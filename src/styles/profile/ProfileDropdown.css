@@ -1,0 +1,67 @@
+.dropdown-container {
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: all 500ms ease;
+}
+
+.dropdownItem{
+  display: flex;
+  justify-content: flex-start;
+  margin: 10px auto;
+  color: #ffffff;
+  width: 200px;
+  font-family: "League Spartan", sans-serif;
+  font-weight: 600;
+  gap: 10px;
+}
+
+.dropdownItem img{
+  max-width: 20px;
+  margin-right: 10px;
+  opacity: 0.5;
+  transition: 500ms;
+}
+
+.dropdownItem div{
+  margin-left: 10px;
+  transition: 500ms;
+}
+
+
+.option-primary-enter {
+  position: absolute;
+  transform: translateX(-110%);
+}
+
+.option-primary-enter-active {
+  transform: translateX(0%);
+  transition: all 500ms ease;
+}
+
+.option-primary-exit {
+  position: absolute;
+}
+
+.option-primary-exit-active {
+  transform: translateX(-110%);
+}
+
+
+.option-secondary-enter {
+  transform: translateX(110%);
+}
+
+.option-secondary-enter-active {
+  transform: translateX(0%);
+  transition: all 500ms ease;
+}
+
+.option-secondary-exit-active {
+  transform: translateX(110%);
+  transition: all 500ms ease;
+}
+
+.option {
+}

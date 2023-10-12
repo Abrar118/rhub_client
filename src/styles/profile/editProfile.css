@@ -1,0 +1,119 @@
+.edit-container {
+  display: flex;
+  flex: 1;
+  width: 68.75vw;
+  padding: 41px 63px 50px 50px;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  overflow: hidden;
+  color: #000000;
+}
+
+.edit-container .title-container {
+  display: flex;
+  align-items: center;
+  gap: 43px;
+  align-self: stretch;
+}
+
+.edit-container .edit-title {
+  color: #000000;
+  font-family: "Poppins";
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.edit-container .profile-pic-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile-pic-container .prof-avatar {
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+}
+
+.profile-pic-container .edit-pic-icon {
+  background-color: #4ac97e;
+  color: aliceblue;
+  box-shadow: 5px 5px 5px #dfdffc99;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  height: 30px;
+  width: 30px;
+  right: 40px;
+  top: 50px;
+  position: relative;
+  font-size: 15px;
+}
+
+.profile-pic-container .edit-pic-icon:hover {
+  background-color: #ee4962;
+  cursor: pointer;
+}
+
+.edit-container .save-edit {
+  width: 172px;
+  height: 45px;
+  background-color: #4ac97e;
+  font-family: "Poppins", sans-serif;
+}
+
+.edit-container .form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 35px 39px;
+  align-self: stretch;
+  flex-wrap: wrap;
+  padding-bottom: 10px;
+}
+
+.form-container .edit-row {
+  display: flex;
+  align-items: center;
+  gap: 50px;
+}
+
+.edit-container .edit-input-holder {
+  display: flex;
+  width: 387px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.edit-container .edit-input {
+  display: flex;
+  height: 48px;
+  padding: 0px 16px;
+  align-items: center;
+  gap: 12px;
+  align-self: stretch;
+  border-radius: 8px;
+  border: 1px solid #363a3d;
+  background: transparent;
+  color: #000000;
+  outline: none;
+}
+
+.edit-container .edit-input:focus {
+  border-color: #4ac97e;
+}
+
+.edit-container .edit-input-label {
+  color: #000000;
+  font-family: "Poppins", sans-serif   ;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 20px;
+  letter-spacing: 0.15px;
+}

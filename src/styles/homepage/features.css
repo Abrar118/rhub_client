@@ -1,0 +1,148 @@
+.section-features {
+  align-items: center;
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  padding-top: 120px;
+  overflow: hidden;
+  width: 98.98vw;
+}
+
+.section-features .feature-container {
+  height: 700px;
+  max-width: 1185px;
+  position: relative;
+  width: 1185px;
+}
+
+.section-features .feat-overlap-group {
+  height: 128px;
+  left: 15px;
+  position: absolute;
+  top: 0;
+  width: 1170px;
+}
+
+.section-features .feature-upper-title {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 1155px;
+}
+
+.section-features .features {
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 0;
+  color: #ee4962;
+  display: -webkit-box;
+  font-family: "Poppins", sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  line-height: 26.2px;
+  margin-top: -1px;
+  overflow: hidden;
+  position: relative;
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: fit-content;
+}
+
+.section-features .feature-heading {
+  height: 45px;
+  left: -40px;
+  position: absolute;
+  top: 40px;
+  width: 1155px;
+}
+
+.section-features .feat-left-text {
+  color: #171717;
+  font-family: "League Spartan", sans-serif;
+  font-size: 45px;
+  font-weight: 600;
+  height: 45px;
+  left: 213px;
+  letter-spacing: 0;
+  line-height: 45px;
+  position: absolute;
+  text-align: center;
+  top: -1px;
+  white-space: nowrap;
+}
+
+.section-features .feat-green {
+  color: #1ab79d;
+  font-family: "League Spartan", Helvetica;
+  font-size: 45px;
+  font-weight: 600;
+  height: 45px;
+  left: 335px;
+  letter-spacing: 0;
+  line-height: 45px;
+  position: absolute;
+  text-align: center;
+  top: -1px;
+  white-space: nowrap;
+}
+
+.section-features .feat-right-text{
+  color: #171717;
+  font-family: "League Spartan", Helvetica;
+  font-size: 45px;
+  font-weight: 600;
+  height: 45px;
+  left: 535px;
+  letter-spacing: 0;
+  line-height: 45px;
+  position: absolute;
+  text-align: center;
+  top: 0px;
+  white-space: nowrap;
+}
+
+.section-features .feature-subtile {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  left: 0;
+  position: absolute;
+  top: 101px;
+  width: 1155px;
+}
+
+.section-features .subsub {
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 0;
+  color: #808080;
+  display: -webkit-box;
+  font-family: "Poppins", Helvetica;
+  font-size: 15px;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 26.2px;
+  margin-left: -2px;
+  margin-right: -2px;
+  margin-top: -1px;
+  overflow: hidden;
+  position: relative;
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: fit-content;
+}
+
+.section-features .feature-list {
+  align-items: flex-start;
+  display: flex;
+  gap: 30px;
+  left: 15px;
+  position: absolute;
+  top: 168px;
+  width: 1155px;
+}

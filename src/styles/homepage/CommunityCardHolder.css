@@ -1,0 +1,283 @@
+@import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;600&family=Plus+Jakarta+Sans:wght@200&family=Poppins&display=swap');
+
+
+.scroll-item {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 365px;
+  box-shadow: 0px 5px 10px #17171730;
+}
+
+.scroll-item .com-card {
+  align-self: stretch;
+  background-color: #ffffff;
+  border-radius: 5px;
+  height: 468.02px;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}
+
+.scroll-item .com-card-overlap-group {
+  height: 217px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 365px;
+}
+
+.scroll-item .com-img {
+  align-items: flex-start;
+  background-color: #cccccc;
+  display: flex;
+  flex-direction: column;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 365px;
+  height: 217px;
+}
+
+.scroll-item .course-jpg {
+  align-self: stretch;
+  background-size: cover;
+  flex: 1;
+  flex-grow: 1;
+  position: relative;
+  width: 100%;
+}
+
+.scroll-item .request-now {
+  align-items: center;
+  background-color: #1ab79d;
+  border-radius: 3px;
+  display: flex;
+  gap: 5px;
+  left: 270px;
+  padding: 6px 7px 3px 8px;
+  position: absolute;
+  top: 15px;
+  width: 75px;
+}
+
+.scroll-item .res-img {
+  align-self: stretch;
+  object-fit: cover;
+  position: relative;
+}
+
+.scroll-item .req-wrapper {
+  align-items: flex-start;
+  display: inline-flex;
+  flex: 0 0 auto;
+  flex-direction: column;
+  position: relative;
+}
+
+.scroll-item .req-text-wrapper {
+  color: #ffffff;
+  font-family: "League Spartan", Helvetica;
+  font-size: 16px;
+  font-weight: bold;
+  letter-spacing: 0;
+  line-height: 16px;
+  margin-top: -1px;
+  position: relative;
+  white-space: nowrap;
+  width: fit-content;
+}
+
+.scroll-item .com-card-desc {
+  height: 251px;
+  left: 0;
+  position: absolute;
+  top: 217px;
+  width: 365px;
+}
+
+.scroll-item .com-tag {
+  background-color: #1ab79d26;
+  border-radius: 3px;
+  height: 25px;
+  left: 24px;
+  position: absolute;
+  top: 25px;
+  width: 80px;
+}
+
+.scroll-item .com-tag-div {
+  color: #1ab79d;
+  font-family: "League Spartan", Helvetica;
+  font-size: 16px;
+  font-weight: 400;
+  height: 16px;
+  left: 16px;
+  letter-spacing: 0;
+  line-height: 25px;
+  position: absolute;
+  top: 4px;
+  white-space: nowrap;
+  width: 38px;
+}
+
+.scroll-item .com-bio {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  left: 25px;
+  padding: 0px 34px 0px 0px;
+  position: absolute;
+  top: 65px;
+  width: 315px;
+}
+
+.scroll-item .com-bio-p {
+  color: #171717;
+  font-family: "League Spartan", sans-serif;
+  font-size: 23px;
+  font-weight: bold;
+  letter-spacing: 0;
+  line-height: 23px;
+  margin-right: 5px;
+  margin-top: -1px;
+  position: relative;
+  width: fit-content;
+}
+
+.scroll-item .rating-wrapper {
+  align-items: center;
+  display: flex;
+  gap: 10px;
+  left: 25px;
+  padding: 0px 113px 0px 0px;
+  position: absolute;
+  top: 119px;
+  width: 315px;
+}
+
+.scroll-item .rating-stars {
+  flex: 0 0 auto;
+  position: relative;
+}
+
+.scroll-item .rating-text-wrapper {
+  color: #171717;
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+  letter-spacing: 0;
+  line-height: 24.5px;
+  margin-top: -1px;
+  overflow: hidden;
+  position: relative;
+  white-space: nowrap;
+  width: fit-content;
+}
+
+.scroll-item .card-com-name {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  left: 25px;
+  padding: 0px 258px 0px 0px;
+  position: absolute;
+  top: 152px;
+  width: 315px;
+}
+
+.scroll-item .card-com-name-text {
+  color: #ee4962;
+  font-family: "League Spartan", sans-serif;
+  font-size: 18px;
+  font-weight: bold;
+  letter-spacing: 0;
+  line-height: 31.5px;
+  margin-right: -71px;
+  margin-top: -1px;
+  overflow: hidden;
+  position: relative;
+  white-space: nowrap;
+  width: fit-content;
+}
+
+.scroll-item .com-stats {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px 0px;
+  left: 26px;
+  position: absolute;
+  top: 198px;
+  width: 314px;
+}
+
+.scroll-item .res-count {
+  align-items: center;
+  display: flex;
+  gap: 5px;
+  position: relative;
+}
+
+.scroll-item .res-img {
+  height: 16px;
+  position: relative;
+  width: 16px;
+}
+
+.scroll-item .res-img-1 {
+  height: 16px;
+  position: relative;
+  width: 16px;
+  top: -3px;
+}
+
+.scroll-item .res-text {
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 0;
+  color: #171717;
+  display: -webkit-box;
+  font-family: "Poppins", sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 22.8px;
+  margin-top: -1px;
+  overflow: hidden;
+  position: relative;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: fit-content;
+}
+
+.scroll-item .card-divider {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  margin-right: -10px;
+  padding: 0px 10px 0px 9px;
+  position: relative;
+  width: 24px;
+}
+
+.scroll-item .stats-divider {
+  color: #e6e6e6;
+  font-family: "Poppins", Helvetica;
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 28px;
+  margin-top: -1px;
+  position: relative;
+  white-space: nowrap;
+  width: fit-content;
+}
+
+.scroll-item .res-count-2 {
+  align-items: center;
+  display: inline-flex;
+  flex: 0 0 auto;
+  gap: 5px;
+  position: relative;
+}

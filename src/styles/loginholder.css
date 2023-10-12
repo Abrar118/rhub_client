@@ -1,0 +1,92 @@
+:root {
+   --body-l-semibold-font-family: "PlusJakarta Sans-SemiBold", Helvetica;
+   --body-l-semibold-font-size: 16px;
+   --body-l-semibold-font-style: normal;
+   --body-l-semibold-font-weight: 600;
+   --body-l-semibold-letter-spacing: 0.15000000596046448px;
+   --body-l-semibold-line-height: 24px;
+ }
+ 
+
+.log-in-holder {
+   background-color: #131619;
+   display: flex;
+   flex-direction: row;
+   justify-content: center;
+   width: 100%;
+   overflow: hidden;
+ }
+ 
+ .log-in-holder .holder-2 {
+   background-color: #131619;
+   height: 898px;
+   position: relative;
+   width: 777px;
+   inset: 2px;
+   z-index: 3;
+ }
+ 
+ .log-in-holder .lower-holder {
+   background-color: #131619;
+   height: 800px;
+   left: 0;
+   position: relative;
+   top: 80px;
+   width: 779px;
+ }
+ 
+ .log-in-holder .upper-holder {
+   background-color: #131619;
+   height: 80px;
+   left: 0;
+   position: absolute;
+   top: 0;
+   width: 779px;
+ }
+ 
+ .log-in-holder .left-divider {
+   height: 40px;
+   left: 101px;
+   object-fit: cover;
+   position: relative;
+   top: 18px;
+   width: 1px;
+   background: #6e6c6c;
+ }
+ 
+ .log-in-holder .sign-up-green {
+   background: transparent;
+   color: #86c232 ;
+   font-family: var(--body-l-semibold-font-family);
+   font-size: var(--body-l-semibold-font-size);
+   font-style: var(--body-l-semibold-font-style);
+   font-weight: var(--body-l-semibold-font-weight);
+   height: 40px;
+   left: 100px;
+   letter-spacing: var(--body-l-semibold-letter-spacing);
+   line-height: var(--body-l-semibold-line-height);
+   position: absolute;
+   top: 15px;
+   white-space: nowrap;
+   border: none;
+   outline: none;
+ }
+  
+ .log-in-holder .text-wrapper99 {
+  background: transparent;
+  color: #86c232 ;
+  font-family: var(--body-l-semibold-font-family);
+  font-size: var(--body-l-semibold-font-size);
+  font-style: var(--body-l-semibold-font-style);
+  font-weight: var(--body-l-semibold-font-weight);
+  height: 40px;
+  left: 5px;
+  letter-spacing: var(--body-l-semibold-letter-spacing);
+  line-height: var(--body-l-semibold-line-height);
+  position: absolute;
+  top: 15px;
+  white-space: nowrap;
+  border: none;
+  outline: none;
+ }
+ 

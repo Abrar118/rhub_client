@@ -1,0 +1,343 @@
+:root {
+   --body-l-medium-font-family: "Plus Jakarta Sans", Helvetica;
+   --body-l-medium-font-size: 16px;
+   --body-l-medium-font-style: normal;
+   --body-l-medium-font-weight: 500;
+   --body-l-medium-letter-spacing: 0.15000000596046448px;
+   --body-l-medium-line-height: 24px;
+   --body-l-semibold-font-family: "Plus Jakarta Sans", Helvetica;
+   --body-l-semibold-font-size: 16px;
+   --body-l-semibold-font-style: normal;
+   --body-l-semibold-font-weight: 600;
+   --body-l-semibold-letter-spacing: 0.15000000596046448px;
+   --body-l-semibold-line-height: 24px;
+   --body-s-medium-font-family: "PlusJ akarta Sans", Helvetica;
+   --body-s-medium-font-size: 12px;
+   --body-s-medium-font-style: normal;
+   --body-s-medium-font-weight: 500;
+   --body-s-medium-letter-spacing: 0.15000000596046448px;
+   --body-s-medium-line-height: 18px;
+   --body-XL-medium-font-family: "Plus Jakarta Sans", Helvetica;
+   --body-XL-medium-font-size: 18px;
+   --body-XL-medium-font-style: normal;
+   --body-XL-medium-font-weight: 500;
+   --body-XL-medium-letter-spacing: 0.15000000596046448px;
+   --body-XL-medium-line-height: 28px;
+   --outline-heisenberg-blue: 0px 0px 0px 4px rgba(132, 220, 245, 0.24);
+   --shadow-small: 0px 1px 3px 0px rgba(0, 0, 0, 0.05), 0px 1px 2px -1px rgba(0, 0, 0, 0.05);
+ }
+ 
+
+.login {
+   align-items: flex-start;
+   background-color: #131619;
+   display: flex;
+   flex-direction: column;
+   gap: 43px;
+   height: 800px;
+   padding: 18px 97px 18px 103px;
+   position: relative;
+ }
+ 
+ .login .secondary-wrapper {
+   align-items: flex-start;
+   display: flex;
+   gap: 181px;
+   height: 182px;
+   margin-right: -72px;
+   position: relative;
+   width: 651px;
+ }
+ 
+ .login .welcome-back {
+   align-items: center;
+   display: flex;
+   flex-direction: column;
+   height: 182px;
+   justify-content: flex-end;
+   position: relative;
+   width: 336px;
+   left: -760px;
+   bottom: 80px;
+ }
+ 
+ .login .welcome-back-2 {
+   width: 336px;
+ }
+ 
+ .login .img {
+   align-self: stretch;
+   flex: 0 0 auto;
+   position: relative;
+   width: 100%;
+ }
+ 
+ .login .log-in-rhub {
+   align-self: stretch;
+   color: #9b9c9e;
+   font-family: var(--body-XL-medium-font-family);
+   font-size: var(--body-XL-medium-font-size);
+   font-style: var(--body-XL-medium-font-style);
+   font-weight: var(--body-XL-medium-font-weight);
+   letter-spacing: var(--body-XL-medium-letter-spacing);
+   line-height: var(--body-XL-medium-line-height);
+   position: relative;
+ }
+ 
+ .login .logo-white {
+   height: 94px;
+   object-fit: cover;
+   position: relative;
+   width: 134px;
+ }
+ 
+ .login .log-in-form {
+   align-items: flex-start;
+   display: flex;
+   flex: 0 0 auto;
+   flex-direction: column;
+   gap: 48px;
+   justify-content: center;
+   position: relative;
+   width: 579px;
+   top: 150px;
+ }
+ 
+ .login .log-in-field {
+   align-items: flex-start;
+   align-self: stretch;
+   display: flex;
+   flex: 0 0 auto;
+   flex-direction: column;
+   gap: 24px;
+   position: relative;
+   width: 100%;
+ }
+ 
+ .login .field-holder-log {
+   align-items: flex-start;
+   align-self: stretch;
+   display: flex;
+   flex: 0 0 auto;
+   flex-direction: column;
+   gap: 16px;
+   position: relative;
+   width: 100%;
+ }
+ 
+ .login .log-in-email-holder {
+   background-color: #1a1d21;
+   border-color: transparent;
+   border-radius: 8px;
+   height: 50px;
+   margin-bottom: -1px;
+   margin-left: -1px;
+   margin-right: -1px;
+   margin-top: -1px;
+   overflow: hidden;
+   padding: 0px 0px 0px 50px;
+   position: relative;
+   width: 520px;
+   outline: none;
+   transition: 1s;
+ }
+
+ .login .log-in-email-holder:focus {
+  border-image: linear-gradient(to bottom, rgb(130, 219, 247), rgb(182, 240, 156)) 1;
+ }
+ 
+ .login .email-icon {
+   height: 15.5px;
+   margin-left: -0.75px;
+   position: relative;
+   width: 19.5px;
+   left: 10px;
+   bottom: 50px;
+ }
+ 
+ .login .lock-icon {
+   height: 17.5px;
+   margin-left: -0.75px;
+   position: relative;
+   width: 15.5px;
+   left: 10px;
+   bottom: 50px;
+ }
+ 
+ .login .remember-section {
+   align-items: center;
+   align-self: stretch;
+   display: flex;
+   flex: 0 0 auto;
+   justify-content: space-between;
+   position: relative;
+   width: 100%;
+ }
+ 
+ .login .remember-checkbox {
+   align-items: flex-start;
+   display: inline-flex;
+   flex: 0 0 auto;
+   gap: 16px;
+   position: relative;
+ }
+ 
+ .login .checkbox-icon {
+   accent-color: #1a1d21;
+   border: 1px solid;
+   border-color: #363a3d;
+   border-radius: 4px;
+   box-shadow: var(--shadow-small);
+   height: 26px;
+   margin-bottom: -1px;
+   margin-left: -1px;
+   margin-top: -1px;
+   position: relative;
+   width: 26px;
+ }
+ 
+ .login .check-box-text {
+   color: #cdcecf;
+   font-family: var(--body-l-medium-font-family);
+   font-size: var(--body-l-medium-font-size);
+   font-style: var(--body-l-medium-font-style);
+   font-weight: var(--body-l-medium-font-weight);
+   letter-spacing: var(--body-l-medium-letter-spacing);
+   line-height: var(--body-l-medium-line-height);
+   margin-top: -1px;
+   position: relative;
+   white-space: nowrap;
+   width: fit-content;
+ }
+ 
+ .login .forgot-pass {
+   -webkit-background-clip: text !important;
+   -webkit-text-fill-color: transparent;
+   background: linear-gradient(180deg, rgb(134, 194, 50) 0%, rgb(182, 240, 156) 100%);
+   background-clip: text;
+   color: transparent;
+   font-family: var(--body-l-semibold-font-family);
+   font-size: var(--body-l-semibold-font-size);
+   font-style: var(--body-l-semibold-font-style);
+   font-weight: var(--body-l-semibold-font-weight);
+   letter-spacing: var(--body-l-semibold-letter-spacing);
+   line-height: var(--body-l-semibold-line-height);
+   margin-top: -1px;
+   position: relative;
+   white-space: nowrap;
+   width: fit-content;
+ }
+ 
+ .login .log-in-button {
+   align-items: center;
+   align-self: stretch;
+   background-color: #86c232;
+   border-radius: 12px;
+   display: flex;
+   gap: 12px;
+   height: 48px;
+   justify-content: center;
+   padding: 8px 24px;
+   position: relative;
+   width: 100%;
+ }  
+ 
+ .login .log-in-divider {
+   align-items: center;
+   align-self: stretch;
+   display: flex;
+   flex: 0 0 auto;
+   gap: 16px;
+   position: relative;
+   width: 100%;
+ }
+
+ .login .divider {
+  width: 300px;
+  height: 1px;
+  background-color: #5a5757;
+ }
+ 
+ .login .img-2 {
+   flex: 1;
+   flex-grow: 1;
+   height: 1px;
+   object-fit: cover;
+   position: relative;
+ }
+ 
+ .login .continue {
+   color: #686b6e;
+   font-family: var(--body-s-medium-font-family);
+   font-size: var(--body-s-medium-font-size);
+   font-style: var(--body-s-medium-font-style);
+   font-weight: var(--body-s-medium-font-weight);
+   letter-spacing: var(--body-s-medium-letter-spacing);
+   line-height: var(--body-s-medium-line-height);
+   margin-top: -1px;
+   position: relative;
+   white-space: nowrap;
+   width: fit-content;
+ }
+ 
+ .login .social-buttons {
+   align-items: flex-start;
+   align-self: stretch;
+   display: flex;
+   flex: 0 0 auto;
+   gap: 24px;
+   position: relative;
+   width: 100%;
+ }
+ 
+ .login .social-login-button {
+   align-items: center;
+   background-color: #1a1d21;
+   border-radius: 12px;
+   display: flex;
+   flex: 1;
+   flex-grow: 1;
+   gap: 12px;
+   height: 48px;
+   justify-content: center;
+   padding: 8px 24px;
+   position: relative;
+ }
+ 
+ .login .google-icon {
+   height: 20px;
+   position: relative;
+   width: 20px;
+ }
+ 
+ .login .log-in-alt {
+   color: #686b6e;
+   font-family: var(--body-l-semibold-font-family);
+   font-size: var(--body-l-semibold-font-size);
+   font-style: var(--body-l-semibold-font-style);
+   font-weight: var(--body-l-semibold-font-weight);
+   letter-spacing: var(--body-l-semibold-letter-spacing);
+   line-height: var(--body-l-semibold-line-height);
+   position: relative;
+   white-space: nowrap;
+   width: fit-content;
+ }
+ 
+ .login .apple-icon {
+   height: 24px;
+   position: relative;
+   width: 24px;
+   top:3px;
+ }
+
+ .toggle-show {
+  position: relative;
+  bottom: 85px;
+  left: 540px;
+ }
+
+ .toggle-show:hover {
+  cursor: pointer;
+  color: #ee4962;
+ }
+ 

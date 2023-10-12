@@ -1,0 +1,145 @@
+.my-community-container {
+  display: flex;
+  flex-direction: column;
+  width: 80vw;
+  background-color: #ffffff;
+  align-items: flex-start;
+  gap: 50px;
+  padding: 70px;
+  color: #1a194d;
+  position: relative;
+}
+
+.my-community-container .community-header {
+  color: #1a194d;
+  font-family: "Poppins", sans-serif;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 700;
+  position: relative;
+}
+
+.my-community-container .search-bar {
+  width: max-content;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 20px;
+  flex: auto;
+  position: relative;
+}
+
+.my-community-container .search-bar .search-input {
+  display: flex;
+  align-items: center;
+  position: relative;
+  gap: 10px;
+}
+
+.my-community-container .search-input .search-icon {
+  position: absolute;
+  font-size: 20px;
+  left: 10px;
+  top: 12px;
+}
+
+.my-community-container .search-input .search-input-holder {
+  background-color: transparent;
+  border: solid 2px #1a194d20;
+  border-radius: 5px;
+  height: 40px;
+  width: 300px;
+  padding-left: 40px;
+  outline: none;
+  color: #1a194d;
+
+  font-family: "Poppins", sans-serif;
+}
+
+.my-community-container .search-input .search-input-holder:focus {
+  border-color: #1a194d;
+}
+
+.my-community-container .search-input .search-community-button {
+  background-color: #1a194d;
+  position: relative;
+  font-family: "Poppins", sans-serif;
+}
+
+.my-community-container .search-bar .sort-by {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  position: relative;
+  left: 2vw;
+}
+
+.my-community-container .sort-by .sort-by-text {
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.my-community-container .sort-by .sort-dropdown {
+  width: 180px;
+  height: 40px;
+  background-color: #ffffff;
+  color: #1a194d;
+  outline: none;
+  border: solid 1px #1a194d50;
+  border-radius: 5px;
+  font-family: "Poppins", sans-serif;
+}
+
+.my-community-container .sort-dropdown .sort-dropdown-item {
+  color: #1a194d;
+  font-family: "Poppins", sans-serif;
+  font-size: 15px;
+}
+
+.my-community-container .sort-dropdown .sort-dropdown:hover {
+  cursor: pointer;
+  accent-color: #1a194d;
+}
+
+.my-community-container .search-bar .show-as {
+  position: relative;
+  left: 2vw;
+  display: flex;
+  align-items: center;
+  height: 30px;
+}
+
+.my-community-container .show-as .show-as-block {
+  border: solid 1px #1a194d50;
+  padding: 5px 5px 2px 5px;
+  font-size: 20px;
+}
+
+.my-community-container .show-as .show-as-block:hover {
+  cursor: pointer;
+  background-color: #dbdbdb;
+}
+
+.my-community-container .search-bar .add-community {
+  display: flex;
+  position: relative;
+  align-items: center;
+  gap: 10px;
+  color: #ffffff;
+  background-color: #1a194d;
+  height: 50px;
+  padding: 5px 20px;
+  border-radius: 10px;
+  left: 30vw;
+
+  font-family: "Poppins", sans-serif;
+  font-size: 15px;
+}
+
+.my-community-container .cards-holder {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 150px;
+}

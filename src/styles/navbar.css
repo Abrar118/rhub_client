@@ -1,0 +1,188 @@
+.navbar {
+  background-color: #ffffff;
+  height: 100px;
+  position: relative;
+  width: 98.98vw;
+}
+
+.navbar-frame {
+  width: 700px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 20px;
+  position: relative;
+}
+
+.navbar-logo {
+  height: 100px;
+  width: 100px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  left: 250px;
+}
+
+.navbar-buttons {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  position: absolute;
+  left: 80%;
+  bottom: 40px;
+  gap: 20px;
+}
+
+.navbar-label-wrapper:hover {
+  color: #ee4962;
+}
+
+.navbar-label-wrapper {
+  background: #ffffff;
+  cursor: pointer;
+  color: #000000;
+  font-family: "Poppins", Helvetica;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: 24px;
+  border: none;
+  width: 150px;
+  position: relative;
+  text-align: center;
+  padding: 10px 0px;
+}
+
+.navbar-label-wrapper::after {
+  content: "";
+  position: absolute;
+  background-color: #ee4962;
+  height: 3px;
+  width: 0%;
+  transition: 0.8s;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  left: 0;
+  bottom: 5px;
+}
+
+.navbar-label-wrapper:hover::after {
+  width: 100%;
+}
+
+.avtive-navbar-link {
+  background: #ffffff;
+  cursor: pointer;
+  color: #000000;
+  font-family: "Poppins", Helvetica;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: 24px;
+  border: none;
+  width: 150px;
+  position: relative;
+  text-align: center;
+  padding: 10px 0px;
+}
+
+.avtive-navbar-link::after {
+  content: "";
+  position: absolute;
+  background-color: #ee4962;
+  height: 3px;
+  width: 100%;
+  transition: 0.8s;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  left: 0;
+  bottom: 5px;
+}
+
+.login-wrapper {
+  display: flex;
+  position: absolute;
+  left: 1500px;
+  top: 2em;
+}
+
+.log-in-button {
+  background: #1ab79d;
+  color: #ffffff;
+  font-family: "League Spartan", Helvetica;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 0;
+  line-height: 24px;
+  stroke: none;
+  width: 160px;
+  text-align: left;
+  padding-left: 50px;
+}
+
+.log-in-button:hover {
+  background: #ee4962;
+  color: #ffffff;
+}
+
+.profile-avatar {
+  border-radius: 50%;
+  height: 60px;
+  width: 60px;
+  position: relative;
+  bottom: 10px;
+  cursor: pointer;
+}
+
+.dropdown-menu {
+  position: relative;
+  top: 0px;
+  right: 70px;
+  background-color: #0d0f10;
+  border-radius: 8px;
+  padding: 10px 30px 10px 10px;
+  overflow: hidden;
+}
+
+.dropdown-menu::before {
+  content: "";
+  position: absolute;
+  top: -5px;
+  right: 120px;
+  height: 20px;
+  width: 20px;
+  background: #404142;
+  transform: rotate(45deg);
+}
+
+.dropdown-menu.active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  transition: 500ms ease;
+}
+
+.dropdown-menu.inactive {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-20px);
+  transition: 500ms ease;
+}
+
+.dropdown-menu ul li {
+  padding: 10px 0;
+  border-top: 1px solid #0000001a;
+}
+
+.dropdown-menu ul li:hover div {
+  color: #ee4962;
+  cursor: pointer;
+}
+
+.dropdown-menu ul li:hover img {
+  opacity: 1;
+  cursor: pointer;
+}
