@@ -16,9 +16,14 @@ function CommunityHolder() {
 
    const active_and_navigate = (activeText, navigatePath) => {
       setComActiveMenu(activeText);
+      window.localStorage.setItem("comActiveMenu", activeText);
       navigate(navigatePath);
    }
 
+   useEffect(() => {
+      const temoActiveMenu = window.localStorage.getItem("comActiveMenu");
+      setComActiveMenu(temoActiveMenu);
+   }, [])
    
    return (
       <div className="com-holder">

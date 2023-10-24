@@ -70,10 +70,6 @@ function EmailVerify() {
     }
   };
 
-  useEffect(() => {
-    fetch_status();
-  }, []);
-
   return (
     <div className="verify-body">
       {isVerified ? (
@@ -90,6 +86,22 @@ function EmailVerify() {
                 {" "}
                 &nbsp; {send_email}
               </span>
+            </div>
+            <div className="verify-subtitle">
+              Didn't get a code &nbsp;
+              <motion.span
+                whileHover={{ textDecoration: "underline" }}
+                whileTap={{ color: "#ee4962" }}
+                style={{
+                  fontWeight: "bold",
+                  color: "#1ab79d",
+                  cursor: "pointer ",
+                }}
+
+                onClick={()=>{fetch_status()}}
+              >
+                send again
+              </motion.span>
             </div>
           </div>
 

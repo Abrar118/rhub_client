@@ -1,46 +1,43 @@
 import React, { useState } from "react";
 import { addScaleCorrector, motion } from "framer-motion";
-import "../../styles/community/createCommunity.css";
+import "../../styles/community/addcat.css";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { checkAllCaps } from "../utility/time";
+import { checkAllCaps, getCurrentTime } from "../utility/time";
+import { useParams } from "react-router-dom";
 
-function CreateCommunity({ closePopUp }) {
+function AddCategory({closePopUp}) {
   const [name, setName] = useState();
-  const [tag, setTag] = useState();
+  const [keywords, setkeywords] = useState([]);
   const [desc, setDesc] = useState();
-  const [privacy, setPrivacy] = useState("open");
+  const [privacy, setPrivacy] = useState("Open");
+  const currentTag = useParams().tag;
 
   const handle_create = async (e) => {
     e.preventDefault();
 
-    const admin = JSON.parse(window.localStorage.getItem("currentUser"));
-    const admin_id = admin.student_id;
-
-    if (!checkAllCaps(tag)) {
-      toast.error("Tag must be in all caps");
-      return;
-    }
+    const current = JSON.parse(window.localStorage.getItem("currentUser"));
+    const current_id = current.student_id;
 
     const requestBody = {
-      name: name,
-      tag: tag,
+      access: privacy,
+      category_name: name,
+      date: getCurrentTime(),
       description: desc,
-      privacy: privacy,
-      members: 0,
-      resource: 0,
-      rating: 1,
-      admin: admin_id,
-      com_image: "/src/assets/default-com.jpg",
+      keywords: keywords,
+      community: currentTag,
+      academic: [],
+      student: [],
+      misc: []
     };
 
     let terminate = false;
 
     const response = await axios
-      .post("http://localhost:3002/insertCommunity", requestBody)
+      .post("http://localhost:3002/createCategory", requestBody)
       .catch((error) => {
         if (error.response?.status === 500) {
-          toast.error(error.response.data.err);
+          toast.error(error.response.data);
           terminate = true;
         }
       });
@@ -50,32 +47,12 @@ function CreateCommunity({ closePopUp }) {
     const data = response.data;
 
     if (!data.acknowledged) {
-      toast.error("Could not create community!");
+      toast.error("Could not create category!");
       return;
     }
 
-    toast.success("Successfully Created Community!!");
-
-    const requestBody2 = {
-      useId: admin_id,
-      tag: tag,
-    };
-
-    terminate = false;
-    const response2 = await axios
-      .patch("http://localhost:3002/addComToUser", requestBody2)
-      .catch((error) => {
-        if (error.response?.status === 500) {
-          toast.error(error.response.data.err);
-          terminate = true;
-        }
-      });
-
-    admin.community.push(tag);
-    window.localStorage.setItem("currentUser", JSON.stringify(admin));
-
-    if (terminate) return;
-
+    toast.success("Successfully Created Category!!");
+    
     setTimeout(() => {
       closePopUp();
       window.location.reload(true);
@@ -88,40 +65,40 @@ function CreateCommunity({ closePopUp }) {
       animate={{ scale: 1 }}
       transition={{ ease: "easeIn", duration: 0.3 }}
       exit={{ scale: 0.8, transition: { ease: "easeIn", duration: 0.3 } }}
-      className="com-create-container"
+      className="cat-create-container"
     >
-      <div className="crt-header">Create a New Community</div>
+      <div className="crt-header">Create a New Category</div>
 
       <form className="create-com-form" onSubmit={handle_create}>
         <div className="privacy-holder">
           <div className="privacy-header">
-            Select a privacy type for your community
+            Select a privacy type for the category
           </div>
           <div className="privacy-radio">
             <div>
               <input
-                checked={privacy === "private"}
+                checked={privacy === "Restricted"}
                 type="radio"
                 id="private"
                 className="privacy-radio-button"
                 name="privacy"
-                value="private"
+                value="Restricted"
                 onChange={(e) => {
                   setPrivacy(e.target.value);
                 }}
               />
               <label htmlFor="private" className="radio-text">
-                Private
+                Restricted
               </label>
             </div>
             <div>
               <input
-                checked={privacy === "open"}
+                checked={privacy === "Open"}
                 type="radio"
                 id="open"
                 className="privacy-radio-button"
                 name="privacy"
-                value="open"
+                value="Open"
                 onChange={(e) => {
                   setPrivacy(e.target.value);
                 }}
@@ -150,16 +127,17 @@ function CreateCommunity({ closePopUp }) {
           </div>
 
           <div className="create-field-2">
-            <label htmlFor="tag" className="filed-label">
-              Tag*
+            <label htmlFor="key" className="filed-label">
+              Keywords*
             </label>
             <input
               required
-              id="tag"
+              placeholder="Space separated words in all caps"
+              id="key"
               type="text"
               className="name-tag-filed name-tag-only"
               onChange={(e) => {
-                setTag(e.target.value);
+                setkeywords(e.target.value.split(" "));
               }}
             />
           </div>
@@ -207,4 +185,4 @@ function CreateCommunity({ closePopUp }) {
   );
 }
 
-export default CreateCommunity;
+export default AddCategory;

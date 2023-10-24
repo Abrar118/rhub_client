@@ -1,0 +1,132 @@
+.cat-create-container {
+   display: flex;
+   flex-direction: column;
+   background-color: #ffffff;
+   width: 490px;
+   align-items: flex-start;
+   gap: 20px;
+   padding: 70px;
+   color: #1a194d;
+   position: relative;
+   border-radius: 10px;
+ }
+ 
+ .cat-create-container .crt-header {
+   font-family: "Poppins";
+   font-weight: 700;
+   font-size: 25px;
+   position: relative;
+ }
+ 
+ .cat-create-container .create-com-form {
+   display: flex;
+   flex-direction: column;
+   align-items: flex-start;
+   gap: 30px;
+ }
+ 
+ .create-com-form .privacy-holder {
+   display: flex;
+   flex-direction: column;
+   align-items: flex-start;
+   gap: 10px;
+   font-family: "Poppins";
+ }
+ 
+ .privacy-holder .privacy-header {
+   font-size: 15px;
+ }
+ 
+ .privacy-holder .privacy-radio {
+   display: flex;
+   align-items: center;
+   gap: 80px;
+ }
+ 
+ .privacy-radio .privacy-radio-button {
+   background-color: transparent;
+   height: 20px;
+   width: 20px;
+   border: solid 2px #000000;
+   padding: 5px;
+   border-radius: 50%;
+   appearance: none;
+   outline-offset: 2px;
+   cursor: pointer;
+   transition: 0.3s;
+   -webkit-appearance: none;
+   -moz-appearance: none;
+ }
+ 
+ .privacy-radio .privacy-radio-button:checked {
+   background-color: #1a194d;
+ }
+ 
+ 
+ .privacy-radio .radio-text {
+   font-family: "Poppins", sans-serif;
+   font-size: 18px;
+   font-weight: 600;
+   position: relative;
+   bottom: 3px;
+   left: 5px;
+ }
+ 
+ .create-com-form .create-fields {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+ }
+ 
+ .create-fields .create-field-2 {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+ }
+ 
+ .create-field-2 .filed-label {
+    font-family: "League Spartan", sans-serif;
+    font-weight: bold;
+    font-size: 20px;
+ }
+ 
+ .create-field-2 .name-tag-filed {
+    background-color: transparent;
+    outline: none;
+    border: solid 1px #1a194d50;
+    border-radius: 5px;
+    width: 24.48vw;
+    color: #000000;
+    padding: 10px;
+    font-family: "Poppins";
+    font-size: 15px;
+    transition: 0.5s;
+ }
+ 
+ .create-field-2 .name-tag-filed:focus {
+    border: solid 1px #8d4502;
+ }
+ 
+ .create-field-2 .name-tag-only {
+    height: 30px;
+ }
+ 
+ .create-field-2 .desc-only {
+    height: 80px;
+ }
+ 
+ .create-com-form .create-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+ }
+ 
+ .create-buttons .create-button {
+    background-color: #1a194d;
+    width: 5.2vw;
+    height: 45px;
+    font-family: "Poppins";
+ }

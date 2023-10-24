@@ -20,10 +20,10 @@
 }
 
 .my-community-container .search-bar {
-  width: max-content;
+  width: 70vw;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: flex-end;
   gap: 20px;
   flex: auto;
   position: relative;
@@ -142,4 +142,23 @@
   flex-wrap: wrap;
   align-items: center;
   gap: 150px;
+}
+
+.my-community-container .select-page {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.select-page .prev-button, .page-button {
+  display: flex;
+  align-items: center;
+  border: solid 1px #1a194d;
+  background-color: transparent;
+  color: black;
+
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
 }

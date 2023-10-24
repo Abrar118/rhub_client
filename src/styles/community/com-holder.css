@@ -26,9 +26,9 @@
   top: 89vh;
   left: 89vw;
   transition: all ease 500ms;
-  color: #00ffffb3;
-  box-shadow: 0px 1px 2px 0px #00ffffb3, 1px 1px 2px 0px #00ffffb3,
-    1px 1px 5px 0px #00ffffb3, 1px 1px 7px 0px #00ffffb3;
+  color: #F6C90E;
+  box-shadow: 0px 1px 2px 0px #F6C90E, 1px 1px 2px 0px #F6C90E,
+    1px 1px 5px 0px #F6C90E, 1px 1px 7px 0px #F6C90E;
 }
 
 .com-menu:hover {
@@ -38,7 +38,7 @@
   border-radius: 5px;
   justify-content: flex-start;
   padding: 0px 10px;
-  box-shadow: 0px 6px 15px 2px #00ffffb3;
+  box-shadow: 0px 6px 15px 2px #F6C90E;
 }
 
 .com-menu .com-menu-icon {
@@ -52,7 +52,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 1em;
-  color: #00ffffb3;
+  color: #F6C90E;
   position: relative;
 }
 
@@ -65,7 +65,7 @@
   content: "";
   width: 100%;
   height: 2px;
-  background-color: #00ffffb3;
+  background-color: #F6C90E;
   transition: 0.5s;
   box-sizing: border-box;
   padding: 0;
@@ -83,7 +83,7 @@
   content: "";
   width: 100%;
   height: 2px;
-  background-color: #00ffffb3;
+  background-color: #F6C90E;
   transition: 0.5s;
   box-sizing: border-box;
   padding: 0;

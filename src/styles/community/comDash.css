@@ -6,14 +6,14 @@
   align-items: flex-start;
   align-self: stretch;
   gap: 30px;
-  padding: 20px 20px;
+  padding: 40px 20px;
   overflow: hidden;
 }
 
 .dashboard-wrapper .upper-part {
   position: relative;
   width: 75vw;
-  height: 10em;
+  height: 7em;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -32,7 +32,7 @@
 
 .title .com-name {
   font-family: "Plus Jakarta Sans", sans-serif;
-  font-size: 1.5em;
+  font-size: 1.4em;
   font-weight: 700;
   text-align: center;
 }
@@ -41,7 +41,7 @@
   color: #9b9c9e;
   text-align: center;
   font-family: "Plus Jakarta Sans";
-  font-size: 1em;
+  font-size: 0.9em;
   font-style: normal;
   font-weight: 400;
 }
@@ -56,6 +56,8 @@
   width: 3em;
   height: 3em;
   border-radius: 50%;
+  cursor: pointer;
+  transition: all ease 500ms;
 }
 
 .com-logo .small-stats {
@@ -71,7 +73,7 @@
 }
 
 .small-stats .member-count {
-  color: #1ab79d;
+  color: hsl(170, 75%, 81%);
   text-align: center;
   font-family: "Plus Jakarta Sans";
   font-size: 0.9em;
@@ -86,7 +88,7 @@
   width: 75vw;
   display: flex;
   justify-content: space-between;
-  gap: 30px;
+  gap: 70px;
   align-items: center;
   border-radius: 20px;
   background: transparent;
@@ -113,7 +115,7 @@
 }
 
 .title-2 .title-left {
-  color: #1ab79d;
+  color: hsl(170, 75%, 61%);
   text-align: center;
   font-family: "Plus Jakarta Sans";
   font-size: 1.2em;
@@ -184,41 +186,41 @@
 }
 
 .comments .comment-list {
-   display: flex;
-   flex-direction: column;
-   align-items: center;
-   align-self: stretch;
-   gap: 10px;
-   font-family: "League Spartan";
-   transition: all ease 1000ms;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-self: stretch;
+  gap: 10px;
+  font-family: "League Spartan";
+  transition: all ease 1000ms;
 }
 
 .comment-list .comment-row {
-   position: relative;
-   background-color: #1a1d21;
-   display: flex;
-   align-items: center;
-   align-self: stretch;
-   justify-content: space-between;
-   padding: 5px 10px;
+  position: relative;
+  background-color: #1a1d21;
+  display: flex;
+  align-items: center;
+  align-self: stretch;
+  justify-content: space-between;
+  padding: 5px 10px;
 }
 
 .comment-row .comment-name {
-   font-weight: 600;
+  font-weight: 600;
 }
 
 .comment-row .comment-body {
-   color: #9b9c9e;
+  color: #9b9c9e;
 }
 
 .comment-list .add-comment {
-   cursor: pointer;
-   display: flex;
-   justify-content: center;
-   align-items: center;
-   align-self: stretch;
-   background-color: #1a1d2180;
-   padding: 5px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-self: stretch;
+  background-color: #1a1d2180;
+  padding: 5px;
 }
 
 .lower-part .add-event {
@@ -231,4 +233,65 @@
   align-self: stretch;
   border-radius: 10px;
   background: #1a1d21;
+}
+
+.addEvent-wrapper {
+  position: relative;
+  width: 30vw;
+  background-color: #ffffff;
+  color: #0d0f10;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.5em;
+  padding: 40px;
+  border-radius: 1em;
+}
+
+.addEvent-wrapper .title {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 1.4em;
+  font-weight: 700;
+  text-align: center;
+}
+
+.addEvent-wrapper .input-form{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1em;
+  width: 90%;
+}
+
+.input-form .field-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.8em;
+  align-self: stretch;
+}
+
+.field-container .field-label {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 1em;
+  font-weight: 600;
+  text-align: center;
+}
+
+.field-container .main-field {
+  border: none;
+  background-color: #0d0f1030;
+  border-radius: 1em;
+  width: 100%;
+  height: 4vh;
+  font-family: Poppins;
+  font-weight: 500;
+  padding: 5px 20px;
+  color: #0d0f10;
+}
+
+.input-form .addEvent-button {
+  font-family: Poppins;
+  font-size: 1em;
 }

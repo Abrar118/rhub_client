@@ -1,0 +1,556 @@
+.com-res {
+  position: relative;
+  width: 83.36vw;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  align-self: stretch;
+  gap: 30px;
+  padding: 40px 20px;
+  overflow: hidden;
+}
+.com-res .search-tab {
+  width: 75vw;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex: auto;
+  position: relative;
+  padding: 5px 20px;
+}
+
+.search-tab .res-title {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 1.5em;
+  font-weight: 700;
+  text-align: center;
+}
+
+.search-tab .search-objects {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.search-tab .search-input {
+  display: flex;
+  align-items: center;
+  position: relative;
+  gap: 10px;
+}
+
+.search-input .search-icon {
+  position: absolute;
+  font-size: 20px;
+  left: 10px;
+  top: 12px;
+}
+
+.com-res .search-input .search-input-holder {
+  background-color: transparent;
+  border: solid 2px #ffffff20;
+  border-radius: 5px;
+  height: 40px;
+  width: 300px;
+  padding-left: 40px;
+  outline: none;
+  color: #ffffff;
+
+  font-family: "Poppins", sans-serif;
+}
+
+.com-res .search-input .search-input-holder:focus {
+  border-color: #ffffff60;
+}
+
+.com-res .search-input .search-community-button {
+  background-color: #f6c90e;
+  position: relative;
+  font-family: "Poppins", sans-serif;
+  color: #000000;
+}
+
+.com-res .search-tab .sort-by {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  position: relative;
+  left: 2vw;
+}
+
+.com-res .sort-by .sort-by-text {
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.com-res .sort-by .sort-dropdown {
+  width: 180px;
+  height: 40px;
+  background-color: #ffffff;
+  color: #1a194d;
+  outline: none;
+  border: solid 1px #1a194d50;
+  border-radius: 5px;
+  font-family: "Poppins", sans-serif;
+}
+
+.com-res .sort-dropdown .sort-dropdown-item {
+  color: #1a194d;
+  font-family: "Poppins", sans-serif;
+  font-size: 15px;
+}
+
+.com-res .sort-dropdown .sort-dropdown:hover {
+  cursor: pointer;
+  accent-color: #1a194d;
+}
+
+.com-res .search-tab .show-as {
+  position: relative;
+  left: 2vw;
+  display: flex;
+  align-items: center;
+  height: 30px;
+}
+
+.com-res .show-as .show-as-block {
+  border: solid 1px #ffffff20;
+  padding: 5px 5px 2px 5px;
+  font-size: 20px;
+  color: #f6c90e;
+}
+
+.com-res .show-as .show-as-block:hover {
+  cursor: pointer;
+  background-color: #dbdbdb20;
+}
+
+.com-res .search-tab .add-community {
+  display: flex;
+  position: relative;
+  align-items: center;
+  gap: 10px;
+  color: #000000;
+  background-color: #f6c90e;
+  height: 50px;
+  padding: 5px 20px;
+  border-radius: 10px;
+  left: 3vw;
+
+  font-family: "Poppins", sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.com-res .resource-list {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 30px;
+  width: 79vw;
+  height: 70vh;
+  padding: 5px 20px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+
+  transition: all ease 500ms;
+}
+
+.resource-list .resource-list-ver {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 20px;
+  transition: all ease 500ms;
+  width: 15vw;
+}
+
+.resource-list .resource-list-hor {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 30px;
+  width: 79vw;
+  padding: 5px 20px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  flex-wrap: wrap;
+}
+
+.resource-list .resource-list-ver::-webkit-scrollbar {
+  display: none;
+}
+
+.resource-list .resource-list-hor::-webkit-scrollbar {
+  display: none;
+}
+
+.com-res .resource-list::-webkit-scrollbar {
+  display: none;
+}
+
+.resource-list .row-wrapper {
+  position: relative;
+  background-color: #ffffff;
+  color: #000000;
+  padding: 20px 20px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+
+  width: 10vw;
+  height: 20vh;
+  transition: all ease 500ms;
+}
+
+.resource-list .row-wrapper:hover {
+  width: 13vw;
+  height: 28vh;
+  cursor: pointer;
+}
+
+.resource-list .row-wrapper::-webkit-scrollbar {
+  display: none;
+}
+
+.row-wrapper .access {
+  position: relative;
+  color: #ffffff;
+  padding: 2px 5px;
+  border-radius: 5px;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 0.8em;
+  font-weight: 600;
+}
+
+.row-wrapper .category-title-date {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0;
+}
+
+.category-title-date .category-title {
+  position: relative;
+  font-family: "Poppins", sans-serif;
+  font-size: 1.2em;
+  font-weight: 700;
+}
+
+.category-title-date .category-date {
+  position: relative;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 0.9em;
+  font-weight: 400;
+  color: #00000080;
+}
+
+.row-wrapper .short-desc {
+  position: relative;
+  font-family: "Poppins", sans-serif;
+  font-size: 1em;
+  font-weight: 600;
+  color: #00000090;
+}
+
+.row-wrapper .resource-count {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+.resource-count .academic-res {
+  font-family: "Poppins", sans-serif;
+  font-size: 1em;
+  font-weight: 400;
+
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.row-wrapper .keyword-title {
+  position: relative;
+  font-family: "Poppins", sans-serif;
+  font-size: 1em;
+  font-weight: 600;
+  color: #00000080;
+}
+
+.row-wrapper .keywords {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.keywords .keyword {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 0.9em;
+  font-weight: 600;
+  background-color: #1a194d;
+  color: #ffffff;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.resource-list .active-resource {
+  position: relative;
+  background-color: #ffffff;
+  width: 63vw;
+  height: 60vh;
+  border-radius: 1.5%;
+  padding: 40px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+}
+
+.active-resource .res-title-wrapper {
+  position: relative;
+  padding: 20px 20px;
+  background-color: #34343530;
+  color: #000000;
+  border-radius: 1em 1em 0 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  width: 90%;
+}
+
+.res-title-wrapper .title {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.25rem;
+}
+
+.title .actual-title {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 1.25rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 2rem;
+}
+
+.title .subtitle {
+  color: #343435;
+  text-align: center;
+  font-family: Plus Jakarta Sans;
+  font-size: 0.875rem;
+  font-style: normal;
+  font-weight: 500;
+}
+
+.res-title-wrapper .icons {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.icons .bookmark {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 1em;
+  font-weight: 600;
+  background-color: #00000070;
+}
+
+.active-resource .options {
+  position: relative;
+  display: flex;
+  height: 3rem;
+  width: 90%;
+  padding: 10px 20px;
+  align-items: center;
+  gap: 1.5rem;
+  background-color: #34343530;
+  border-radius: 0 0 1em 1em;
+}
+
+.options .academic-res,
+.academic-res-active {
+  position: relative;
+  color: #000000;
+  font-family: Plus Jakarta Sans;
+  font-size: 1em;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.6em;
+
+  transition: all ease 500ms;
+}
+
+.options .academic-res:hover {
+  cursor: pointer;
+  color: #1a194d;
+  transition: all ease 500ms;
+}
+
+.options .academic-res:hover::after {
+  content: "";
+  position: absolute;
+  height: 2px;
+  width: 100%;
+  background-color: #000000;
+  top: 1.5em;
+}
+
+.options .academic-res-active::after {
+  content: "";
+  position: absolute;
+  height: 2px;
+  width: 100%;
+  background-color: #000000;
+  top: 1.5em;
+}
+
+.active-resource .main-list {
+  position: relative;
+  top: 1em;
+  width: 90%;
+  left: -1%;
+  border-radius: 1em;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1em;
+}
+
+.main-list .row-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 55vw;
+  padding: 5px 10px;
+  border-radius: 0.6em;
+  border: solid 1px #000000;
+}
+
+.row-container .row-title-date {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.row-title-date .title {
+  font-family: Plus Jakarta Sans;
+  font-weight: 700;
+  color: #000000;
+  font-size: 1.2em;
+}
+
+.row-title-date .upload-time {
+  font-family: Plus Jakarta Sans;
+  font-weight: 400;
+  color: #00000090;
+  font-size: 0.8em;
+}
+
+.row-container .download-button {
+  display: flex;
+  color: #000000;
+  align-items: center;
+  gap: 0.6em;
+  background-color: #ffffff;
+  font-family: League Spartan;
+}
+
+.upload-container {
+  position: relative;
+  background-color: #ffffff;
+  width: 28vw;
+  height: 20vh;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1em;
+  padding: 20px;
+  border-radius: 1em;
+}
+
+.upload-container .name-input {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1em;
+}
+
+.name-input .name-label {
+  font-family: Poppins;
+  font-size: 1.2em;
+  font-weight: 700;
+  color: #1a194d;
+}
+
+.name-input .name-field {
+  background-color: transparent;
+  outline: none;
+  border: solid 1px #1a194d50;
+  border-radius: 5px;
+  width: 24.48vw;
+  color: #000000;
+  padding: 10px;
+  font-family: "Poppins";
+  font-size: 15px;
+  transition: 0.5s;
+}
+
+.upload-container .buttons {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+}
+
+.buttons .upload-button {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  font-family: Plus Jakarta Sans;
+}
+
+.upload-container .select-content-type {
+  width: 180px;
+  height: 40px;
+  background-color: #ffffff;
+  color: #1a194d;
+  outline: none;
+  border: solid 1px #1a194d50;
+  border-radius: 5px;
+  font-family: "Poppins", sans-serif;
+}
+
+.select-content-type .type-item {
+  color: #1a194d;
+  font-family: "Poppins", sans-serif;
+  font-size: 15px;
+}
+
+.select-content-type .type-item:hover {
+  cursor: pointer;
+  accent-color: #1a194d;
+}

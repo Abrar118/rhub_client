@@ -9,14 +9,14 @@
   top: 89vh;
   left: 94vw;
   transition: all ease 500ms;
-  color: #00ffffb3;
-  box-shadow: 0px 1px 2px 0px #00ffffb3, 1px 1px 2px 0px #00ffffb3,
-    1px 1px 5px 0px #00ffffb3, 1px 1px 7px 0px #00ffffb3;
+  color: #F6C90E;
+  box-shadow: 0px 1px 2px 0px #F6C90E, 1px 1px 2px 0px #F6C90E,
+    1px 1px 5px 0px #F6C90E, 1px 1px 7px 0px #F6C90E;
 }
 
 .chatbot:hover {
   transform: translateY(-5px);
-  box-shadow: 0px 6px 10px 2px #00ffffb3;
+  box-shadow: 0px 6px 10px 2px #F6C90E;
   cursor: pointer;
 }
 
