@@ -13,7 +13,7 @@ import MyCommunities from "./components/profile/MyCommunities";
 import CommunityHolder from "./components/community/CommunityHolder";
 import ComDash from "./components/community/ComDash";
 import ComChat from "./components/community/ComChat";
-import ComRes from "./components/community/ComRes";
+import ComRes, { ActiveResource } from "./components/community/ComRes";
 import EmailVerify from "./components/EmailVerify";
 
 import { ToastContainer } from "react-toastify";
@@ -73,7 +73,10 @@ const App = () => {
             <Route path="com-holder" element={<CommunityHolder />}>
               <Route path=":tag/dashboard" element={<ComDash />} />
               <Route path=":tag/chat" element={<ComChat />} />
-              <Route path=":tag/resource" element={<ComRes />} />
+              <Route path=":tag/resource">
+                <Route path="list" element={<ComRes />} />
+                <Route path=":name/res-item" element={<ActiveResource />} />
+              </Route>
             </Route>
           </Route>
           <Route path="/verify">

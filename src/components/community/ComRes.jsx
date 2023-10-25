@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useId } from "react";
 import "../../styles/community/comRes.css";
 import axios from "axios";
 import { toast } from "react-toastify";
@@ -10,6 +10,7 @@ import PortalPopup from "../PortalPopup";
 import {
   AiOutlinePlus as Plus,
   AiOutlineSearch as SearchIcon,
+  AiFillDelete as Delete,
 } from "react-icons/ai";
 import {
   HiSortAscending as Ascending,
@@ -19,11 +20,13 @@ import {
   BsCloudUploadFill as UploadIcon,
   BsFillCloudDownloadFill as DownloadIcon,
   BsFillBookmarkPlusFill as Bookmark,
+  BsToggleOn as ToggleOn,
+  BsToggleOff as ToggleOff,
 } from "react-icons/bs";
 import { FaBook as BookIcon, FaPenFancy as PenIcon } from "react-icons/fa";
 import { VscSymbolMisc as MiscIcon } from "react-icons/vsc";
-import { getTextFormattedTime } from "../utility/time";
-import { useParams } from "react-router-dom";
+import { compareDates, getTextFormattedTime } from "../utility/time";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { convertBase64 } from "../utility/fileLoad";
 import LoadingIcon from "../utility/Loader/LoadingIcon";
 
@@ -36,6 +39,9 @@ function ComRes() {
   const [isActive, setIsActive] = useState(false);
   const currentTag = useParams().tag;
   const [index, setIndex] = useState(0);
+  const [comAdmin, setComAdmin] = useState(0);
+  const [userId, setUserId] = useState(0);
+  const navigate = useNavigate();
 
   const toggleUpload = () => {
     setuploadContent(!uploadContent);
@@ -46,8 +52,18 @@ function ComRes() {
     if (searchQuery.length > 0) URL += `?key=${searchQuery.toUpperCase()}`;
 
     const response = await axios.get(URL);
+    const response2 = await axios.get(
+      `http://localhost:3002/getAdmin/${currentTag}`
+    );
     const data = response.data;
+    const data2 = response2.data;
     setuploads(data);
+    setComAdmin(data2);
+
+    const user_id = JSON.parse(
+      window.localStorage.getItem("currentUser")
+    ).student_id;
+    setUserId(user_id);
   };
 
   useEffect(() => {
@@ -137,12 +153,25 @@ function ComRes() {
         </div>
       </div>
       <div className={"resource-list"}>
-        <div className={isActive ? "resource-list-ver" : "resource-list-hor"}>
+        <div className={"resource-list-hor"}>
           {uploads.map((upload, index) => (
             <ResourceRow
               onClick={() => {
-                setIsActive(!isActive);
-                setIndex(index);
+                if (upload.access === "Open" || userId == comAdmin) {
+                  const activeContent = uploads[index];
+                  navigate(
+                    `/profile/com-holder/${currentTag}/resource/${upload.category_name}/res-item`,
+                    {
+                      state: {
+                        activeContent: activeContent,
+                        comAdmin: comAdmin,
+                        userId: userId,
+                        access: upload.access,
+                        keywords: upload.keywords,
+                      },
+                    }
+                  );
+                } else toast.error("Access prohibited.");
               }}
               access={upload.access}
               name={upload.category_name}
@@ -153,12 +182,12 @@ function ComRes() {
               miscLen={upload.misc.length}
               keywords={upload.keywords}
               index={index}
+              comAdmin={comAdmin}
+              userId={userId}
               key={index}
             />
           ))}
         </div>
-
-        {isActive && <ActiveResource activeConent={uploads[index]} />}
       </div>
 
       <AnimatePresence initial={false} mode="wait" onExitComplete={() => null}>
@@ -236,15 +265,58 @@ export const ResourceRow = ({
   );
 };
 
-export const ActiveResource = ({ activeConent }) => {
+export const ActiveResource = () => {
+  const location = useLocation();
   const [activeOption, setActiveOption] = useState("academic");
-  const [mainList, setMainList] = useState(activeConent.academic);
+  const [mainList, setMainList] = useState([]);
   const [openUpload, setOpenUpload] = useState(false);
   const uploadContent = useRef(null);
+  const [showAccess, setShowAccess] = useState(location.state.access);
+  const comAdmin = location.state.comAdmin;
+  const userId = location.state.userId;
+  const keywords = location.state.keywords;
+  const [activeConent, setActiveContent] = useState({});
 
   const toggleOpenUpload = () => {
     setOpenUpload(!openUpload);
   };
+
+  const compare = (a, b) => {
+    return compareDates(new Date(a.date), new Date(b.date)) * -1;
+  };
+
+  const getContent = async () => {
+    const response = await axios.get(
+      `http://localhost:3002/get_upload/${JSON.stringify(keywords)}`
+    );
+
+    const data = response.data;
+    data.academic.sort(compare);
+    data.student.sort(compare);
+    data.misc.sort(compare);
+
+    setActiveContent(data);
+    setMainList(data.academic);
+  };
+
+  const changeAccess = async () => {
+    const changedAccess = showAccess === "Open" ? "Restricted" : "Open";
+
+    const response = await axios.post("http://localhost:3002/changeAccess", {
+      access: changedAccess,
+      keywords: keywords,
+    });
+
+    const data = response.data;
+    if (data.acknowledged) {
+      toast.success("Access changed.");
+      setShowAccess(changedAccess);
+    }
+  };
+
+  useEffect(() => {
+    getContent();
+  }, []);
 
   return (
     <div className="active-resource">
@@ -255,19 +327,30 @@ export const ActiveResource = ({ activeConent }) => {
         </div>
         <div className="icons">
           <motion.button
-            whileHover={{ scale: 1.05, backgroundColor: "#000000" }}
+            whileHover={{ scale: 1.05, backgroundColor: "#ee4962" }}
             whileTap={{ scale: 0.9 }}
             className="bookmark"
           >
             <Bookmark /> Bookmark this
           </motion.button>
           <motion.button
-            whileHover={{ scale: 1.05, backgroundColor: "#000000" }}
+            whileHover={{ scale: 1.05, backgroundColor: "#ee4962" }}
             whileTap={{ scale: 0.9 }}
             className="bookmark"
             onClick={toggleOpenUpload}
           >
             <UploadIcon /> Upload content
+          </motion.button>
+          <motion.button
+            whileHover={{ scale: 1.05, backgroundColor: "#ee4962" }}
+            whileTap={{ scale: 0.9 }}
+            className="bookmark"
+            onClick={() => {
+              if (userId == comAdmin) changeAccess();
+              else toast.error("Access prohibited.");
+            }}
+          >
+            {showAccess === "Open" ? <ToggleOn /> : <ToggleOff />} Toggle Access
           </motion.button>
           <input
             ref={uploadContent}
@@ -325,6 +408,10 @@ export const ActiveResource = ({ activeConent }) => {
             uploadTime={getTextFormattedTime(new Date(row.date))}
             contentLink={row.content}
             uploader={row.uploader}
+            publicId={row.publicId}
+            type={row.type}
+            resourceType={row.resourceType}
+            time={activeConent.date}
           />
         ))}
       </div>
@@ -349,7 +436,39 @@ export const MainListRow = ({
   uploadTime,
   uploader,
   contentLink,
+  publicId,
+  type,
+  resourceType,
+  time,
 }) => {
+  const currentTag = useParams().tag;
+  const [isDeleting, setDeleting] = useState(false);
+
+  const deleteContent = async () => {
+    const currentUser = JSON.parse(
+      window.localStorage.getItem("currentUser")
+    ).student_id;
+
+    if (currentUser !== Number(uploader)) {
+      toast.error("You cannot delete this content.");
+      return;
+    }
+
+    setDeleting(true);
+    const response = await axios.delete(
+      `http://localhost:3002/deleteContent/${publicId}/${time}/${currentTag}/${type}/${resourceType}`,
+    );
+    setDeleting(false);
+
+    const data = response.data;
+    if (data.acknowledged) {
+      toast.success("Content deleted.");
+      setTimeout(() => {
+        window.location.reload(true);
+      }, 500);
+    }
+  };
+
   return (
     <div className="row-container">
       <div className="row-title-date">
@@ -359,20 +478,42 @@ export const MainListRow = ({
         </div>
       </div>
 
-      <motion.button
-        whileHover={{
-          scale: 1.05,
-          backgroundColor: "#000000",
-          color: "#ffffff",
-        }}
-        whileTap={{ scale: 0.9 }}
-        className="download-button"
-        onClick={() => {
-          window.open(contentLink, "_blank");
-        }}
-      >
-        <DownloadIcon /> Download
-      </motion.button>
+      <div className="row-buttons">
+        <motion.button
+          whileHover={{
+            scale: 1.05,
+            backgroundColor: "#000000",
+            color: "#ffffff",
+          }}
+          whileTap={{ scale: 0.9 }}
+          className="download-button"
+          onClick={() => {
+            window.open(contentLink, "_blank");
+          }}
+        >
+          <DownloadIcon /> Download
+        </motion.button>
+
+        <motion.button
+          whileHover={{
+            scale: 1.05,
+            backgroundColor: "rgb(238, 73, 98)",
+            color: "#ffffff",
+          }}
+          whileTap={{ scale: 0.9 }}
+          className="download-button"
+          onClick={deleteContent}
+        >
+          <Delete /> Delete
+        </motion.button>
+      </div>
+      <AnimatePresence initial={false} mode="wait" onExitComplete={() => null}>
+        {isDeleting && (
+          <PortalPopup overlayColor="rgba(0,0,0, 0.5)" placement="Centered">
+            <LoadingIcon iconSize={"5vw"} iconWidth={"5vw"} />
+          </PortalPopup>
+        )}
+      </AnimatePresence>
     </div>
   );
 };
@@ -511,11 +652,8 @@ export const UploadPopUp = ({ keywords }) => {
 
       <AnimatePresence initial={false} mode="wait" onExitComplete={() => null}>
         {isUploading && (
-          <PortalPopup
-            overlayColor="rgba(0,0,0, 0.5)"
-            placement="Centered"
-          >
-            <LoadingIcon iconSize={"10vw"} iconWidth={"10vw"} />
+          <PortalPopup overlayColor="rgba(0,0,0, 0.5)" placement="Centered">
+            <LoadingIcon iconSize={"5vw"} iconWidth={"5vw"} />
           </PortalPopup>
         )}
       </AnimatePresence>

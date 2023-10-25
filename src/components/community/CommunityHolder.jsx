@@ -55,7 +55,7 @@ function CommunityHolder() {
                      </div>
                      <div
                         title="Resources"
-                        onClick={() => { active_and_navigate("resource", `/profile/com-holder/${urlTag}/resource`) }}
+                        onClick={() => { active_and_navigate("resource", `/profile/com-holder/${urlTag}/resource/list`) }}
                         className={
                            comActiveMenu === "resource" ? "com-menu-item-icon-active" :
                               "com-menu-item-icon"}

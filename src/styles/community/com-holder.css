@@ -97,4 +97,7 @@
   position: relative;
   width: 83.36vw;
   height: 90.7vh;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
 }
