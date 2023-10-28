@@ -38,7 +38,6 @@ function ComRes() {
   const [sortOrder, setSortOrder] = useState(-1);
   const [isActive, setIsActive] = useState(false);
   const currentTag = useParams().tag;
-  const [index, setIndex] = useState(0);
   const [comAdmin, setComAdmin] = useState(0);
   const [userId, setUserId] = useState(0);
   const navigate = useNavigate();
@@ -159,17 +158,20 @@ function ComRes() {
               onClick={() => {
                 if (upload.access === "Open" || userId == comAdmin) {
                   const activeContent = uploads[index];
+                  const categoryData = {
+                    activeContent: activeContent,
+                    comAdmin: comAdmin,
+                    userId: userId,
+                    access: upload.access,
+                    keywords: upload.keywords,
+                  };
+
+                  window.sessionStorage.setItem(
+                    "catData",
+                    JSON.stringify(categoryData)
+                  );
                   navigate(
-                    `/profile/com-holder/${currentTag}/resource/${upload.category_name}/res-item`,
-                    {
-                      state: {
-                        activeContent: activeContent,
-                        comAdmin: comAdmin,
-                        userId: userId,
-                        access: upload.access,
-                        keywords: upload.keywords,
-                      },
-                    }
+                    `/profile/com-holder/${currentTag}/resource/${upload.category_name}/res-item`
                   );
                 } else toast.error("Access prohibited.");
               }}
@@ -266,16 +268,17 @@ export const ResourceRow = ({
 };
 
 export const ActiveResource = () => {
-  const location = useLocation();
+  const location = JSON.parse(window.sessionStorage.getItem("catData"));
   const [activeOption, setActiveOption] = useState("academic");
   const [mainList, setMainList] = useState([]);
   const [openUpload, setOpenUpload] = useState(false);
   const uploadContent = useRef(null);
-  const [showAccess, setShowAccess] = useState(location.state.access);
-  const comAdmin = location.state.comAdmin;
-  const userId = location.state.userId;
-  const keywords = location.state.keywords;
+  const [showAccess, setShowAccess] = useState(location.access);
+  const comAdmin = location.comAdmin;
+  const userId = location.userId;
+  const keywords = location.keywords;
   const [activeConent, setActiveContent] = useState({});
+  const currentTag = useParams().tag;
 
   const toggleOpenUpload = () => {
     setOpenUpload(!openUpload);
@@ -287,7 +290,7 @@ export const ActiveResource = () => {
 
   const getContent = async () => {
     const response = await axios.get(
-      `http://localhost:3002/get_upload/${JSON.stringify(keywords)}`
+      `http://localhost:3002/get_upload/${JSON.stringify(keywords)}/${currentTag}`
     );
 
     const data = response.data;
@@ -314,6 +317,28 @@ export const ActiveResource = () => {
     }
   };
 
+  //a function for calling the backend /insertBookmark api which will insert the bookmark into the database
+  const insertBookmark = async () => {
+    const response = await axios
+      .post("http://localhost:3002/insertBookmark", {
+        user: userId,
+        uploadDate: activeConent.date,
+        title: activeConent.category_name,
+        bookmarkDate: new Date().toISOString(),
+        comTag: currentTag,
+      })
+      .catch((error) => {
+        if (error.response?.status === 500) {
+          toast.error("Could not insert bookmark or already added.");
+        }
+      });
+
+    const data = response.data;
+    if (data.acknowledged) {
+      toast.success("Bookmark added.");
+    }
+  };
+
   useEffect(() => {
     getContent();
   }, []);
@@ -330,6 +355,7 @@ export const ActiveResource = () => {
             whileHover={{ scale: 1.05, backgroundColor: "#ee4962" }}
             whileTap={{ scale: 0.9 }}
             className="bookmark"
+            onClick={insertBookmark}
           >
             <Bookmark /> Bookmark this
           </motion.button>
@@ -456,7 +482,7 @@ export const MainListRow = ({
 
     setDeleting(true);
     const response = await axios.delete(
-      `http://localhost:3002/deleteContent/${publicId}/${time}/${currentTag}/${type}/${resourceType}`,
+      `http://localhost:3002/deleteContent/${publicId}/${time}/${currentTag}/${type}/${resourceType}`
     );
     setDeleting(false);
 

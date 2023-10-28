@@ -192,7 +192,7 @@ function AllCommunity() {
               }}
               className="page-button"
               key={index}
-              style={{backgroundColor: currentPage === index? "#ee4962": "transparent"}}
+              style={{backgroundColor: currentPage === index? "#ee4962": "transparent", color: currentPage === index? "#ffffff": "#000000"}}
             >
               {index + 1}
             </motion.button>

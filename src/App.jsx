@@ -20,6 +20,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { BsRobot as Chatbot } from "react-icons/bs";
 import { motion } from "framer-motion";
+import Bookmark from "./components/profile/Bookmark";
 
 const App = () => {
   const mainStyle = {
@@ -64,7 +65,7 @@ const App = () => {
             <Route path="info" element={<GeneralInfo />} />
             <Route path="change-pass" element={<MyProfile />} />
             <Route path="edit" element={<EditProfile />} />
-            <Route path="bookmark" element={<MyProfile />} />
+            <Route path="bookmark" element={<Bookmark />} />
             <Route path="my-commnunities" element={<MyCommunities />} />
             <Route path="my-uploads" element={<MyProfile />} />
             <Route path="notification" element={<MyProfile />} />

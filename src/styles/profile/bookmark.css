@@ -1,0 +1,286 @@
+.bookmark-container {
+  position: relative;
+  width: 83.36vw;
+  height: 90.7vh;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  padding: 40px 20px;
+  overflow: hidden;
+  background-color: #131619;
+}
+
+.bookmark-container .search-tab {
+  width: 75vw;
+  height: 5vh;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  position: relative;
+  padding: 5px 20px;
+}
+
+.bookmark-container .search-tab .res-title {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 1.5em;
+  font-weight: 700;
+  text-align: center;
+}
+
+.bookmark-container .search-tab .search-objects {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.bookmark-container .search-tab .search-input {
+  display: flex;
+  align-items: center;
+  position: relative;
+  gap: 10px;
+}
+
+.bookmark-container .search-input .search-icon {
+  position: absolute;
+  font-size: 20px;
+  left: 10px;
+  top: 12px;
+}
+
+.bookmark-container .search-input .search-input-holder {
+  background-color: transparent;
+  border: solid 2px #ffffff20;
+  border-radius: 5px;
+  height: 40px;
+  width: 300px;
+  padding-left: 40px;
+  outline: none;
+  color: #ffffff;
+
+  font-family: "Poppins", sans-serif;
+}
+
+.bookmark-container .search-input .search-input-holder:focus {
+  border-color: #ffffff60;
+}
+
+.bookmark-container .search-input .search-community-button {
+  background-color: #f6c90e;
+  position: relative;
+  font-family: "Poppins", sans-serif;
+  color: #000000;
+}
+
+.bookmark-container .search-tab .sort-by {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  position: relative;
+  left: 2vw;
+}
+
+.bookmark-container .sort-by .sort-by-text {
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.bookmark-container .sort-by .sort-dropdown {
+  width: 180px;
+  height: 40px;
+  background-color: #ffffff;
+  color: #1a194d;
+  outline: none;
+  border: solid 1px #1a194d50;
+  border-radius: 5px;
+  font-family: "Poppins", sans-serif;
+}
+
+.bookmark-container .sort-dropdown .sort-dropdown-item {
+  color: #1a194d;
+  font-family: "Poppins", sans-serif;
+  font-size: 15px;
+}
+
+.bookmark-container .sort-dropdown .sort-dropdown:hover {
+  cursor: pointer;
+  accent-color: #1a194d;
+}
+
+.bookmark-container .search-tab .show-as {
+  position: relative;
+  left: 2vw;
+  display: flex;
+  align-items: center;
+  height: 30px;
+}
+
+.bookmark-container .show-as .show-as-block {
+  border: solid 1px #ffffff20;
+  padding: 5px 5px 2px 5px;
+  font-size: 20px;
+  color: #f6c90e;
+}
+
+.bookmark-container .show-as .show-as-block:hover {
+  cursor: pointer;
+  background-color: #dbdbdb20;
+}
+
+.bookmark-container .search-tab .add-community {
+  display: flex;
+  position: relative;
+  align-items: center;
+  gap: 10px;
+  color: #000000;
+  background-color: #f6c90e;
+  height: 50px;
+  padding: 5px 20px;
+  border-radius: 10px;
+  left: 3vw;
+
+  font-family: "Poppins", sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.bookmark-container .bookmark-list {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  align-content: flex-start;
+  justify-content: flex-start;
+  gap: 30px;
+  width: 79vw;
+  height: 65vh;
+  padding: 5px 20px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+
+  transition: all ease 500ms;
+}
+
+.bookmark-container .bookmark-list::-webkit-scrollbar {
+  display: none;
+}
+
+.bookmark-list .bookmark-item {
+  position: relative;
+  background-color: #ffffff;
+  color: #000000;
+  padding: 20px 20px;
+  border-radius: 10px;
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+
+  width: 15vw;
+  height: 10vh;
+  transition: all ease 500ms;
+}
+
+.bookmark-list .bookmark-item::-webkit-scrollbar {
+  display: none;
+}
+
+.bookmark-list .bookmark-item:hover {
+  cursor: pointer;
+  transform: scale(1.05);
+  box-shadow: 0px 6px 15px 2px #f6c90e;
+}
+
+.bookmark-item .bookmark-info {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.bookmark-item .bookmark-item-title {
+  font-family: "Poppins", sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.bookmark-item .bookmark-item-date {
+  font-family: "Poppins", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: #00000080;
+}
+
+.bookmark-item .bookmark-item-icon {
+  position: relative;
+  font-size: 50px;
+  color: #f6c90e;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.bookmark-item .bookmark-dropdown {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+  left: 90%;
+  top: 70%;
+}
+
+.bookmark-dropdown .bookmark-dropdown-icon {
+  position: relative;
+  font-size: 25px;
+  color: #000000;
+}
+
+.bookmark-dropdown .bookmark-dropdown-icon:hover {
+  cursor: pointer;
+  color: #f6c90e;
+}
+
+.bookmark-dropdown .bookmark-dropdown-content {
+  position: absolute;
+  background-color: black;
+  color: #ffffff;
+  width: 5vw;
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  border-radius: 5px;
+  top: 30px;
+
+  transition: all ease 500ms;
+  visibility: hidden;
+  transform: translateY(0%);
+  opacity: 0;
+}
+
+.bookmark-dropdown:hover .bookmark-dropdown-content {
+  visibility: visible;
+  opacity: 1;
+  transform: translateY(-100%);
+}
+
+.bookmark-dropdown-content .bookmark-dropdown-item {
+  font-family: "Poppins", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: #ffffff;
+}
+
+.bookmark-dropdown-content .bookmark-dropdown-item:hover {
+  cursor: pointer;
+  color: #f6c90e;
+  scale: 1.05;
+}

@@ -45,6 +45,7 @@ function ProfileDropdown() {
                if (linkTo) {
                   navigate(goToMenu);
                   window.localStorage.setItem("profileOption", dropText);
+                  window.scrollTo(0, 0);
                }
                else setOpton(goToMenu);
             }

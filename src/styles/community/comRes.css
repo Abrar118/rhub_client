@@ -160,17 +160,6 @@
   transition: all ease 500ms;
 }
 
-.resource-list .resource-list-ver {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-start;
-  gap: 20px;
-  transition: all ease 500ms;
-  width: 15vw;
-}
-
 .resource-list .resource-list-hor {
   position: relative;
   display: flex;

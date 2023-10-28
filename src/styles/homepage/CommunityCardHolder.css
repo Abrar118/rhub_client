@@ -98,28 +98,26 @@
 }
 
 .scroll-item .com-tag {
-  background-color: #1ab79d26;
+  background-color: #1ab79d50;
   border-radius: 3px;
   height: 25px;
   left: 24px;
-  position: absolute;
-  top: 25px;
-  width: 80px;
+  position: relative;
+  top: 20px;
+  width: fit-content;
+  text-align: center;
+  padding: 2px 5px;
 }
 
 .scroll-item .com-tag-div {
   color: #1ab79d;
   font-family: "League Spartan", Helvetica;
   font-size: 16px;
-  font-weight: 400;
-  height: 16px;
-  left: 16px;
+  font-weight: 600;
   letter-spacing: 0;
   line-height: 25px;
-  position: absolute;
-  top: 4px;
+  position: relative;
   white-space: nowrap;
-  width: 38px;
 }
 
 .scroll-item .com-bio {

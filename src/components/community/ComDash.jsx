@@ -320,7 +320,10 @@ export const AddEventPopUp = () => {
             required
             type="text"
             className="main-field"
-            style={{ backgroundColor: "transparent", border: "solid 1px #0d0f10" }}
+            style={{
+              backgroundColor: "transparent",
+              border: "solid 1px #0d0f10",
+            }}
           />
         </div>
 
@@ -335,7 +338,10 @@ export const AddEventPopUp = () => {
             required
             type="text"
             className="main-field"
-            style={{ backgroundColor: "transparent", border: "solid 1px #0d0f10" }}
+            style={{
+              backgroundColor: "transparent",
+              border: "solid 1px #0d0f10",
+            }}
           />
         </div>
 
@@ -350,7 +356,10 @@ export const AddEventPopUp = () => {
             required
             type="text"
             className="main-field"
-            style={{ backgroundColor: "transparent", border: "solid 1px #0d0f10" }}
+            style={{
+              backgroundColor: "transparent",
+              border: "solid 1px #0d0f10",
+            }}
           />
         </div>
 
@@ -380,4 +389,5 @@ export const AddEventPopUp = () => {
     </motion.div>
   );
 };
+
 export default ComDash;
