@@ -55,7 +55,7 @@ function AllCommunity() {
   }, [sortOption, sortOrder, currentPage]);
 
   return (
-    <div className="community-container">
+    <motion.div layout className="community-container">
       <div className="community-header">Our Communities</div>
 
       <div className="search-bar">
@@ -138,24 +138,32 @@ function AllCommunity() {
         </motion.button>
       </div>
 
-      <div className="cards-holder">
+      <motion.div
+        animate={{ opacity: 1 }}
+        initial={{ opacity: 0 }}
+        exit={{ opacity: 0 }}
+        layout
+        className="cards-holder"
+      >
         {communities.length === 0 ? (
           <LoadingIcon iconSize={"100px"} iconWidth={"98.98vw"} />
         ) : (
-          communities.map((com, index) => (
-            <CommunityCardHolder
-              key={index}
-              communityTag={com.tag}
-              communityBio={com.description}
-              communityRating={com.rating}
-              communityName={com.name}
-              resourceCount={com.resource}
-              memberCount={com.members}
-              communityImage={`${com.com_image}`}
-            />
-          ))
+          <AnimatePresence mode="wait">
+            {communities.map((com, index) => (
+              <CommunityCardHolder
+                key={index}
+                communityTag={com.tag}
+                communityBio={com.description}
+                communityRating={com.rating}
+                communityName={com.name}
+                resourceCount={com.resource}
+                memberCount={com.members}
+                communityImage={`${com.com_image}`}
+              />
+            ))}
+          </AnimatePresence>
         )}
-      </div>
+      </motion.div>
 
       <div className="select-page">
         {currentPage > 0 && (
@@ -169,6 +177,9 @@ function AllCommunity() {
             whileTap={{ scale: 0.9 }}
             onClick={() => {
               setCurrentPage(currentPage - 1);
+              setTimeout(() => {
+                window.scrollTo(0, 0);
+              }, 300);
             }}
             className="prev-button"
           >
@@ -189,10 +200,17 @@ function AllCommunity() {
               whileTap={{ scale: 0.9 }}
               onClick={() => {
                 setCurrentPage(index);
+                setTimeout(() => {
+                  window.scrollTo(0, 0);
+                }, 300);
               }}
               className="page-button"
               key={index}
-              style={{backgroundColor: currentPage === index? "#ee4962": "transparent", color: currentPage === index? "#ffffff": "#000000"}}
+              style={{
+                backgroundColor:
+                  currentPage === index ? "#ee4962" : "transparent",
+                color: currentPage === index ? "#ffffff" : "#000000",
+              }}
             >
               {index + 1}
             </motion.button>
@@ -209,6 +227,9 @@ function AllCommunity() {
             whileTap={{ scale: 0.9 }}
             onClick={() => {
               setCurrentPage(currentPage + 1);
+              setTimeout(() => {
+                window.scrollTo(0, 0);
+              }, 300);
             }}
             className="prev-button"
           >
@@ -228,7 +249,7 @@ function AllCommunity() {
           </PortalPopup>
         )}
       </AnimatePresence>
-    </div>
+    </motion.div>
   );
 }
 

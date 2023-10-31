@@ -26,6 +26,7 @@ function ProfileDropdown() {
 
    const handleLogout = () => {
       window.localStorage.setItem("logInStatus", false);
+      window.localStorage.removeItem("currentUser");
       toast.success("Logged Out Successfully");
       setTimeout(() => {
          navigate("/");

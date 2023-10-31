@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 import React from "react";
 import "../../styles/homepage/CommunityCardHolder.css";
 import mem_image from "../../assets/mem-img.png";
@@ -16,47 +16,47 @@ const CommunityCardHolder = ({
   resourceCount,
   memberCount,
   communityImage,
-  hideShowRequest
+  hideShowRequest,
 }) => {
-
   const [showRequest, setShowRequest] = useState(false);
 
   useEffect(() => {
     setShowRequest(!hideShowRequest);
   }, []);
 
-
   const handleRequest = () => {
     const status = window.localStorage.getItem("logInStatus");
     if (status === "true") {
       toast.success("Request sent successfully!");
-    }
-    else toast.error("Log in to join a community");
-  }
-
+    } else toast.error("Log in to join a community");
+  };
 
   return (
-    <div className="scroll-item">
+    <motion.div
+      animate={{ opacity: 1 }}
+      initial={{ opacity: 0 }}
+      exit={{ opacity: 0 }}
+      layout
+      className="scroll-item"
+    >
       <div className="com-card">
         <div className="com-card-overlap-group">
           <div className="com-img">
             <img className="course-jpg" src={communityImage} />
           </div>
-          {
-            showRequest && (
-              <motion.button
-                whileHover={{ scale: 1.04, backgroundColor: "#ee4962" }}
-                whileTap={{ scale: 0.9 }}
-                className="request-now"
-                onClick={handleRequest}
-              >
-                <img className="res-img" alt="Res img" src={req_image} />
-                <div className="req-wrapper">
-                  <div className="req-text-wrapper">Join</div>
-                </div>
-              </motion.button>
-            )
-          }
+          {showRequest && (
+            <motion.button
+              whileHover={{ scale: 1.04, backgroundColor: "#ee4962" }}
+              whileTap={{ scale: 0.9 }}
+              className="request-now"
+              onClick={handleRequest}
+            >
+              <img className="res-img" alt="Res img" src={req_image} />
+              <div className="req-wrapper">
+                <div className="req-text-wrapper">Join</div>
+              </div>
+            </motion.button>
+          )}
         </div>
         <div className="com-card-desc">
           <div className="com-tag">
@@ -66,12 +66,19 @@ const CommunityCardHolder = ({
             <p className="com-bio-p">{communityBio}</p>
           </div>
           <div className="rating-wrapper">
-            {
-              Array(communityRating).fill(null).map((elem, index) =>
-                <img className="rating-stars" alt="Rating stars" src={star_image} key={index} />
-              )
-            }
-            <div className="rating-text-wrapper">({communityRating}.0/5 Rating)</div>
+            {Array(communityRating)
+              .fill(null)
+              .map((elem, index) => (
+                <img
+                  className="rating-stars"
+                  alt="Rating stars"
+                  src={star_image}
+                  key={index}
+                />
+              ))}
+            <div className="rating-text-wrapper">
+              ({communityRating}.0/5 Rating)
+            </div>
           </div>
           <div className="card-com-name">
             <div className="card-com-name-text">{communityName}</div>
@@ -91,7 +98,7 @@ const CommunityCardHolder = ({
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

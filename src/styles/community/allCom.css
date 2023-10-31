@@ -73,6 +73,7 @@
    gap: 20px;
    position: relative;
    left: 26vw;
+   width: 28%;
 }
 
 .sort-by .sort-by-text {
@@ -82,23 +83,28 @@
 }
 
 .sort-by .sort-dropdown {
-   width: 180px;
-   height: 40px;
+   appearance: none;
+   width: 70%;
+   height: 4vh;
+   padding: 1px 5px;
    background-color: #ffffff;
    color: #1a194d;
    outline: none;
    border: solid 1px #1a194d50;
    border-radius: 5px;
    font-family: "Poppins", sans-serif;
+   cursor: pointer;
+   transition: all ease 0.5s;
 }
 
 .sort-dropdown .sort-dropdown-item {
    color: #1a194d;
    font-family: "Poppins", sans-serif;
    font-size: 15px;
+   transition: all ease 0.5s;
 }
 
-.sort-dropdown .sort-dropdown:hover {
+.sort-dropdown .sort-dropdown-item:hover {
    cursor: pointer;
    accent-color: #1a194d;
 }

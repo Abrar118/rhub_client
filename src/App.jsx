@@ -38,6 +38,7 @@ const App = () => {
     window.onscroll = () => {
       if (window.scrollY > 50) {
         setHeaderStyle({
+          width: "98.98vw",
           position: "fixed",
           boxShadow: "0px 5px 5px #525252",
           transition: "1s",
@@ -45,6 +46,7 @@ const App = () => {
         });
       } else {
         setHeaderStyle({
+          width: "98.98vw",
           position: "relative",
           zIndex: 4,
         });

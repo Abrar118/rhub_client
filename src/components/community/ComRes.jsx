@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef, useId } from "react";
+import React, { useEffect, useState, useRef} from "react";
 import "../../styles/community/comRes.css";
 import axios from "axios";
 import { toast } from "react-toastify";

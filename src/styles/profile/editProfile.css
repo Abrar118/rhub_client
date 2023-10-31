@@ -1,6 +1,5 @@
 .edit-container {
   display: flex;
-  flex: 1;
   width: 68.75vw;
   padding: 41px 63px 50px 50px;
   flex-direction: column;

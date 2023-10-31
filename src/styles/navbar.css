@@ -1,37 +1,37 @@
 .navbar {
   background-color: #ffffff;
-  height: 100px;
+  height: 8vh;
   position: relative;
-  width: 98.98vw;
+  width: 98vw;
+  display: flex;
+  padding: 10px 10px;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .navbar-frame {
-  width: 700px;
+  position: relative;
+  width: 36.45vw;
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  gap: 20px;
-  position: relative;
+  gap: 20%;
+  left: 18%;
 }
 
 .navbar-logo {
   height: 100px;
   width: 100px;
   position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  left: 250px;
 }
 
 .navbar-buttons {
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  position: absolute;
-  left: 80%;
-  bottom: 40px;
-  gap: 20px;
+  position: relative;
+  gap: 50px;
+  width: 80%;
 }
 
 .navbar-label-wrapper:hover {
@@ -46,11 +46,10 @@
   font-size: 18px;
   font-weight: 700;
   letter-spacing: 0;
-  line-height: 24px;
   border: none;
-  width: 150px;
-  position: relative;
+  width: 50%;
   text-align: center;
+  position: relative;
   padding: 10px 0px;
 }
 
@@ -75,14 +74,13 @@
 .avtive-navbar-link {
   background: #ffffff;
   cursor: pointer;
-  color: #000000;
+  color: #ee4962;
   font-family: "Poppins", Helvetica;
   font-size: 18px;
   font-weight: 700;
   letter-spacing: 0;
-  line-height: 24px;
   border: none;
-  width: 150px;
+  width: 50%;
   position: relative;
   text-align: center;
   padding: 10px 0px;
@@ -104,9 +102,11 @@
 
 .login-wrapper {
   display: flex;
-  position: absolute;
-  left: 1500px;
-  top: 2em;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  right: 10%;
+  width: 8%;
 }
 
 .log-in-button {
@@ -116,35 +116,30 @@
   font-size: 18px;
   font-weight: 600;
   letter-spacing: 0;
-  line-height: 24px;
   stroke: none;
-  width: 160px;
-  text-align: left;
-  padding-left: 50px;
+  width: 100%;
+  text-align: center;
 }
 
 .log-in-button:hover {
   background: #ee4962;
-  color: #ffffff;
 }
 
 .profile-avatar {
   border-radius: 50%;
-  height: 60px;
-  width: 60px;
+  width: 40%;
+  height: 50%;
   position: relative;
-  bottom: 10px;
   cursor: pointer;
 }
 
 .dropdown-menu {
-  position: relative;
-  top: 0px;
-  right: 70px;
+  position: absolute;
+  top: 120%;
+  left: -50%;
   background-color: #0d0f10;
   border-radius: 8px;
   padding: 10px 30px 10px 10px;
-  overflow: hidden;
 }
 
 .dropdown-menu::before {
@@ -154,7 +149,7 @@
   right: 120px;
   height: 20px;
   width: 20px;
-  background: #404142;
+  background: #0d0f10;
   transform: rotate(45deg);
 }
 

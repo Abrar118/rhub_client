@@ -204,6 +204,11 @@ export const EventList = ({ eventArray, listTitle }) => {
 
 export const EvnetCard = ({ event }) => {
   const [showComment, setShowComment] = useState(false);
+  const [addComment, setAddComment] = useState(false);
+
+  const toggleAddComment = () => {
+    setAddComment(!addComment);
+  };
 
   return (
     <div className="event-card">
@@ -231,7 +236,7 @@ export const EvnetCard = ({ event }) => {
           <div className="comment-list">
             {event.comments.map((comment, index) => (
               <div className="comment-row" key={index}>
-                <div className="comment-name">{comment.name}:</div>
+                <div className="comment-name">{comment.name}</div>
                 <div className="comment-body">{comment.body}</div>
               </div>
             ))}
@@ -239,13 +244,105 @@ export const EvnetCard = ({ event }) => {
               whileHover={{ scale: 1.04, backgroundColor: "#1a1d21" }}
               whileTap={{ scale: 0.9 }}
               className="add-comment"
+              onClick={toggleAddComment}
             >
               <Plus />
             </motion.div>
+            {
+              <AnimatePresence
+                initial={false}
+                mode="wait"
+                onExitComplete={() => null}
+              >
+                {addComment && (
+                  <PortalPopup
+                    overlayColor="rgba(0,0,0, 0.5)"
+                    placement="Centered"
+                    onOutsideClick={toggleAddComment}
+                  >
+                    <AddCommentPopUp tag={event.tag} date={event.date} />
+                  </PortalPopup>
+                )}
+              </AnimatePresence>
+            }
           </div>
         )}
       </div>
     </div>
+  );
+};
+
+const AddCommentPopUp = ({ tag, date }) => {
+  const [comment, setComment] = useState("");
+  const user = JSON.parse(window.localStorage.getItem("currentUser")).name;
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const requestBody = {
+      body: comment,
+      name: user,
+    };
+
+    const response = await axios
+      .patch(
+        `http://localhost:3002/addComment/${JSON.stringify(tag)}/${date}`,
+        requestBody
+      )
+      .catch((error) => {
+        if (error.response?.status === 500) {
+          toast.error("Could not add comment");
+        }
+      });
+
+    const data = response.data;
+
+    if (data.acknowledged) {
+      toast.success("Comment added successfully");
+      setTimeout(() => {
+        window.location.reload(true);
+      }, 500);
+    }
+  };
+
+  return (
+    <motion.div
+      initial={{ scale: 0.8 }}
+      animate={{ scale: 1 }}
+      transition={{ ease: "easeIn", duration: 0.3 }}
+      exit={{ scale: 0.8, transition: { ease: "easeIn", duration: 0.3 } }}
+      className="addEvent-wrapper"
+    >
+      <div className="title">Add a comment</div>
+      <form className="input-form" onSubmit={handleSubmit}>
+        <div className="field-container">
+          <label htmlFor="comment" className="field-label">
+            Comment
+          </label>
+          <textarea
+            onChange={(e) => {
+              setComment(e.target.value);
+            }}
+            required
+            type="text"
+            className="main-field"
+            style={{
+              backgroundColor: "transparent",
+              border: "solid 1px #0d0f10",
+            }}
+          />
+        </div>
+
+        <motion.button
+          whileHover={{ scale: 1.04, backgroundColor: "#ee4962" }}
+          whileTap={{ scale: 0.9 }}
+          type="submit"
+          className="addEvent-button"
+        >
+          Add comment
+        </motion.button>
+      </form>
+    </motion.div>
   );
 };
 

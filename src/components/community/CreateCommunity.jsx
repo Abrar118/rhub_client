@@ -10,6 +10,7 @@ function CreateCommunity({ closePopUp }) {
   const [tag, setTag] = useState();
   const [desc, setDesc] = useState();
   const [privacy, setPrivacy] = useState("open");
+  const [characterCount, setCharacterCount] = useState(0);
 
   const handle_create = async (e) => {
     e.preventDefault();
@@ -166,16 +167,20 @@ function CreateCommunity({ closePopUp }) {
 
           <div className="create-field-2">
             <label htmlFor="desc" className="filed-label">
-              Description*
+              <div className="ashol">Description*</div>
+              <div className="word-count">{characterCount}/60</div>
             </label>
             <textarea
-              spellCheck
+              spellCheck={true}
+              maxLength={60}
+              rows={2}
               required
               id="desc"
               type="textarea"
               className="name-tag-filed desc-only"
               onChange={(e) => {
                 setDesc(e.target.value);
+                setCharacterCount(e.target.value.length);
               }}
             />
           </div>

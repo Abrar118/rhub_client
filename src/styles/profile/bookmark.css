@@ -12,7 +12,6 @@
 
 .bookmark-container .search-tab {
   width: 75vw;
-  height: 5vh;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
