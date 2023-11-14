@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef} from "react";
+import React, { useEffect, useState, useRef } from "react";
 import "../../styles/community/comRes.css";
 import axios from "axios";
 import { toast } from "react-toastify";
@@ -26,7 +26,7 @@ import {
 import { FaBook as BookIcon, FaPenFancy as PenIcon } from "react-icons/fa";
 import { VscSymbolMisc as MiscIcon } from "react-icons/vsc";
 import { compareDates, getTextFormattedTime } from "../utility/time";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { convertBase64 } from "../utility/fileLoad";
 import LoadingIcon from "../utility/Loader/LoadingIcon";
 
@@ -71,7 +71,12 @@ function ComRes() {
 
   return (
     <div className="com-res">
-      <div className="search-tab">
+      <motion.div
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ ease: "easeIn", duration: 0.5 }}
+        className="search-tab"
+      >
         <div className="res-title">Resources</div>
         <div className="search-objects">
           <div className="search-input">
@@ -150,8 +155,14 @@ function ComRes() {
             Add Category
           </motion.button>
         </div>
-      </div>
-      <div className={"resource-list"}>
+      </motion.div>
+
+      <motion.div
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ ease: "easeIn", duration: 0.5 }}
+        className={"resource-list"}
+      >
         <div className={"resource-list-hor"}>
           {uploads.map((upload, index) => (
             <ResourceRow
@@ -190,7 +201,7 @@ function ComRes() {
             />
           ))}
         </div>
-      </div>
+      </motion.div>
 
       <AnimatePresence initial={false} mode="wait" onExitComplete={() => null}>
         {uploadContent && (
@@ -290,7 +301,9 @@ export const ActiveResource = () => {
 
   const getContent = async () => {
     const response = await axios.get(
-      `http://localhost:3002/get_upload/${JSON.stringify(keywords)}/${currentTag}`
+      `http://localhost:3002/get_upload/${JSON.stringify(
+        keywords
+      )}/${currentTag}`
     );
 
     const data = response.data;
@@ -317,7 +330,6 @@ export const ActiveResource = () => {
     }
   };
 
-  //a function for calling the backend /insertBookmark api which will insert the bookmark into the database
   const insertBookmark = async () => {
     const response = await axios
       .post("http://localhost:3002/insertBookmark", {
@@ -345,7 +357,12 @@ export const ActiveResource = () => {
 
   return (
     <div className="active-resource">
-      <div className="res-title-wrapper">
+      <motion.div
+        initial={{ x: -1000, opacity: 0 }}
+        animate={{ x: 0, opacity: 1 }}
+        transition={{ ease: "easeIn", duration: 0.3 }}
+        className="res-title-wrapper"
+      >
         <div className="title">
           <div className="actual-title">{activeConent.category_name}</div>
           <div className="subtitle">{activeConent.description}</div>
@@ -386,7 +403,7 @@ export const ActiveResource = () => {
             style={{ display: "none" }}
           />
         </div>
-      </div>
+      </motion.div>
       <div className="options">
         <div
           className={
@@ -426,7 +443,12 @@ export const ActiveResource = () => {
         </div>
       </div>
 
-      <div className="main-list">
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ ease: "easeIn", duration: 0.3 }}
+        className="main-list"
+      >
         {mainList.map((row, index) => (
           <MainListRow
             key={index}
@@ -440,7 +462,7 @@ export const ActiveResource = () => {
             time={activeConent.date}
           />
         ))}
-      </div>
+      </motion.div>
 
       <AnimatePresence initial={false} mode="wait" onExitComplete={() => null}>
         {openUpload && (

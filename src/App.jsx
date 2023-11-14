@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
-import "./App.css";
 
 import Homepage from "./components/homepage/homepage";
 import MyProfile from "./components/profile/Myprofile";
@@ -15,12 +14,17 @@ import ComDash from "./components/community/ComDash";
 import ComChat from "./components/community/ComChat";
 import ComRes, { ActiveResource } from "./components/community/ComRes";
 import EmailVerify from "./components/EmailVerify";
+import Bookmark from "./components/profile/Bookmark";
+import Chat from "./components/Chat/chat";
 
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { BsRobot as Chatbot } from "react-icons/bs";
-import { motion } from "framer-motion";
-import Bookmark from "./components/profile/Bookmark";
+import { signal } from "@preact/signals-react";
+import ChangePass from "./components/profile/ChangePass";
+
+export const logoBlack = signal(
+  "https://res.cloudinary.com/da8v9ysli/image/upload/v1697061060/msthqidxbbfavh8lpczp.svg"
+);
 
 const App = () => {
   const mainStyle = {
@@ -65,7 +69,7 @@ const App = () => {
           <Route path="/allCommunities" element={<AllCommunity />} />
           <Route path="/profile" element={<MyProfile />}>
             <Route path="info" element={<GeneralInfo />} />
-            <Route path="change-pass" element={<MyProfile />} />
+            <Route path="change-pass" element={<ChangePass />} />
             <Route path="edit" element={<EditProfile />} />
             <Route path="bookmark" element={<Bookmark />} />
             <Route path="my-commnunities" element={<MyCommunities />} />
@@ -90,11 +94,7 @@ const App = () => {
 
       <About />
 
-      <motion.div className="chatbot">
-        <div className="chatbot-icon">
-          <Chatbot />
-        </div>
-      </motion.div>
+      <Chat />
 
       <ToastContainer
         position="bottom-left"

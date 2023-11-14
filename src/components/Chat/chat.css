@@ -1,0 +1,251 @@
+/* #0D0F10 */
+
+.chatbot {
+  position: fixed;
+  height: 3.5em;
+  width: 3.5em;
+  border-radius: 50%;
+  background-color: #131619;
+  top: 90vh;
+  left: 95vw;
+  transition: all ease 500ms;
+  color: #f6c90e;
+  box-shadow: 0px 1px 2px 0px #f6c90e, 1px 1px 2px 0px #f6c90e,
+    1px 1px 5px 0px #f6c90e, 1px 1px 7px 0px #f6c90e;
+}
+
+.chatbot:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 6px 10px 2px #f6c90e;
+}
+
+.chatbot .chatbot-icon {
+  font-size: 1.5em;
+  position: relative;
+  top: 28%;
+  left: 30%;
+  cursor: pointer;
+  transition: all ease 500ms;
+}
+
+/* chatpopup */
+
+.chatbot-popup {
+  position: absolute;
+  width: 20vw;
+  height: 70vh;
+  bottom: 120%;
+  right: 20%;
+  border-radius: 1rem;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  background: linear-gradient(180deg, #0c243c 30%, #fcfcfc 100%);
+}
+
+.chatbot-popup::-webkit-scrollbar {
+  display: none;
+}
+
+.initial-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 1rem;
+  position: relative;
+  top: 20%;
+  padding: 20px;
+}
+
+.initial-content .hello {
+  font-family: Poppins;
+  font-size: 1.8em;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 1em;
+  margin-left: 1rem;
+}
+
+.initial-content .helpoptions {
+  background-color: #ffffff;
+  padding: 10px;
+  width: 100%;
+  border-radius: 1rem;
+  box-sizing: border-box;
+  box-shadow: #00000014 5px 5px 2px 1px,
+    #0000000f 2px 2px 8px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.helpoptions .send-us {
+  width: 100%;
+  border-radius: 1rem;
+  padding: 10px;
+  box-sizing: border-box;
+  color: #131619;
+  font-family: Poppins;
+  display: flex;
+  flex-direction: column;
+}
+
+.helpoptions .send-us:hover {
+  cursor: pointer;
+  background-color: #0c243c30;
+}
+
+.send-us .help-title {
+  font-size: 1em;
+  font-weight: 700;
+  margin-bottom: 0.5em;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.send-us .help-sub {
+  font-size: 0.8em;
+  font-weight: 400;
+  margin-bottom: 0.5em;
+  color: #666666;
+}
+
+.initial-content .faq {
+  background-color: #ffffff;
+  padding: 20px;
+  width: 100%;
+  border-radius: 1rem;
+  box-sizing: border-box;
+  box-shadow: #00000014 5px 5px 5px 1px, #0000000f 0px 2px 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+  color: #131619;
+}
+
+.faq .faq-title {
+  font-size: 1em;
+  font-weight: 700;
+  margin-bottom: 0.5em;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.faq .faq-list {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.faq-list .faq-rows {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  border-radius: 0.5rem;
+
+  font-family: Plus Jakarta Sans;
+  font-weight: 600;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.faq-list .faq-rows:hover {
+  background-color: #0c243c30;
+}
+
+/* FAQ details */
+.faq-details {
+  position: relative;
+  background-color: #ffffff;
+  color: #000000;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.faq-details .expand-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.faq-details #back-icon {
+  cursor: pointer;
+  transition: all ease 500ms;
+}
+
+.faq-details #expand-icon {
+  cursor: pointer;
+  transition: all ease 500ms;
+}
+
+.faq-details .question-part {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.1rem;
+}
+
+.question-part .faq-question {
+  font-family: Poppins;
+  font-weight: 700;
+  font-size: 1.5em;
+}
+
+.question-part .faq-sub {
+  font-family: Poppins;
+  font-weight: 400;
+  font-size: 0.8em;
+  color: #666666;
+}
+
+.faq-details .written-by {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.written-by .logo {
+  height: 20%;
+  width: 20%;
+  border-radius: 50%;
+}
+
+.written-by .info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.1rem;
+}
+
+.info .name {
+  font-family: Poppins;
+  font-size: 1rem;
+}
+
+.info .updated {
+  font-family: Poppins;
+  font-size: 0.8rem;
+}
+
+.faq-details .faq-answer {
+  font-family: Plus Jakarta Sans;
+  font-weight: 400;
+  font-size: 1em;
+  color: #000000;
+  text-align: justify;
+}

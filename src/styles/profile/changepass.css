@@ -1,0 +1,200 @@
+.change-pass {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+  padding: 20px 40px;
+  overflow: hidden;
+  background-color: #0d0f10;
+  box-sizing: border-box;
+}
+
+.change-pass .verify-body {
+  background-color: transparent;
+  position: relative;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5em;
+  padding: 5em 2em;
+}
+
+.verify-body .v-title-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2em;
+}
+
+.v-title-wrapper .verify-title {
+  font-family: "Poppins", sans-serif;
+  font-size: 2em;
+}
+
+.v-title-wrapper .verify-subtitle {
+  font-family: "Poppins", sans-serif;
+  font-size: 1em;
+}
+
+.verify-body .verify-form {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  padding: 2em 2em;
+  margin: 0;
+  justify-content: space-around;
+  box-shadow: 2px 2px 10px #1ab79d50, -2px -2px 10px #1ab79d50;
+}
+
+.verify-form input {
+  background-color: aliceblue;
+  color: #131619;
+  position: relative;
+  border: none;
+  border-radius: 6px 0px 0px 6px;
+  width: 30em;
+  height: 3em;
+  padding-left: 2em;
+  font-family: "Poppins";
+  font-weight: 400;
+  outline: none;
+}
+
+.verify-form input:focus {
+  border: solid 1px #1ab79d;
+}
+
+.verify-form .verify-btn {
+  font-family: "Poppins", sans-serif;
+  background-color: #1ab79d;
+  border-radius: 0;
+  height: 2.7em;
+  width: 8em;
+}
+
+.verify-body .already-ver {
+  display: flex;
+  align-items: center;
+  height: 5em;
+  font-family: "Poppins";
+  font-size: 3em;
+  color: #1ab79d;
+}
+
+.change-pass .create-pass {
+  position: relative;
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 1.5rem;
+  padding: 2rem;
+  box-sizing: border-box;
+  background-color: #131619;
+  border-radius: 1rem;
+  box-shadow: 2px 2px 10px #1ab79d50, -2px -2px 10px #1ab79d50;
+}
+
+.create-pass .create-title {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.create-title .create-new-pass {
+  font-family: "Poppins", sans-serif;
+  font-size: 2em;
+  font-weight: 700;
+  color: #fff;
+}
+
+.create-title .create-subtitle {
+  font-family: "Poppins", sans-serif;
+  font-size: 1em;
+  font-weight: 400;
+  color: #9b9c9e;
+}
+
+.change-pass .pass-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.pass-fields .set-pass {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.set-pass .passlabel {
+  font-family: "Poppins", sans-serif;
+  font-size: 1em;
+  font-weight: 400;
+  color: #9b9c9e;
+}
+
+.set-pass .set-pass-input {
+  position: relative;
+  background-color: transparent;
+  border: solid 2px #ffffff20;
+  border-radius: 5px;
+  height: 3em;
+  width: 100%;
+  box-sizing: border-box;
+  padding-left: 1.5rem;
+  outline: none;
+  color: #9b9c9e;
+  font-family: "Poppins", sans-serif;
+  font-size: 1em;
+  font-weight: 600;
+  transform: all 0.3s ease;
+}
+.set-pass .set-pass-input:focus {
+  border: solid 2px #1ab79d;
+}
+
+.set-pass .show-pass {
+  position: absolute;
+  right: 1rem;
+  top: 2.5rem;
+  font-size: 1.5em;
+  color: #ffffff50;
+  cursor: pointer;
+}
+
+.set-pass .pass-hint {
+  font-family: "Poppins", sans-serif;
+  font-size: 0.8em;
+  font-weight: 400;
+  color: #9b9c9e;
+}
+
+.pass-fields .submit-create-pass {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  height: 3em;
+  border-radius: 5px;
+  background-color: #1ab79d;
+  box-sizing: border-box;
+  outline: none;
+  border: none;
+  cursor: pointer;
+
+  font-family: Poppins;
+  font-size: 1rem;
+  font-weight: 600;
+}

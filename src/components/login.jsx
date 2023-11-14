@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import "../styles/login.css";
 import email_icon from "../assets/email-icon.png";
 import google_icon from "../assets/google-icon.svg";
@@ -13,20 +13,20 @@ import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai";
 import { BsGithub } from "react-icons/bs";
 
 export const Login = ({ closePopUp }) => {
-
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPass, setShowPass] = useState(false);
+  const [remember, setRemember] = useState("off");
 
   const authenticateUser = async (e) => {
-
     e.preventDefault();
 
     let terminate = false;
 
-    const response = await axios.get(`http://localhost:3002/getStudentByEmail/${email}/${password}`)
-      .catch(error => {
+    const response = await axios
+      .get(`http://localhost:3002/getStudentByEmail/${email}/${password}`)
+      .catch((error) => {
         if (error.response?.status === 500) {
           toast.error(error.response.data.error);
           terminate = true;
@@ -42,7 +42,7 @@ export const Login = ({ closePopUp }) => {
       return;
     }
 
-    if(response.status === 202){
+    if (response.status === 202) {
       toast.error("User is not verified!");
       return;
     }
@@ -52,7 +52,7 @@ export const Login = ({ closePopUp }) => {
     // console.log(window.localStorage.getItem("currentUser"));
 
     toast.success("Successfully Logged In");
-    
+
     setTimeout(() => {
       navigate("/");
       closePopUp();
@@ -62,12 +62,10 @@ export const Login = ({ closePopUp }) => {
 
   const toggleShow = () => {
     setShowPass(!showPass);
-  }
+  };
 
   return (
-    <motion.div
-      className="login"
-    >
+    <motion.div className="login">
       <div className="secondary-wrapper">
         <form className="log-in-form" onSubmit={authenticateUser}>
           <div className="log-in-field">
@@ -78,7 +76,9 @@ export const Login = ({ closePopUp }) => {
                 name="email"
                 placeholder="email address"
                 className="log-in-email-holder"
-                onChange={(e) => { setEmail(e.target.value) }}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                }}
               />
               <img className="email-icon" alt="Email icon" src={email_icon} />
             </div>
@@ -89,7 +89,9 @@ export const Login = ({ closePopUp }) => {
                 name="password"
                 placeholder="password"
                 className="log-in-email-holder"
-                onChange={(e) => { setPassword(e.target.value) }}
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                }}
               />
               <img className="lock-icon" alt="Lock icon" src={lock_icon} />
               <div className="toggle-show" onClick={toggleShow}>
@@ -99,10 +101,21 @@ export const Login = ({ closePopUp }) => {
           </div>
           <div className="remember-section">
             <div className="remember-checkbox">
-              <input type="checkbox" className="checkbox-icon" name="remember" />
-              <label htmlFor="remember" className="check-box-text">Remember me</label>
+              <input
+                type="checkbox"
+                className="checkbox-icon"
+                name="remember"
+                onChange={() => {
+                  setRemember(remember === "off" ? "on" : "off");
+                }}
+              />
+              <label htmlFor="remember" className="check-box-text">
+                Remember me
+              </label>
             </div>
-            <a href="/" target="_self" className="forgot-pass">Forgot Password?</a>
+            <a href="/" target="_self" className="forgot-pass">
+              Forgot Password?
+            </a>
           </div>
 
           <motion.button
@@ -124,7 +137,11 @@ export const Login = ({ closePopUp }) => {
               whileTap={{ scale: 0.9 }}
               className="social-login-button"
             >
-              <img className="google-icon" alt="Google icon" src={google_icon} />
+              <img
+                className="google-icon"
+                alt="Google icon"
+                src={google_icon}
+              />
               <div className="log-in-alt">Google Account</div>
             </motion.button>
             <motion.button

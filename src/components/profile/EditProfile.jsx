@@ -26,7 +26,7 @@ export const EditProfile = () => {
       batch: batch * 1,
       email: email,
       phone: phone,
-      avatar: avatarPath
+      avatar: avatarPath,
     };
 
     const student = JSON.parse(window.localStorage.getItem("currentUser"));
@@ -54,8 +54,7 @@ export const EditProfile = () => {
 
   const handleUpload = async (e) => {
     const selectedImage = e.target.files[0];
-    if(selectedImage.size > 2097152)
-    {
+    if (selectedImage.size > 2097152) {
       toast.error("Image size should be less than 2MB");
       return;
     }
@@ -83,7 +82,7 @@ export const EditProfile = () => {
     setavatarPath(data.secure_url);
     toast.success("Avatar updated successfully. Click SAVE to proceed.");
 
-   //  console.log(data);
+    //  console.log(data);
   };
 
   useEffect(() => {
@@ -186,6 +185,7 @@ export const EditProfile = () => {
               type="text"
               name="batch"
               value={batch}
+              placeholder="e.g. 2020"
             />
           </div>
         </div>

@@ -7,6 +7,7 @@ import req_image from "../../assets/req-img.png";
 import res_image from "../../assets/res-img.png";
 import { motion } from "framer-motion";
 import { toast } from "react-toastify";
+import axios from "axios";
 
 const CommunityCardHolder = ({
   communityTag,
@@ -24,10 +25,38 @@ const CommunityCardHolder = ({
     setShowRequest(!hideShowRequest);
   }, []);
 
-  const handleRequest = () => {
+  const handleRequest = async () => {
     const status = window.localStorage.getItem("logInStatus");
     if (status === "true") {
-      toast.success("Request sent successfully!");
+      const user = JSON.parse(localStorage.getItem("currentUser"));
+      const body = {
+        name: user.name,
+        email: user.email,
+        tag: communityTag,
+        id: user.student_id,
+        date: new Date().toISOString(),
+        avatar: user.avatar,
+      };
+
+      let terminate = false;
+      const response = await axios
+        .post("http://localhost:3002/insertRequest", body)
+        .catch((err) => {
+          if (err.response?.status === 500) {
+            terminate = true;
+            toast.error("Request already sent!");
+          }
+        });
+
+      if (terminate) return;
+
+      if (response.status === 201) {
+        toast.warning("Already a member if this community!");
+        return;
+      }
+
+      const data = response.data;
+      if (data.acknowledged) toast.success("Request sent successfully!");
     } else toast.error("Log in to join a community");
   };
 

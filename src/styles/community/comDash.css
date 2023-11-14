@@ -3,7 +3,7 @@
   width: 83.36vw;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   align-self: stretch;
   gap: 30px;
   padding: 40px 20px;
@@ -12,7 +12,7 @@
 
 .dashboard-wrapper .upper-part {
   position: relative;
-  width: 75vw;
+  width: 70vw;
   height: 7em;
   display: flex;
   justify-content: space-between;
@@ -31,6 +31,9 @@
 }
 
 .title .com-name {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
   font-family: "Plus Jakarta Sans", sans-serif;
   font-size: 1.4em;
   font-weight: 700;
@@ -64,6 +67,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  justify-content: space-between;
 }
 
 .small-stats .small-name {
@@ -81,6 +85,16 @@
   font-weight: 400;
   line-height: 18px;
   letter-spacing: 0.15px;
+}
+
+.small-stats .rate-us {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 400;
+  font-size: 0.8rem;
+  margin-top: 0.5rem;
+  cursor: pointer;
 }
 
 .dashboard-wrapper .lower-part {
@@ -139,6 +153,14 @@
   display: none;
 }
 
+.event-list .empty-list {
+  position: relative;
+  font-family: Poppins;
+  color: #9b9c9e;
+  top: 30%;
+  right: 10%;
+}
+
 .event-list .event-card {
   background-color: #0d0f10;
   display: flex;
@@ -175,6 +197,7 @@
   justify-content: center;
   align-items: center;
   align-self: stretch;
+  gap: 1rem;
 }
 
 .comments .comment-stat {
@@ -212,6 +235,12 @@
 
 .comment-row .comment-body {
   color: #9b9c9e;
+}
+
+.comment-row .delete-comment {
+  position: absolute;
+  color: #ffffff;
+  left: 102%;
 }
 
 .comment-list .add-comment {
@@ -256,7 +285,7 @@
   text-align: center;
 }
 
-.addEvent-wrapper .input-form{
+.addEvent-wrapper .input-form {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -295,4 +324,67 @@
 .input-form .addEvent-button {
   font-family: Poppins;
   font-size: 1em;
+}
+
+.rating-holder {
+  position: relative;
+  width: 30vw;
+  background-color: #1a1d21;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5em;
+  padding: 2rem;
+  border-radius: 1em;
+}
+
+.rating-holder .title {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 1.4em;
+  font-weight: 700;
+  text-align: center;
+}
+
+.rating-holder .rating-stars {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
+  font-size: 2rem;
+}
+
+.rating-holder .rating-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
+}
+
+.rating-buttons .show-comment {
+  background-color: #f6c90e;
+  color: #000000;
+  border: none;
+  border-radius: 1em;
+  padding: 0.5em 1em;
+  font-family: Poppins;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.rating-holder .comment-field {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1em;
+  width: 90%;
+  height: 100%;
+  resize: none;
+  font-family: Plus Jakarta Sans;
+  font-size: 1rem;
+  padding: 1rem;
+  box-sizing: border-box;
+  outline: none;
+  background-color: transparent;
+  border-radius: 1rem;
 }

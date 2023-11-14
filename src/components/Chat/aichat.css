@@ -1,0 +1,152 @@
+.aichat {
+  width: 100%;
+  height: 100%;
+  background-color: #ffffff;
+  color: black;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+.aichat .upper-panel {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1rem;
+  background-color: #0c243c;
+  width: 100%;
+  height: 10%;
+  color: #ffffff;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+.upper-panel .back-icon {
+  cursor: pointer;
+  transition: all ease 500ms;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+}
+
+.upper-panel .back-icon:hover {
+  transform: scale(1.2);
+}
+
+.upper-panel .bot-icon {
+  font-size: 1.2rem;
+  font-family: Poppins;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-weight: 600;
+}
+
+.aichat .chat-window {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+  height: 80%;
+  box-sizing: border-box;
+  overflow-y: scroll;
+  scrollbar-width: none;
+  align-items: center;
+  justify-content: center;
+  background-color: #00000005;
+}
+
+.chat-window .loading-model {
+  font-family: Poppins;
+  font-weight: 600;
+  font-size: 1rem;
+  color: #000000;
+}
+
+.chat-window .bot-chats {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  padding: 1rem;
+}
+
+.aichat .type-message {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  height: 10%;
+  padding: 1rem;
+  box-sizing: border-box;
+  border-top: solid 1px #0c243c60;
+}
+
+.type-message .message-holder {
+  width: 100%;
+  height: 100%;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  font-family: Poppins;
+  font-weight: 600;
+  font-size: 1rem;
+  color: #000000;
+  resize: none;
+}
+
+.type-message .send-icon {
+  all: unset;
+  cursor: pointer;
+  transition: all ease 500ms;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+}
+
+.bot-chats .message-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  box-sizing: border-box;
+  border-radius: 0.5rem;
+  color: #000000;
+  width: 100%;
+}
+
+.message-container .bot-icon {
+  font-size: 1.2rem;
+  font-family: Poppins;
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+  background-color: #000000;
+  color: #ffffff;
+  padding: 0.5rem;
+  border-radius: 50%;
+}
+
+.message-container .message {
+  position: relative;
+  font-family: Poppins;
+  font-weight: 400;
+  font-size: 1rem;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+}
+
+.message-container .bot {
+  position: relative;
+  background-color: #00000020;
+}
+
+.message-container .user {
+  position: relative;
+  background-color: #0c243c;
+  color: #ffffff;
+}

@@ -26,6 +26,7 @@ function AllCommunity() {
   const [searchQuery, setSearchQuery] = useState("");
   const [pages, setPages] = useState(1);
   const [currentPage, setCurrentPage] = useState(0);
+  const [loading, setLoading] = useState(false);
 
   const toggleCreateCom = () => {
     const status = window.localStorage.getItem("logInStatus");
@@ -41,13 +42,14 @@ function AllCommunity() {
     let URL = `http://localhost:3002/get_all_communities/${criteria}/${order}/${currentPage}`;
     if (searchQuery.length > 0) URL += `?tag=${searchQuery}`;
 
+    setLoading(true);
     const response = await axios.get(URL);
     const data = response.data;
-    const noOfComs = data.pop().total;
+    const noOfComs = data.total;
     const noOfPages = Math.ceil(noOfComs / 8.0);
     setPages(noOfPages);
-
-    setCommunities(data);
+    setLoading(false);
+    setCommunities(data.communities);
   };
 
   useEffect(() => {
@@ -145,7 +147,7 @@ function AllCommunity() {
         layout
         className="cards-holder"
       >
-        {communities.length === 0 ? (
+        {loading ? (
           <LoadingIcon iconSize={"100px"} iconWidth={"98.98vw"} />
         ) : (
           <AnimatePresence mode="wait">

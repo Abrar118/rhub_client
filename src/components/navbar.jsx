@@ -1,7 +1,12 @@
 import "../styles/navbar.css";
 import { motion, AnimatePresence } from "framer-motion";
-import { useCallback, useEffect, useRef, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import {
+  useCallback,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Link as ScrollLink } from "react-scroll";
 
 import PortalPopup from "./PortalPopup";
@@ -38,6 +43,8 @@ const Navbar = () => {
   const isAuthenticated = useRef(false);
   const [dropdown, setdropdown] = useState(false);
   const [avatarPath, setavatarPath] = useState("");
+  const location = useLocation().pathname;
+  const showMenu = location === "/" ? true : false;
   const navigate = useNavigate();
 
   const open_log_in = useCallback(() => {
@@ -59,8 +66,8 @@ const Navbar = () => {
       setavatarPath(data.avatar);
     }
   };
-
-  useEffect(() => {
+  
+  useLayoutEffect(() => {
     const status = window.localStorage.getItem("logInStatus");
     isAuthenticated.current = status === "true";
     fetch_avatar();
@@ -75,6 +82,7 @@ const Navbar = () => {
         <div className="navbar-buttons">
           {menusRoutes.map((menuItem, index) => (
             <ScrollLink
+              disabled={!showMenu}
               className="navbar-label-wrapper"
               to={menuItem.route}
               key={index}

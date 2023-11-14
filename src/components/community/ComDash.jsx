@@ -6,8 +6,13 @@ import { toast } from "react-toastify";
 import { motion, AnimatePresence } from "framer-motion";
 
 import { BsThreeDotsVertical as Colon } from "react-icons/bs";
-import { AiOutlinePlus as Plus } from "react-icons/ai";
+import {
+  AiOutlinePlus as Plus,
+  AiFillDelete as DeleteIcon,
+  AiFillStar as StarIcon,
+} from "react-icons/ai";
 import { BiCommentDetail as Comment } from "react-icons/bi";
+import { HiThumbUp as RateUsIcon } from "react-icons/hi";
 import {
   checkAllCaps,
   compareDates,
@@ -16,18 +21,25 @@ import {
 
 import PortalPopup from "../PortalPopup";
 import { convertBase64 } from "../utility/fileLoad";
+import { signal } from "@preact/signals-react";
+
+const com = signal({});
 
 function ComDash() {
   const currentTag = useParams();
-  const [com, setcom] = useState([]);
   const [past, setpast] = useState([]);
   const [ongoing, setongoing] = useState([]);
   const [upcoming, setupcoming] = useState([]);
   const [addEvent, setAddEvent] = useState(false);
+  const [giveRating, setGiveRating] = useState(false);
   const comImage = useRef(null);
 
   const toggleAddEvent = () => {
     setAddEvent(!addEvent);
+  };
+
+  const compare = (a, b) => {
+    return compareDates(new Date(a.date), new Date(b.date)) * -1;
   };
 
   const fetch_com = async () => {
@@ -45,7 +57,7 @@ function ComDash() {
     if (terminate) return;
 
     const data = response.data;
-    setcom(data);
+    com.value = data;
     //  console.log(com);
 
     terminate = false;
@@ -60,6 +72,8 @@ function ComDash() {
 
     if (terminate) return;
     const data2 = response2.data;
+
+    data2.sort(compare);
 
     setpast([]);
     setongoing([]);
@@ -88,7 +102,7 @@ function ComDash() {
     const response = await axios
       .post("http://localhost:3002/uploadComImage", {
         image: base64Image,
-        tag: com.tag,
+        tag: com.value.tag,
       })
       .catch((error) => {
         if (error.response?.status === 413) {
@@ -114,16 +128,24 @@ function ComDash() {
 
   return (
     <div className="dashboard-wrapper">
-      <div className="upper-part">
+      <motion.div
+        initial={{ x: -1000, opacity: 0 }}
+        animate={{ x: 0, opacity: 1 }}
+        transition={{ ease: "easeIn", duration: 0.3 }}
+        className="upper-part"
+      >
         <div className="title">
-          <div className="com-name">{com.name} Dashboard</div>
-          <div className="com-desc">{com.description}</div>
+          <div className="com-name">{com.value.name} Dashboard </div>
+          <div className="com-desc">{com.value.description}</div>
+          <div className="com-desc">
+            <b>Admin:</b> {com.value.admin}
+          </div>
         </div>
         <div className="com-logo">
           <motion.img
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.5 }}
-            src={com.com_image}
+            src={com.value.com_image}
             alt="com image"
             className="com-image"
             onClick={() => {
@@ -140,13 +162,46 @@ function ComDash() {
             style={{ display: "none" }}
           />
           <div className="small-stats">
-            <div className="small-name">{com.name}</div>
-            <div className="member-count">{com.members} members</div>
+            <div className="small-name">{com.value.name}</div>
+            <div className="member-count">{com.value.members} members</div>
+            <motion.div
+              whileHover={{ scale: 1.05, color: "#ee4962" }}
+              whileTap={{ scale: 0.9 }}
+              className="rate-us"
+              onClick={() => {
+                setGiveRating(!giveRating);
+              }}
+            >
+              <RateUsIcon /> rate community
+            </motion.div>
+
+            <AnimatePresence
+              initial={false}
+              mode="wait"
+              onExitComplete={() => null}
+            >
+              {giveRating && (
+                <PortalPopup
+                  overlayColor="rgba(0,0,0, 0.5)"
+                  placement="Centered"
+                  onOutsideClick={() => {
+                    setGiveRating(false);
+                  }}
+                >
+                  <GiveRating com={com.value} />
+                </PortalPopup>
+              )}
+            </AnimatePresence>
           </div>
         </div>
-      </div>
+      </motion.div>
 
-      <div className="lower-part">
+      <motion.div
+        initial={{ y: -1000, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ ease: "easeIn", duration: 0.3 }}
+        className="lower-part"
+      >
         <EventList eventArray={past} listTitle={"Past"} />
         <EventList eventArray={ongoing} listTitle={"Ongoing"} />
         <EventList eventArray={upcoming} listTitle={"Upcoming"} />
@@ -159,7 +214,7 @@ function ComDash() {
         >
           <Plus />
         </motion.div>
-      </div>
+      </motion.div>
 
       <AnimatePresence initial={false} mode="wait" onExitComplete={() => null}>
         {addEvent && (
@@ -194,9 +249,13 @@ export const EventList = ({ eventArray, listTitle }) => {
         </motion.div>
       </div>
       <div className="event-list">
-        {eventArray.map((event, index) => (
-          <EvnetCard event={event} key={index} />
-        ))}
+        {eventArray.length === 0 ? (
+          <div className="empty-list">No events</div>
+        ) : (
+          eventArray.map((event, index) => (
+            <EvnetCard event={event} key={index} />
+          ))
+        )}
       </div>
     </div>
   );
@@ -204,6 +263,7 @@ export const EventList = ({ eventArray, listTitle }) => {
 
 export const EvnetCard = ({ event }) => {
   const [showComment, setShowComment] = useState(false);
+  const [showDelete, setShowDelete] = useState(-1);
   const [addComment, setAddComment] = useState(false);
 
   const toggleAddComment = () => {
@@ -235,9 +295,18 @@ export const EvnetCard = ({ event }) => {
         {showComment && (
           <div className="comment-list">
             {event.comments.map((comment, index) => (
-              <div className="comment-row" key={index}>
+              <div className="comment-row" key={index} onMouseEnter={() => {}}>
                 <div className="comment-name">{comment.name}</div>
                 <div className="comment-body">{comment.body}</div>
+                {showDelete === index && (
+                  <motion.div
+                    whileHover={{ scale: 1.3, color: "#F6C90E" }}
+                    whileTap={{ scale: 0.9 }}
+                    className="delete-comment"
+                  >
+                    <DeleteIcon />
+                  </motion.div>
+                )}
               </div>
             ))}
             <motion.div
@@ -248,23 +317,22 @@ export const EvnetCard = ({ event }) => {
             >
               <Plus />
             </motion.div>
-            {
-              <AnimatePresence
-                initial={false}
-                mode="wait"
-                onExitComplete={() => null}
-              >
-                {addComment && (
-                  <PortalPopup
-                    overlayColor="rgba(0,0,0, 0.5)"
-                    placement="Centered"
-                    onOutsideClick={toggleAddComment}
-                  >
-                    <AddCommentPopUp tag={event.tag} date={event.date} />
-                  </PortalPopup>
-                )}
-              </AnimatePresence>
-            }
+
+            <AnimatePresence
+              initial={false}
+              mode="wait"
+              onExitComplete={() => null}
+            >
+              {addComment && (
+                <PortalPopup
+                  overlayColor="rgba(0,0,0, 0.5)"
+                  placement="Centered"
+                  onOutsideClick={toggleAddComment}
+                >
+                  <AddCommentPopUp tag={event.tag} date={event.date} />
+                </PortalPopup>
+              )}
+            </AnimatePresence>
           </div>
         )}
       </div>
@@ -483,6 +551,95 @@ export const AddEventPopUp = () => {
           Create event
         </motion.button>
       </form>
+    </motion.div>
+  );
+};
+
+export const GiveRating = ({ com }) => {
+  const [rating, setRating] = useState(0);
+  const [hoverPosition, setHoverPosition] = useState(0);
+  const [showComment, setShowComment] = useState(false);
+  const [comment, setComment] = useState("");
+
+  return (
+    <motion.div
+      initial={{ width: "15vw" }}
+      animate={{ width: "30vw" }}
+      exit={{ width: "15vw" }}
+      transition={{ ease: "easeIn", duration: 0.2 }}
+      className="rating-holder"
+    >
+      <div className="title">Your opinion matters to us</div>
+      <div className="rating-stars">
+        {[...Array(5)].map((star, index) => {
+          return (
+            <label key={index}>
+              <input
+                type="radio"
+                name="rating"
+                value={index + 1}
+                style={{ display: "none" }}
+              />
+              <StarIcon
+                style={{ cursor: "pointer" }}
+                color={
+                  index + 1 <= (hoverPosition || rating)
+                    ? "#f6c90e"
+                    : "#ffffff "
+                }
+                onClick={() => {
+                  setRating(index + 1);
+                }}
+                onMouseEnter={() => {
+                  setHoverPosition(index + 1);
+                }}
+                onMouseLeave={() => {
+                  setHoverPosition(0);
+                }}
+              />
+            </label>
+          );
+        })}
+      </div>
+
+      <div className="rating-buttons">
+        <motion.button
+          whileHover={{ scale: 1.04, backgroundColor: "#ee4962" }}
+          whileTap={{ scale: 0.9 }}
+          className="show-comment"
+          onClick={() => {
+            setShowComment(!showComment);
+          }}
+        >
+          Give a feedback
+        </motion.button>
+        <motion.button
+          whileHover={{ scale: 1.04, backgroundColor: "#ee4962" }}
+          whileTap={{ scale: 0.9 }}
+          className="show-comment"
+          onClick={() => {}}
+        >
+          Submit
+        </motion.button>
+      </div>
+
+      {showComment && (
+        <motion.textarea
+          initial={{ opacity: 0, width: 0, height: 0 }}
+          animate={{ opacity: 1, width: "90%", height: "100%" }}
+          exit={{ opacity: 0, width: 0, height: 0 }}
+          transition={{ ease: "easeIn", duration: 0.3 }}
+          className="comment-field"
+          placeholder="Write your feedback here"
+          name="feedback"
+          id="feedback"
+          cols="30"
+          rows="10"
+          onChange={(e) => {
+            setComment(e.target.value);
+          }}
+        />
+      )}
     </motion.div>
   );
 };

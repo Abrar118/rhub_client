@@ -33,6 +33,7 @@ function CreateCommunity({ closePopUp }) {
       rating: 1,
       admin: admin_id,
       com_image: "/src/assets/default-com.jpg",
+      reviews: [],
     };
 
     let terminate = false;

@@ -177,6 +177,12 @@
   left: 2%;
 }
 
+.message-field .send-icon {
+  background-color: transparent;
+  width: fit-content;
+  height: fit-content;
+}
+
 .message-field .message-input {
   position: relative;
   width: 80%;

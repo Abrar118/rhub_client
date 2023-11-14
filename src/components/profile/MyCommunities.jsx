@@ -57,7 +57,7 @@ function MyCommunities() {
 
   return (
     <div className="my-community-container">
-      <div className="community-header">Our Communities</div>
+      <div className="community-header">My Communities</div>
 
       <div className="search-bar">
         <div className="search-input">

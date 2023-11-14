@@ -61,7 +61,7 @@ function EmailVerify() {
 
     if (data.authenticated === 1) setIsVerified(true);
     else {
-      const temp_code = Math.floor(Math.random() * 1000000000) % 100000;
+      const temp_code = Math.floor(Math.random() * 10000000000000) % 100000;
       // console.log(temp_code);
 
       code.current = temp_code.toString();

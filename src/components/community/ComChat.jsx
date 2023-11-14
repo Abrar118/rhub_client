@@ -15,14 +15,33 @@ import {
   BsFillReplyFill as ReplyIcon,
   BsGlobe as PublicIcon,
 } from "react-icons/bs";
+import { useParams } from "react-router-dom";
 
 function ComChat() {
   const user = JSON.parse(localStorage.getItem("currentUser"));
   const [manageMembers, setManageMembers] = useState(false);
+  const comAdmin = useRef(0);
+  const currentTag = useParams().tag;
+  const attachment = useRef(null);
 
   const toggleManageMembers = () => {
     setManageMembers(!manageMembers);
   };
+
+  const getAdmin = async () => {
+    try {
+      const res = await axios.get(
+        `http://localhost:3002/getAdmin/${currentTag}`
+      );
+      comAdmin.current = res.data;
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    getAdmin();
+  }, []);
 
   return (
     <div className="com-chat">
@@ -35,7 +54,7 @@ function ComChat() {
           <ChatRow user={user} />
           <ChatRow user={user} />
         </div>
-        <div className="message-field">
+        <form className="message-field">
           <motion.div
             whileHover={{ scale: 1.1, cursor: "pointer", color: "#ee4962" }}
             whileTap={{ scale: 0.9 }}
@@ -45,6 +64,7 @@ function ComChat() {
             <AuidoIcon />
           </motion.div>
           <textarea
+            required
             name="message"
             id="message"
             cols="30"
@@ -57,17 +77,26 @@ function ComChat() {
             whileTap={{ scale: 0.9 }}
             className="attach-icon"
             title="Attach file"
+            onClick={() => attachment.current.click()}
           >
             <AttachmentIcon />
           </motion.div>
-          <motion.div
+          <input
+            type="file"
+            name="file"
+            id="file"
+            ref={attachment}
+            style={{ display: "none" }}
+          />
+          <motion.button
+            type="submit"
             whileHover={{ scale: 1.1, cursor: "pointer", color: "#ee4962" }}
             whileTap={{ scale: 0.9 }}
             className="send-icon"
           >
             <SendIcon />
-          </motion.div>
-        </div>
+          </motion.button>
+        </form>
       </div>
       <div className="members">
         <div className="onoff-list">
@@ -86,10 +115,17 @@ function ComChat() {
           </div>
         </div>
         <motion.button
+          ref={comAdmin}
           whileHover={{ scale: 1.04, backgroundColor: "#ee4962" }}
           whileTap={{ scale: 0.9 }}
           className="member-mng"
-          onClick={toggleManageMembers}
+          onClick={() => {
+            if (comAdmin.current === user.student_id) {
+              toggleManageMembers();
+            } else {
+              toast.error("You are not an admin of this community");
+            }
+          }}
         >
           Manage Members
         </motion.button>
@@ -126,6 +162,12 @@ export const ChatRow = ({ user }) => {
             whileHover={{ scale: 1.04, cursor: "pointer", color: "#ee4962" }}
             whileTap={{ scale: 0.9 }}
             className="copy-icon"
+            onClick={() => {
+              navigator.clipboard.writeText(
+                "This is me testing if this css thing actually works or not. This is me testing if this css thing actually works or not. This is me testing if this css thing actually works or not."
+              );
+              toast.warning("Message copied to clipboard");
+            }}
           >
             <CopyIcon />
           </motion.div>
@@ -134,12 +176,7 @@ export const ChatRow = ({ user }) => {
           <div className="main-actual-text">
             This is me testing if this css thing actually works or not. This is
             me testing if this css thing actually works or not. This is me
-            testing if this css thing actually works or not. This is me testing
-            if this css thing actually works or not. This is me testing if this
-            css thing actually works or not. This is me testing if this css
-            thing actually works or not. This is me testing if this css thing
-            actually works or not. This is me testing if this css thing actually
-            works or not.
+            testing if this css thing actually works or not.
           </div>
           <motion.button
             whileHover={{ scale: 1.04, backgroundColor: "#ee4962" }}
@@ -167,13 +204,44 @@ export const OnlineOffline = ({ user }) => {
 
 export const ManageMembers = () => {
   const user = JSON.parse(window.localStorage.getItem("currentUser"));
+  const [requests, setRequests] = useState([]);
+  const currentTag = useParams().tag;
 
-  const RequestRow = ({ user }) => {
+  const getRequests = async () => {
+    try {
+      const res = await axios.get(
+        `http://localhost:3002/getRequests/${currentTag}`
+      );
+      setRequests(res.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const handleRequest = async ({ confirm, tag, id }) => {
+    try {
+      await axios.patch("http://localhost:3002/handleRequest", {
+        confirm: confirm,
+        tag: tag,
+        id: id,
+      });
+
+      getRequests();
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    getRequests();
+  }, []);
+
+  const RequestRow = ({ request }) => {
     return (
       <div className="request-row">
         <div className="image-name">
-          <img src={user.avatar} alt="avatar" className="image" />
-          <div className="name">{user.name}</div>
+          <img src={request.avatar} alt="avatar" className="image" />
+          <div className="name">{request.name}</div>
         </div>
 
         <div className="buttons">
@@ -186,6 +254,9 @@ export const ManageMembers = () => {
             whileTap={{ scale: 0.9 }}
             className="confirm"
             style={{ color: "#b6f09c" }}
+            onClick={() =>
+              handleRequest({ confirm: "yes", tag: currentTag, id: request.id })
+            }
           >
             Confirm
           </motion.button>
@@ -198,6 +269,9 @@ export const ManageMembers = () => {
             whileTap={{ scale: 0.9 }}
             className="confirm"
             style={{ color: "#ee4962" }}
+            onClick={() =>
+              handleRequest({ confirm: "no", tag: currentTag, id: request.id })
+            }
           >
             Decline
           </motion.button>
@@ -244,13 +318,9 @@ export const ManageMembers = () => {
       </div>
 
       <div className="request-list">
-        <RequestRow user={user} />
-        <RequestRow user={user} />
-        <RequestRow user={user} />
-        <RequestRow user={user} />
-        <RequestRow user={user} />
-        <RequestRow user={user} />
-        <RequestRow user={user} />
+        {requests.map((request) => (
+          <RequestRow request={request} key={request.id} />
+        ))}
       </div>
     </motion.div>
   );
