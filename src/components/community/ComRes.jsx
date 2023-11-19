@@ -43,7 +43,7 @@ function ComRes() {
   const navigate = useNavigate();
 
   const toggleUpload = () => {
-    setuploadContent(!uploadContent);
+    setuploadContent(!uploadContent);ekh
   };
 
   const fetch_uploads = async (option, order) => {
@@ -51,13 +51,13 @@ function ComRes() {
     if (searchQuery.length > 0) URL += `?key=${searchQuery.toUpperCase()}`;
 
     const response = await axios.get(URL);
-    const response2 = await axios.get(
-      `http://localhost:3002/getAdmin/${currentTag}`
+    const res = await axios.get(
+      `http://localhost:3002/get_communityByTag/${currentTag}`
     );
     const data = response.data;
-    const data2 = response2.data;
+    const data2 = res.data;
     setuploads(data);
-    setComAdmin(data2);
+    setComAdmin(data2.admin);
 
     const user_id = JSON.parse(
       window.localStorage.getItem("currentUser")
@@ -75,6 +75,7 @@ function ComRes() {
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ ease: "easeIn", duration: 0.5 }}
+        layout
         className="search-tab"
       >
         <div className="res-title">Resources</div>
@@ -161,6 +162,7 @@ function ComRes() {
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ ease: "easeIn", duration: 0.5 }}
+        layout
         className={"resource-list"}
       >
         <div className={"resource-list-hor"}>
@@ -282,6 +284,7 @@ export const ActiveResource = () => {
   const location = JSON.parse(window.sessionStorage.getItem("catData"));
   const [activeOption, setActiveOption] = useState("academic");
   const [mainList, setMainList] = useState([]);
+  const [mainListType, setMainListType] = useState("academic");
   const [openUpload, setOpenUpload] = useState(false);
   const uploadContent = useRef(null);
   const [showAccess, setShowAccess] = useState(location.access);
@@ -412,6 +415,7 @@ export const ActiveResource = () => {
           onClick={() => {
             setActiveOption("academic");
             setMainList(activeConent.academic);
+            setMainListType("academic");
           }}
         >
           <BookIcon />
@@ -424,6 +428,7 @@ export const ActiveResource = () => {
           onClick={() => {
             setActiveOption("student");
             setMainList(activeConent.student);
+            setMainListType("student");
           }}
         >
           <PenIcon />
@@ -436,6 +441,7 @@ export const ActiveResource = () => {
           onClick={() => {
             setActiveOption("misc");
             setMainList(activeConent.misc);
+            setMainListType("misc");
           }}
         >
           <MiscIcon />
@@ -460,6 +466,7 @@ export const ActiveResource = () => {
             type={row.type}
             resourceType={row.resourceType}
             time={activeConent.date}
+            mainListType={mainListType}
           />
         ))}
       </motion.div>
@@ -488,6 +495,7 @@ export const MainListRow = ({
   type,
   resourceType,
   time,
+  mainListType,
 }) => {
   const currentTag = useParams().tag;
   const [isDeleting, setDeleting] = useState(false);
@@ -504,7 +512,7 @@ export const MainListRow = ({
 
     setDeleting(true);
     const response = await axios.delete(
-      `http://localhost:3002/deleteContent/${publicId}/${time}/${currentTag}/${type}/${resourceType}`
+      `http://localhost:3002/deleteContent/${publicId}/${time}/${currentTag}/${type}/${resourceType}/${mainListType}`
     );
     setDeleting(false);
 

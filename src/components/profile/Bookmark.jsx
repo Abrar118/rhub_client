@@ -136,9 +136,9 @@ export const BookmarkRow = ({ bookmark }) => {
     window.localStorage.setItem("profileOption", "My Communities");
 
     const response = await axios.get(
-      `http://localhost:3002/getAdmin/${currentTag}`
+      `http://localhost:3002/get_communityByTag/${currentTag}`
     );
-    const admin = response.data;
+    const admin = response.data.admin;
 
     const content = await axios.get(
       `http://localhost:3002/get_uploadByTitle/${bookmark.title}/${bookmark.uploadDate}`

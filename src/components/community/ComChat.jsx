@@ -3,6 +3,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { motion, AnimatePresence } from "framer-motion";
 import PortalPopup from "../PortalPopup";
+import ScaleLoader from "react-spinners/ScaleLoader";
 import "../../styles/community/comChat.css";
 
 import { getFormattedDateWithTime } from "../utility/time";
@@ -15,14 +16,21 @@ import {
   BsFillReplyFill as ReplyIcon,
   BsGlobe as PublicIcon,
 } from "react-icons/bs";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { signal } from "@preact/signals-react";
+
+const community = signal({});
 
 function ComChat() {
   const user = JSON.parse(localStorage.getItem("currentUser"));
   const [manageMembers, setManageMembers] = useState(false);
+  const [showDelete, setShowDelete] = useState(false);
+  const [comName, setComName] = useState("");
+  const [loading, setLoading] = useState(false);
   const comAdmin = useRef(0);
   const currentTag = useParams().tag;
   const attachment = useRef(null);
+  const navigate = useNavigate();
 
   const toggleManageMembers = () => {
     setManageMembers(!manageMembers);
@@ -31,11 +39,34 @@ function ComChat() {
   const getAdmin = async () => {
     try {
       const res = await axios.get(
-        `http://localhost:3002/getAdmin/${currentTag}`
+        `http://localhost:3002/get_communityByTag/${currentTag}`
       );
-      comAdmin.current = res.data;
+      comAdmin.current = res.data.admin;
+      community.value = res.data;
+      setComName(res.data.name);
+      setShowDelete(comAdmin.current === user.student_id);
     } catch (err) {
       console.log(err);
+    }
+  };
+
+  const deleteCommunity = async () => {
+    setLoading(true);
+    const reposnse = await axios
+      .delete(`http://localhost:3002/deleteCom/${currentTag}`)
+      .catch((err) => {
+        if (err.response?.status === 500) {
+          toast.error("Something went wrong");
+        }
+      });
+
+    const data = reposnse.data;
+    if (data.acknowledged) {
+      setLoading(false);
+      toast.success("Community deleted successfully");
+      navigate("/profile/my-commnunities");
+    } else {
+      toast.error("Something went wrong");
     }
   };
 
@@ -44,9 +75,14 @@ function ComChat() {
   }, []);
 
   return (
-    <div className="com-chat">
-      <div className="chat-window">
-        <div className="title">CSE Department Chatroom</div>
+    <motion.div layout className="com-chat">
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ ease: "easeIn", duration: 0.3 }}
+        className="chat-window"
+      >
+        <div className="title">{comName} Chatroom</div>
         <div className="chat-holder">
           <ChatRow user={user} />
           <ChatRow user={user} />
@@ -97,39 +133,62 @@ function ComChat() {
             <SendIcon />
           </motion.button>
         </form>
-      </div>
-      <div className="members">
+      </motion.div>
+
+      <motion.div className="members">
         <div className="onoff-list">
-          <div className="online">
+          <motion.div
+            initial={{ x: 500, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ ease: "easeIn", duration: 0.3 }}
+            className="online"
+          >
             <div className="title">Currently Online</div>
             <OnlineOffline user={user} />
             <OnlineOffline user={user} />
             <OnlineOffline user={user} />
-          </div>
+          </motion.div>
           <div className="divider" />
-          <div className="offline">
+          <motion.div
+            initial={{ x: -500, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ ease: "easeIn", duration: 0.3 }}
+            className="offline"
+          >
             <div className="title">Offline</div>
             <OnlineOffline user={user} />
             <OnlineOffline user={user} />
             <OnlineOffline user={user} />
-          </div>
+          </motion.div>
         </div>
-        <motion.button
-          ref={comAdmin}
-          whileHover={{ scale: 1.04, backgroundColor: "#ee4962" }}
-          whileTap={{ scale: 0.9 }}
-          className="member-mng"
-          onClick={() => {
-            if (comAdmin.current === user.student_id) {
-              toggleManageMembers();
-            } else {
-              toast.error("You are not an admin of this community");
-            }
-          }}
-        >
-          Manage Members
-        </motion.button>
-      </div>
+        <div className="manage-buttons">
+          <motion.button
+            whileHover={{ scale: 1.04, backgroundColor: "#ee4962" }}
+            whileTap={{ scale: 0.9 }}
+            className="member-mng"
+            onClick={() => {
+              if (comAdmin.current === user.student_id) {
+                toggleManageMembers();
+              } else {
+                toast.error("You are not an admin of this community");
+              }
+            }}
+          >
+            Manage Members
+          </motion.button>
+
+          {showDelete && (
+            <motion.button
+              whileHover={{ scale: 1.04, backgroundColor: "#ee4962" }}
+              whileTap={{ scale: 0.9 }}
+              className="member-mng"
+              onClick={deleteCommunity}
+            >
+              Delete Community
+            </motion.button>
+          )}
+        </div>
+      </motion.div>
 
       <AnimatePresence initial={false} mode="wait" onExitComplete={() => null}>
         {manageMembers && (
@@ -142,7 +201,13 @@ function ComChat() {
           </PortalPopup>
         )}
       </AnimatePresence>
-    </div>
+
+      {loading && (
+        <PortalPopup overlayColor="rgba(0,0,0, 0.5)" placement="Centered">
+          <ScaleLoader color="#36d7b7" height={35} width={5} />
+        </PortalPopup>
+      )}
+    </motion.div>
   );
 }
 
@@ -205,6 +270,7 @@ export const OnlineOffline = ({ user }) => {
 export const ManageMembers = () => {
   const user = JSON.parse(window.localStorage.getItem("currentUser"));
   const [requests, setRequests] = useState([]);
+  const [invitationId, setInvitationId] = useState(0);
   const currentTag = useParams().tag;
 
   const getRequests = async () => {
@@ -229,6 +295,43 @@ export const ManageMembers = () => {
       getRequests();
     } catch (err) {
       console.log(err);
+    }
+  };
+
+  const sendInvitation = async (e) => {
+    e.preventDefault();
+
+    const invitation = {
+      messageBody: `${user.name} has invited you to join his community`,
+      title: community.value.name,
+      date: new Date().toISOString(),
+      type: "invitation",
+      status: "unread",
+      comTag: currentTag,
+      comName: community.value.name,
+    };
+
+    const response = await axios
+      .patch(
+        `http://localhost:3002/sendNotification/${invitationId}`,
+        invitation
+      )
+      .catch((err) => {
+        if (err.response?.status === 500) {
+          toast.error("Something went wrong");
+        }
+      });
+
+    if (response.status === 201) {
+      toast.warning("Already a member of this community");
+      return;
+    }
+
+    const data = response.data;
+    if (data.acknowledged) {
+      toast.success("Invitation sent successfully");
+    } else {
+      toast.error("Something went wrong");
     }
   };
 
@@ -295,14 +398,16 @@ export const ManageMembers = () => {
         </div>
       </div>
 
-      <div className="invitation-send">
+      <form className="invitation-send" onSubmit={sendInvitation}>
         <div className="public-icon">
           <PublicIcon />
         </div>
         <input
+          required
           type="text"
           className="invitation-field"
           placeholder="Send invitation by student ID"
+          onChange={(e) => setInvitationId(e.target.value)}
         />
         <motion.button
           whileHover={{
@@ -311,16 +416,31 @@ export const ManageMembers = () => {
             color: "#ffffff",
           }}
           whileTap={{ scale: 0.9 }}
+          type="submit"
           className="invitation-button"
         >
           Invite
         </motion.button>
-      </div>
+      </form>
 
       <div className="request-list">
-        {requests.map((request) => (
-          <RequestRow request={request} key={request.id} />
-        ))}
+        {requests.length === 0 ? (
+          <div
+            style={{
+              fontFamily: "poppins",
+              position: "relative",
+              left: "30%",
+              top: "30%",
+              color: "gray"
+            }}
+          >
+            No requests to join this community
+          </div>
+        ) : (
+          requests.map((request) => (
+            <RequestRow request={request} key={request.id} />
+          ))
+        )}
       </div>
     </motion.div>
   );

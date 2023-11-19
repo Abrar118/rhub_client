@@ -15,6 +15,8 @@ import CommunityCardHolder from "../homepage/CommunityCardHolder";
 import { toast } from "react-toastify";
 import LoadingIcon from "../utility/Loader/LoadingIcon";
 import { useNavigate } from "react-router-dom";
+import PortalPopup from "../PortalPopup";
+import { ScaleLoader } from "react-spinners";
 
 function MyCommunities() {
   const [communities, setCommunities] = useState([]);
@@ -23,6 +25,7 @@ function MyCommunities() {
   const [searchQuery, setSearchQuery] = useState("");
   const [pages, setPages] = useState(1);
   const [currentPage, setCurrentPage] = useState(0);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const fetch_coms = async (criteria, order) => {
@@ -34,6 +37,7 @@ function MyCommunities() {
     )}/${currentPage}`;
     if (searchQuery.length > 0) URL += `?tag=${searchQuery}`;
 
+    setLoading(true);
     const response = await axios.get(URL);
     const data = response.data;
     const noOfComs = data.pop().total;
@@ -41,6 +45,7 @@ function MyCommunities() {
     setPages(noOfPages);
 
     setCommunities(data);
+    setLoading(false);
   };
 
   const showSelectedCom = (selectedTag) => {
@@ -65,7 +70,7 @@ function MyCommunities() {
             <AiOutlineSearch />
           </div>
           <input
-            type="text"
+            type="search"
             className="search-input-holder"
             placeholder="Search communities by tag"
             onChange={(e) => {
@@ -130,8 +135,21 @@ function MyCommunities() {
       </div>
 
       <div className="cards-holder">
-        {communities.length === 0 ? (
-          <LoadingIcon iconSize={"100px"} iconWidth={"83vw"} />
+        {loading ? (
+          <PortalPopup overlayColor="rgba(0,0,0, 0.5)" placement="Centered">
+            <ScaleLoader color="#36d7b7" height={35} width={5} />
+          </PortalPopup>
+        ) : communities.length === 0 ? (
+          <div
+            style={{
+              fontWeight: "600",
+              fontFamily: "Poppins",
+              position: "absolute",
+              left: "40%",
+            }}
+          >
+            No communities found
+          </div>
         ) : (
           communities.map((com, index) => (
             <motion.div

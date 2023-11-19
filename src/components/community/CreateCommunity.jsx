@@ -28,12 +28,12 @@ function CreateCommunity({ closePopUp }) {
       tag: tag,
       description: desc,
       privacy: privacy,
-      members: 0,
+      members: 1,
       resource: 0,
-      rating: 1,
+      rating: 0,
       admin: admin_id,
       com_image: "/src/assets/default-com.jpg",
-      reviews: [],
+      imagePublicId: "",
     };
 
     let terminate = false;
@@ -59,7 +59,7 @@ function CreateCommunity({ closePopUp }) {
     toast.success("Successfully Created Community!!");
 
     const requestBody2 = {
-      useId: admin_id,
+      userId: admin_id,
       tag: tag,
     };
 
@@ -159,6 +159,7 @@ function CreateCommunity({ closePopUp }) {
               required
               id="tag"
               type="text"
+              placeholder="ALL CAPS and no spaces"
               className="name-tag-filed name-tag-only"
               onChange={(e) => {
                 setTag(e.target.value);

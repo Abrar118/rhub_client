@@ -1,0 +1,120 @@
+.invitation {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 22vw;
+  height: 35vh;
+  margin-bottom: 1rem;
+  padding: 1.2rem;
+  box-sizing: border-box;
+  border-radius: 1rem;
+  background-color: #ffffff;
+  border: solid 0.1rem #ffffff90;
+  box-shadow: 0px 5px 10px #17171730;
+  font-family: Poppins;
+  color: #000000;
+}
+
+.invitation .inv-details {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 80%;
+}
+
+.inv-details .subtitle {
+  font-size: 0.8rem;
+  font-weight: 400;
+}
+
+.subtitle .unread {
+  color: #1ab79d;
+  font-weight: 700;
+  background-color: #1ab79d10;
+  padding: 0.3rem;
+  box-sizing: border-box;
+  border-radius: 1rem;
+  cursor: pointer;
+}
+
+.inv-details .community-name {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.inv-details .description {
+  font-size: 0.9rem;
+  font-weight: 400;
+}
+
+.inv-details .com-tag {
+   background-color: #f05c72;
+   color: #ffffff;
+   font-size: 0.8rem;
+   font-weight: 700;
+   width: 15%;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   padding: 0.3rem;
+   border-radius: 1rem;
+}
+
+.inv-details .inv-btns {
+   display: flex;
+   gap: 1rem;
+   align-items: center;
+}
+
+.inv-btns .accept-btn, .responded {
+   background-color: #1ab79d;
+   color: #ffffff;
+   font-size: 1rem;
+   padding: 0.3rem 0.5rem;
+   border-radius: 0.5rem;
+   cursor: pointer;
+   width: fit-content;
+}
+
+.inv-details .noti-date {
+   font-size: 0.8rem;
+   font-weight: 500;
+   color: #00000090;
+}
+
+.invitation .image-holder {
+  position: relative;
+  width: 20%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.image-holder .type-image {
+  font-size: 2rem;
+}
+
+.image-holder .dropdown {
+  position: absolute;
+  top: 10%;
+  background-color: #ffffff;
+  box-shadow: 0px 5px 10px #17171730;
+  padding: 0.5rem;
+  width: 150%;
+  height: 20%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.dropdown .dropdown-item {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #00000090;
+  cursor: pointer;
+  width: 100%;
+}

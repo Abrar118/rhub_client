@@ -1,0 +1,72 @@
+.notification {
+  position: relative;
+  width: 83.36vw;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  padding: 40px 20px;
+  overflow: hidden;
+  background-color: transparent;
+  box-sizing: border-box;
+}
+
+.notification .upper-part {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  width: 100%;
+  justify-content: space-between;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+.upper-part .noti-count {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.noti-count .count-notif {
+  font-size: 1rem;
+  font-weight: 400;
+  color: #000000;
+  font-family: Poppins;
+}
+
+.noti-count .notif-title {
+  font-size: 2.1rem;
+  font-weight: 700;
+  color: #000000;
+  font-family: Poppins;
+}
+
+.upper-part .filters {
+  color: #131619;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  background-color: #f6c90e;
+  cursor: pointer;
+  font-family: Poppins;
+  font-weight: 600;
+}
+
+.notification .notification-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  width: 100%;
+  height: 100%;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+.notification-list::-webkit-scrollbar {
+  display: none;
+}

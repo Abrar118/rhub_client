@@ -17,6 +17,7 @@ import PortalPopup from "../PortalPopup";
 import CreateCommunity from "./CreateCommunity";
 import { toast } from "react-toastify";
 import LoadingIcon from "../utility/Loader/LoadingIcon";
+import { ScaleLoader, SyncLoader } from "react-spinners";
 
 function AllCommunity() {
   const [communities, setCommunities] = useState([]);
@@ -148,8 +149,10 @@ function AllCommunity() {
         className="cards-holder"
       >
         {loading ? (
-          <LoadingIcon iconSize={"100px"} iconWidth={"98.98vw"} />
-        ) : (
+          <PortalPopup overlayColor="rgba(0,0,0, 0.5)" placement="Centered">
+            <ScaleLoader color="#36d7b7" height={35} width={5} />
+          </PortalPopup>
+        ) : communities.length !== 0 ? (
           <AnimatePresence mode="wait">
             {communities.map((com, index) => (
               <CommunityCardHolder
@@ -164,6 +167,17 @@ function AllCommunity() {
               />
             ))}
           </AnimatePresence>
+        ) : (
+          <div
+            style={{
+              fontWeight: "600",
+              fontFamily: "Poppins",
+              position: "absolute",
+              left: "40%",
+            }}
+          >
+            No communities found
+          </div>
         )}
       </motion.div>
 

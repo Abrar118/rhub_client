@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { signal } from "@preact/signals-react";
 
 import Homepage from "./components/homepage/homepage";
 import MyProfile from "./components/profile/Myprofile";
@@ -16,11 +19,9 @@ import ComRes, { ActiveResource } from "./components/community/ComRes";
 import EmailVerify from "./components/EmailVerify";
 import Bookmark from "./components/profile/Bookmark";
 import Chat from "./components/Chat/chat";
-
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import { signal } from "@preact/signals-react";
+import ProfileNotification from "./components/profile/ProfileNotification";
 import ChangePass from "./components/profile/ChangePass";
+
 
 export const logoBlack = signal(
   "https://res.cloudinary.com/da8v9ysli/image/upload/v1697061060/msthqidxbbfavh8lpczp.svg"
@@ -39,23 +40,7 @@ const App = () => {
   });
 
   useEffect(() => {
-    window.onscroll = () => {
-      if (window.scrollY > 50) {
-        setHeaderStyle({
-          width: "98.98vw",
-          position: "fixed",
-          boxShadow: "0px 5px 5px #525252",
-          transition: "1s",
-          zIndex: 4,
-        });
-      } else {
-        setHeaderStyle({
-          width: "98.98vw",
-          position: "relative",
-          zIndex: 4,
-        });
-      }
-    };
+    
   }, []);
 
   return (
@@ -74,7 +59,7 @@ const App = () => {
             <Route path="bookmark" element={<Bookmark />} />
             <Route path="my-commnunities" element={<MyCommunities />} />
             <Route path="my-uploads" element={<MyProfile />} />
-            <Route path="notification" element={<MyProfile />} />
+            <Route path="notification" element={<ProfileNotification />} />
             <Route path="inbox" element={<MyProfile />} />
             <Route path="help" element={<MyProfile />} />
             <Route path="com-holder" element={<CommunityHolder />}>

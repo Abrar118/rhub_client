@@ -129,8 +129,8 @@ function ComDash() {
   return (
     <div className="dashboard-wrapper">
       <motion.div
-        initial={{ x: -1000, opacity: 0 }}
-        animate={{ x: 0, opacity: 1 }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
         transition={{ ease: "easeIn", duration: 0.3 }}
         className="upper-part"
       >
@@ -172,7 +172,7 @@ function ComDash() {
                 setGiveRating(!giveRating);
               }}
             >
-              <RateUsIcon /> rate community
+              rate community
             </motion.div>
 
             <AnimatePresence
@@ -188,7 +188,12 @@ function ComDash() {
                     setGiveRating(false);
                   }}
                 >
-                  <GiveRating com={com.value} />
+                  <GiveRating
+                    com={com.value}
+                    colsePopUp={() => {
+                      setGiveRating(!giveRating);
+                    }}
+                  />
                 </PortalPopup>
               )}
             </AnimatePresence>
@@ -197,8 +202,8 @@ function ComDash() {
       </motion.div>
 
       <motion.div
-        initial={{ y: -1000, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
         transition={{ ease: "easeIn", duration: 0.3 }}
         className="lower-part"
       >
@@ -555,11 +560,44 @@ export const AddEventPopUp = () => {
   );
 };
 
-export const GiveRating = ({ com }) => {
+export const GiveRating = ({ com, colsePopUp }) => {
   const [rating, setRating] = useState(0);
   const [hoverPosition, setHoverPosition] = useState(0);
   const [showComment, setShowComment] = useState(false);
   const [comment, setComment] = useState("");
+  const user = JSON.parse(window.localStorage.getItem("currentUser"));
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const requestBody = {
+      name: user.name,
+      student_id: user.student_id,
+      rating: rating,
+      date: new Date().toISOString(),
+      feedback: comment,
+    };
+
+    const response = await axios
+      .patch(`http://localhost:3002/rateCom/${com.tag}`, requestBody)
+      .catch((error) => {
+        if (error.response?.status === 500) {
+          toast.error("Could not rate community");
+        }
+      });
+
+    const data = response.data;
+
+    if (response.status === 200) {
+      toast.success("Community rated successfully");
+    } else if (response.status === 201) {
+      toast.warning("You have already rated this community");
+    }
+
+    setTimeout(() => {
+      colsePopUp();
+    }, 500);
+  };
 
   return (
     <motion.div
@@ -583,12 +621,11 @@ export const GiveRating = ({ com }) => {
               <StarIcon
                 style={{ cursor: "pointer" }}
                 color={
-                  index + 1 <= (hoverPosition || rating)
-                    ? "#f6c90e"
-                    : "#ffffff "
+                  index + 1 <= (hoverPosition || rating) ? "#f6c90e" : "#ffffff"
                 }
                 onClick={() => {
                   setRating(index + 1);
+                  console.log(rating);
                 }}
                 onMouseEnter={() => {
                   setHoverPosition(index + 1);
@@ -613,11 +650,12 @@ export const GiveRating = ({ com }) => {
         >
           Give a feedback
         </motion.button>
+
         <motion.button
           whileHover={{ scale: 1.04, backgroundColor: "#ee4962" }}
           whileTap={{ scale: 0.9 }}
           className="show-comment"
-          onClick={() => {}}
+          onClick={handleSubmit}
         >
           Submit
         </motion.button>

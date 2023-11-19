@@ -1,13 +1,14 @@
 .bookmark-container {
   position: relative;
   width: 83.36vw;
-  height: 90.7vh;
+  height: 100%;
   display: flex;
   flex-direction: column;
   gap: 30px;
   padding: 40px 20px;
   overflow: hidden;
   background-color: #131619;
+  box-sizing: border-box;
 }
 
 .bookmark-container .search-tab {
