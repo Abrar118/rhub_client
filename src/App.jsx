@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { signal } from "@preact/signals-react";
+import "./index.css"
 
 import Homepage from "./components/homepage/homepage";
 import MyProfile from "./components/profile/Myprofile";
@@ -22,12 +23,12 @@ import Chat from "./components/Chat/chat";
 import ProfileNotification from "./components/profile/ProfileNotification";
 import ChangePass from "./components/profile/ChangePass";
 
-
 export const logoBlack = signal(
   "https://res.cloudinary.com/da8v9ysli/image/upload/v1697061060/msthqidxbbfavh8lpczp.svg"
 );
 
 const App = () => {
+
   const mainStyle = {
     width: "98.98vw",
     overflow: "hidden",
@@ -38,10 +39,6 @@ const App = () => {
     position: "relative",
     zIndex: 4,
   });
-
-  useEffect(() => {
-    
-  }, []);
 
   return (
     <div className="bg-cover overflow-hidden bg-no-repeat">

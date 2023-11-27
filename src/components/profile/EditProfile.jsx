@@ -103,31 +103,8 @@ export const EditProfile = () => {
         <div className="edit-title">Edit Profile</div>
       </div>
 
-      <div className="profile-pic-container">
-        <img src={avatarPath} alt="avatar" className="prof-avatar" />
-        <motion.div
-          whileHover={{ scale: 1.04 }}
-          whileTap={{ scale: 0.9 }}
-          className="edit-pic-icon"
-          onClick={() => {
-            uploadAvatar.current.click();
-          }}
-        >
-          <EditIcon />
-        </motion.div>
-        <input
-          onChange={handleUpload}
-          ref={uploadAvatar}
-          type="file"
-          accept="image/*"
-          name="avatarUpload"
-          id="avatar-up"
-          style={{ display: "none" }}
-        />
-      </div>
-
-      <form className="form-container" onSubmit={handleEdit}>
-        <div className="edit-row">
+      <div className="shobkichu">
+        <form className="form-container" onSubmit={handleEdit}>
           <div className="edit-input-holder">
             <label className="edit-input-label" htmlFor="name">
               Name
@@ -156,9 +133,6 @@ export const EditProfile = () => {
               value={email}
             />
           </div>
-        </div>
-
-        <div className="edit-row">
           <div className="edit-input-holder">
             <label className="edit-input-label" htmlFor="department">
               Department
@@ -188,9 +162,7 @@ export const EditProfile = () => {
               placeholder="e.g. 2020"
             />
           </div>
-        </div>
 
-        <div className="edit-row">
           <div className="edit-input-holder">
             <label className="edit-input-label" htmlFor="bio">
               Bio
@@ -219,17 +191,40 @@ export const EditProfile = () => {
               value={phone}
             />
           </div>
-        </div>
 
-        <motion.button
-          whileHover={{ scale: 1.04, backgroundColor: "#ee4962" }}
-          whileTap={{ scale: 0.9 }}
-          type="submit"
-          className="save-edit"
-        >
-          Save
-        </motion.button>
-      </form>
+          <motion.button
+            whileHover={{ scale: 1.04, backgroundColor: "#ee4962" }}
+            whileTap={{ scale: 0.9 }}
+            type="submit"
+            className="save-edit"
+          >
+            Save
+          </motion.button>
+        </form>
+
+        <div className="profile-pic-container">
+          <img src={avatarPath} alt="avatar" className="prof-avatar" />
+          <motion.div
+            whileHover={{ scale: 1.04 }}
+            whileTap={{ scale: 0.9 }}
+            className="edit-pic-icon"
+            onClick={() => {
+              uploadAvatar.current.click();
+            }}
+          >
+            <EditIcon />
+          </motion.div>
+          <input
+            onChange={handleUpload}
+            ref={uploadAvatar}
+            type="file"
+            accept="image/*"
+            name="avatarUpload"
+            id="avatar-up"
+            style={{ display: "none" }}
+          />
+        </div>
+      </div>
     </div>
   );
 };

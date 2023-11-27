@@ -18,8 +18,11 @@ import {
 } from "react-icons/bs";
 import { useNavigate, useParams } from "react-router-dom";
 import { signal } from "@preact/signals-react";
+import { io } from "socket.io-client";
+import ScrollToBottom from "react-scroll-to-bottom";
 
 const community = signal({});
+const socket = io("http://localhost:3002");
 
 function ComChat() {
   const user = JSON.parse(localStorage.getItem("currentUser"));
@@ -27,6 +30,10 @@ function ComChat() {
   const [showDelete, setShowDelete] = useState(false);
   const [comName, setComName] = useState("");
   const [loading, setLoading] = useState(false);
+  const [messages, setMessages] = useState([]); // [ { sender: "user", message: "message" } ]
+  const [text, setText] = useState("");
+  const [onlineUsers, setOnlineUsers] = useState([]);
+  const [offlieUsers, setOfflineUsers] = useState([]);
   const comAdmin = useRef(0);
   const currentTag = useParams().tag;
   const attachment = useRef(null);
@@ -45,6 +52,18 @@ function ComChat() {
       community.value = res.data;
       setComName(res.data.name);
       setShowDelete(comAdmin.current === user.student_id);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const getOnlineUsers = async () => {
+    try {
+      const res = await axios.get(
+        `http://localhost:3002/getOnlineUsers/${currentTag}`
+      );
+      setOnlineUsers(res.data.online);
+      setOfflineUsers(res.data.offline);
     } catch (err) {
       console.log(err);
     }
@@ -70,9 +89,32 @@ function ComChat() {
     }
   };
 
+  const sendMessage = (e) => {
+    e.preventDefault();
+    if (e.key === "Enter") {
+      socket.emit("sendMessage", {
+        user: user,
+        body: text,
+      });
+      setText("");
+    } else setText(e.target.value);
+  };
+
   useEffect(() => {
     getAdmin();
+    getOnlineUsers();
+
+    socket.emit("joinComChat", {
+      user: user,
+      comTag: currentTag,
+    });
   }, []);
+
+  useEffect(() => {
+    socket.on("receiveMessage", (message) => {
+      setMessages((prevMessages) => [...prevMessages, message]);
+    });
+  }, [socket]);
 
   return (
     <motion.div layout className="com-chat">
@@ -84,11 +126,16 @@ function ComChat() {
       >
         <div className="title">{comName} Chatroom</div>
         <div className="chat-holder">
-          <ChatRow user={user} />
-          <ChatRow user={user} />
-          <ChatRow user={user} />
-          <ChatRow user={user} />
-          <ChatRow user={user} />
+          <ScrollToBottom
+            initialScrollBehavior="smooth"
+            className="chat-holder-scroll"
+            followButtonClassName="follow-button"
+            scrollViewClassName="scroll-view"
+          >
+            {messages.map((message, index) => (
+              <ChatRow user={message.user} message={message.body} key={index} />
+            ))}
+          </ScrollToBottom>
         </div>
         <form className="message-field">
           <motion.div
@@ -107,6 +154,11 @@ function ComChat() {
             rows="10"
             placeholder="What do you want to say today"
             className="message-input"
+            value={text}
+            onChange={(e) => {
+              setText(e.target.value);
+            }}
+            // onKeyDown={sendMessage}
           />
           <motion.div
             whileHover={{ scale: 1.1, cursor: "pointer", color: "#ee4962" }}
@@ -126,11 +178,20 @@ function ComChat() {
           />
           <motion.button
             type="submit"
-            whileHover={{ scale: 1.1, cursor: "pointer", color: "#ee4962" }}
+            whileHover={{ scale: 1.1, cursor: "pointer" }}
             whileTap={{ scale: 0.9 }}
             className="send-icon"
+            onClick={(e) => {
+              e.preventDefault();
+              socket.emit("sendMessage", {
+                user: user,
+                body: text,
+                room: currentTag,
+              });
+              setText("");
+            }}
           >
-            <SendIcon />
+            <SendIcon style={{ color: "GrayText" }} />
           </motion.button>
         </form>
       </motion.div>
@@ -144,9 +205,9 @@ function ComChat() {
             className="online"
           >
             <div className="title">Currently Online</div>
-            <OnlineOffline user={user} />
-            <OnlineOffline user={user} />
-            <OnlineOffline user={user} />
+            {onlineUsers.map((user, index) => (
+              <OnlineOffline user={user} key={index} />
+            ))}
           </motion.div>
           <div className="divider" />
           <motion.div
@@ -156,14 +217,18 @@ function ComChat() {
             className="offline"
           >
             <div className="title">Offline</div>
-            <OnlineOffline user={user} />
-            <OnlineOffline user={user} />
-            <OnlineOffline user={user} />
+            {offlieUsers.map((user, index) => (
+              <OnlineOffline user={user} key={index} />
+            ))}
           </motion.div>
         </div>
         <div className="manage-buttons">
           <motion.button
-            whileHover={{ scale: 1.04, backgroundColor: "#ee4962" }}
+            whileHover={{
+              scale: 1.04,
+              backgroundColor: "#ee4962",
+              color: "#fff",
+            }}
             whileTap={{ scale: 0.9 }}
             className="member-mng"
             onClick={() => {
@@ -179,7 +244,11 @@ function ComChat() {
 
           {showDelete && (
             <motion.button
-              whileHover={{ scale: 1.04, backgroundColor: "#ee4962" }}
+              whileHover={{
+                scale: 1.04,
+                backgroundColor: "#ee4962",
+                color: "#fff",
+              }}
               whileTap={{ scale: 0.9 }}
               className="member-mng"
               onClick={deleteCommunity}
@@ -211,9 +280,23 @@ function ComChat() {
   );
 }
 
-export const ChatRow = ({ user }) => {
+export const ChatRow = ({ user, message }) => {
+  const [showCopy, setShowCopy] = useState(false);
+  const [showReply, setShowReply] = useState(false);
+  const currentUser = JSON.parse(
+    localStorage.getItem("currentUser")
+  )?.student_id;
+
   return (
-    <div className="chat-row">
+    <div
+      className="chat-row"
+      onMouseEnter={() => {
+        setShowReply(true);
+      }}
+      onMouseLeave={() => {
+        setShowReply(false);
+      }}
+    >
       <img src={user.avatar} alt="avatar" className="sender-avatar" />
       <div className="message-body">
         <div className="name-date">
@@ -228,28 +311,48 @@ export const ChatRow = ({ user }) => {
             whileTap={{ scale: 0.9 }}
             className="copy-icon"
             onClick={() => {
-              navigator.clipboard.writeText(
-                "This is me testing if this css thing actually works or not. This is me testing if this css thing actually works or not. This is me testing if this css thing actually works or not."
-              );
-              toast.warning("Message copied to clipboard");
+              navigator.clipboard.writeText(message);
+              setShowCopy(true);
+              setTimeout(() => {
+                setShowCopy(false);
+              }, 500);
             }}
           >
             <CopyIcon />
+            {showCopy && (
+              <AnimatePresence
+                initial={false}
+                mode="wait"
+                onExitComplete={() => null}
+              >
+                <motion.div
+                  initial={{ width: 0, opacity: 0, fontSize: 0 }}
+                  animate={{
+                    width: "fit-content",
+                    opacity: 1,
+                    fontSize: "0.8rem",
+                  }}
+                  exit={{ width: 0, opacity: 0, fontSize: 0 }}
+                  transition={{ duration: 0.2, ease: "easeIn" }}
+                  className="copy-message"
+                >
+                  copied
+                </motion.div>
+              </AnimatePresence>
+            )}
           </motion.div>
         </div>
         <div className="main-text">
-          <div className="main-actual-text">
-            This is me testing if this css thing actually works or not. This is
-            me testing if this css thing actually works or not. This is me
-            testing if this css thing actually works or not.
-          </div>
-          <motion.button
-            whileHover={{ scale: 1.04, backgroundColor: "#ee4962" }}
-            whileTap={{ scale: 0.9 }}
-            className="reply-icon"
-          >
-            <ReplyIcon /> Reply
-          </motion.button>
+          <div className="main-actual-text">{message}</div>
+          {showReply && (
+            <motion.button
+              whileHover={{ scale: 1.04, backgroundColor: "#ee4962" }}
+              whileTap={{ scale: 0.9 }}
+              className="reply-icon"
+            >
+              <ReplyIcon /> Reply
+            </motion.button>
+          )}
         </div>
       </div>
     </div>
@@ -312,10 +415,7 @@ export const ManageMembers = () => {
     };
 
     const response = await axios
-      .patch(
-        `http://localhost:3002/sendNotification/${invitationId}`,
-        invitation
-      )
+      .patch(`http://localhost:3002/sendInvitation/${invitationId}`, invitation)
       .catch((err) => {
         if (err.response?.status === 500) {
           toast.error("Something went wrong");
@@ -325,11 +425,19 @@ export const ManageMembers = () => {
     if (response.status === 201) {
       toast.warning("Already a member of this community");
       return;
+    } else if (response.status === 202) {
+      toast.warning("User does not exists");
+      return;
     }
 
     const data = response.data;
     if (data.acknowledged) {
       toast.success("Invitation sent successfully");
+      socket.emit("sendInvitation", {
+        invitationId: Number(invitationId),
+        sender: user.student_id,
+        comName: community.value.name,
+      });
     } else {
       toast.error("Something went wrong");
     }
@@ -431,7 +539,7 @@ export const ManageMembers = () => {
               position: "relative",
               left: "30%",
               top: "30%",
-              color: "gray"
+              color: "gray",
             }}
           >
             No requests to join this community

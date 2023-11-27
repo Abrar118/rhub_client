@@ -165,6 +165,7 @@ function ComDash() {
             <div className="small-name">{com.value.name}</div>
             <div className="member-count">{com.value.members} members</div>
             <motion.div
+              style={{ color: "#000000" }}
               whileHover={{ scale: 1.05, color: "#ee4962" }}
               whileTap={{ scale: 0.9 }}
               className="rate-us"
@@ -245,10 +246,10 @@ export const EventList = ({ eventArray, listTitle }) => {
           whileHover={{
             scale: 1.05,
             cursor: "pointer",
-            backgroundColor: "#9b9c9e50",
             borderRadius: "50%",
           }}
           whileTap={{ scale: 0.9 }}
+          style={{ color: "#000000" }}
         >
           <Colon />
         </motion.div>
@@ -291,7 +292,7 @@ export const EvnetCard = ({ event }) => {
             setShowComment(!showComment);
           }}
         >
-          <div style={{ color: "#B6F09C" }}>
+          <div style={{ color: "#000000", fontSize: "1.1rem" }}>
             <Comment />
           </div>
           <div className="cmnt-count">{event.comments.length}</div>
@@ -462,9 +463,6 @@ export const AddEventPopUp = () => {
       requestBody
     );
     toast.success("Event created successfully");
-    setTimeout(() => {
-      window.location.reload(true);
-    }, 500);
   };
 
   return (

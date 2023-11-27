@@ -2,18 +2,21 @@ import "../styles/navbar.css";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   useCallback,
+  useEffect,
   useLayoutEffect,
   useRef,
   useState,
 } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Link as ScrollLink } from "react-scroll";
+import { io } from "socket.io-client";
 
 import PortalPopup from "./PortalPopup";
 import LogInHolder from "./loginholder";
 import ProfileDropdown from "./profile/ProfileDropdown";
 
 import logo from "../assets/logo-black.svg";
+import { toast } from "react-toastify";
 
 const menusRoutes = [
   {
@@ -38,6 +41,8 @@ const menusRoutes = [
   },
 ];
 
+const socket = io("http://localhost:3002");
+
 const Navbar = () => {
   const [log_in, set_log_in] = useState(false);
   const isAuthenticated = useRef(false);
@@ -45,7 +50,6 @@ const Navbar = () => {
   const [avatarPath, setavatarPath] = useState("");
   const location = useLocation().pathname;
   const showMenu = location === "/" ? true : false;
-  const navigate = useNavigate();
 
   const open_log_in = useCallback(() => {
     set_log_in(true);
@@ -66,12 +70,20 @@ const Navbar = () => {
       setavatarPath(data.avatar);
     }
   };
-  
+
   useLayoutEffect(() => {
     const status = window.localStorage.getItem("logInStatus");
     isAuthenticated.current = status === "true";
     fetch_avatar();
   }, []);
+
+  useEffect(() => {
+    console.log("useEffect");
+    socket.on("sendInvitationNotification", (message) => {
+      toast.success(message);
+      console.log(message);
+    });
+  }, [socket]);
 
   return (
     <div className="navbar">

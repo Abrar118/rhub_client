@@ -25,6 +25,7 @@
   font-size: 1.5em;
   font-weight: 700;
   text-align: center;
+  color: #000000;
 }
 
 .search-tab .search-objects {
@@ -46,23 +47,24 @@
   font-size: 20px;
   left: 10px;
   top: 12px;
+  color: #000000;
 }
 
 .com-res .search-input .search-input-holder {
   background-color: transparent;
-  border: solid 2px #ffffff20;
+  border: solid 2px #00000010;
   border-radius: 5px;
   height: 40px;
   width: 300px;
   padding-left: 40px;
   outline: none;
-  color: #ffffff;
+  color: #000000;
 
   font-family: "Poppins", sans-serif;
 }
 
 .com-res .search-input .search-input-holder:focus {
-  border-color: #ffffff60;
+  border-color: #00000030;
 }
 
 .com-res .search-input .search-community-button {
@@ -84,6 +86,7 @@
   font-family: "Poppins", sans-serif;
   font-weight: 700;
   font-size: 18px;
+  color: #000000;
 }
 
 .com-res .sort-by .sort-dropdown {
@@ -117,7 +120,7 @@
 }
 
 .com-res .show-as .show-as-block {
-  border: solid 1px #ffffff20;
+  border: solid 1px #00000020;
   padding: 5px 5px 2px 5px;
   font-size: 20px;
   color: #f6c90e;
@@ -201,6 +204,7 @@
   width: 10vw;
   height: 20vh;
   transition: all ease 500ms;
+  box-shadow: 0px 5px 10px #17171730;
 }
 
 .resource-list .row-wrapper:hover {
@@ -308,12 +312,12 @@
   align-items: center;
   justify-content: flex-start;
   flex-direction: column;
+  color: #1a194d;
 }
 
 .active-resource .res-title-wrapper {
   position: relative;
   padding: 20px 20px;
-  color: #ffffff;
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
@@ -337,7 +341,7 @@
 }
 
 .title .subtitle {
-  color: #ffffff80;
+  color: #00000090;
   font-family: Plus Jakarta Sans;
   font-size: 0.875rem;
   font-style: normal;
@@ -374,7 +378,7 @@
 .options .academic-res,
 .academic-res-active {
   position: relative;
-  color: #ffffff;
+  color: #000000;
   font-family: Plus Jakarta Sans;
   font-size: 1em;
   font-weight: 600;
@@ -417,13 +421,13 @@
   position: relative;
   top: 1em;
   width: 90%;
-  left: -1%;
   border-radius: 1em;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  justify-content: space-between;
+  align-items: center;
   gap: 1em;
+  padding: 1rem;
+  box-sizing: border-box;
   overflow-y: scroll;
 }
 
@@ -438,7 +442,7 @@
   justify-content: space-between;
   width: 55vw;
   padding: 10px 10px;
-  border-bottom: solid 1px #ffffff50;
+  box-shadow: 0px 5px 10px #17171730;
 }
 
 .row-container .row-title-date {
@@ -452,14 +456,14 @@
 .row-title-date .title {
   font-family: Plus Jakarta Sans;
   font-weight: 700;
-  color: #ffffff;
+  color: #000000;
   font-size: 1.2em;
 }
 
 .row-title-date .upload-time {
   font-family: Plus Jakarta Sans;
   font-weight: 400;
-  color: #ffffff90;
+  color: #00000090;
   font-size: 0.8em;
 }
 

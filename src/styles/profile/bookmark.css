@@ -7,7 +7,7 @@
   gap: 30px;
   padding: 40px 20px;
   overflow: hidden;
-  background-color: #131619;
+  background-color: #f3f4f7;
   box-sizing: border-box;
 }
 
@@ -48,17 +48,18 @@
   font-size: 20px;
   left: 10px;
   top: 12px;
+  color: #000000;
 }
 
 .bookmark-container .search-input .search-input-holder {
-  background-color: transparent;
-  border: solid 2px #ffffff20;
+  background-color: #ffffff;
+  border: solid 1px #1a194d50;
   border-radius: 5px;
   height: 40px;
   width: 300px;
   padding-left: 40px;
   outline: none;
-  color: #ffffff;
+  color: #000000;
 
   font-family: "Poppins", sans-serif;
 }
@@ -86,6 +87,7 @@
   font-family: "Poppins", sans-serif;
   font-weight: 700;
   font-size: 18px;
+  color: #000000;
 }
 
 .bookmark-container .sort-by .sort-dropdown {
@@ -119,7 +121,7 @@
 }
 
 .bookmark-container .show-as .show-as-block {
-  border: solid 1px #ffffff20;
+  border: solid 1px #1a194d50;
   padding: 5px 5px 2px 5px;
   font-size: 20px;
   color: #f6c90e;
@@ -181,6 +183,7 @@
   width: 15vw;
   height: 10vh;
   transition: all ease 500ms;
+  box-shadow: 0px 5px 10px #17171730;
 }
 
 .bookmark-list .bookmark-item::-webkit-scrollbar {

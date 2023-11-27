@@ -2,10 +2,11 @@
   width: 83.36vw;
   overflow-y: scroll;
   overflow-x: hidden;
-  background-color: #131619;
+  background-color: #ffffff;
   scrollbar-width: none;
   height: 90.8vh;
   position: relative;
+  background-color: #f3f4f7;
 }
 
 .com-holder::-webkit-scrollbar {

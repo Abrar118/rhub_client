@@ -10,7 +10,7 @@ import { toast } from "react-toastify";
 function Invitation({ invitation, fetchNotifications }) {
   const [unread, setUnread] = useState(invitation.status === "unread");
   const [dropdown, setDropdown] = useState(false);
-  const [responded, setResponded] = useState(false);
+  const [responded, setResponded] = useState(invitation.responded);
   const title = invitation.title;
   const message = invitation.messageBody;
   const tag = invitation.comTag;
@@ -64,9 +64,10 @@ function Invitation({ invitation, fetchNotifications }) {
 
   const acceptInvitation = async () => {
     const response = await axios
-      .patch(`http://localhost:3002/acceptInvitation/${user.student_id}`, {
-        comTag: tag,
-      })
+      .patch(
+        `http://localhost:3002/acceptInvitation/${user.student_id}`,
+        invitation
+      )
       .catch((err) => {
         if (err.response?.status === 500) {
           toast.error("Server Error");
@@ -100,34 +101,27 @@ function Invitation({ invitation, fetchNotifications }) {
         </div>
         <div className="community-name">{title}</div>
         <div className="description">{message}</div>
-        <div className="com-tag">{tag}</div>
-
-        {!responded ? (
-          <div className="inv-btns">
-            <motion.button
-              whileHover={{
-                scale: 1.04,
-                backgroundColor: "#f6c90e",
-                color: "#000",
-              }}
-              whileTap={{ scale: 0.9 }}
-              className="accept-btn"
-              onClick={acceptInvitation}
-            >
-              Accept
-            </motion.button>
-
-            <motion.button
-              whileHover={{ scale: 1.04, backgroundColor: "#ee4962" }}
-              whileTap={{ scale: 0.9 }}
-              className="accept-btn"
-            >
-              Reject
-            </motion.button>
-          </div>
-        ) : (
-          <div className="responded">Responded</div>
-        )}
+        <div className="inv-btns">
+          <div className="com-tag">{tag}</div>
+          {!responded ? (
+            <div className="inv-btns">
+              <motion.button
+                whileHover={{
+                  scale: 1.04,
+                  backgroundColor: "#f6c90e",
+                  color: "#000",
+                }}
+                whileTap={{ scale: 0.9 }}
+                className="accept-btn"
+                onClick={acceptInvitation}
+              >
+                Accept
+              </motion.button>
+            </div>
+          ) : (
+            <div className="responded">Responded</div>
+          )}
+        </div>
 
         <div className="noti-date">{date}</div>
       </div>
@@ -148,6 +142,7 @@ function Invitation({ invitation, fetchNotifications }) {
               initial={{ height: 0, opacity: 0 }}
               animate={{ height: "20%", opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.1 }}
               className="dropdown"
             >
               <motion.div

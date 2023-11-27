@@ -1,8 +1,7 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useState } from "react";
 import "../styles/login.css";
 import email_icon from "../assets/email-icon.png";
 import google_icon from "../assets/google-icon.svg";
-import apple_icon from "../assets/apple-icon.svg";
 import lock_icon from "../assets/lock-icon.png";
 import welcome from "../assets/welcome.png";
 import { motion } from "framer-motion";
@@ -54,7 +53,8 @@ export const Login = ({ closePopUp }) => {
     toast.success("Successfully Logged In");
 
     setTimeout(() => {
-      navigate("/");
+      window.localStorage.setItem("profileOption", "General");
+      navigate("/profile/info");
       closePopUp();
       window.location.reload(true);
     }, 500);

@@ -7,6 +7,9 @@ import Invitation from "./NotificationCards/Invitation";
 import axios from "axios";
 import { toast } from "react-toastify";
 import PortalPopup from "../PortalPopup";
+import { io } from "socket.io-client";
+
+const socket = io("http://localhost:3002");
 
 function ProfileNotification() {
   const [notifications, setNotifications] = useState([]);
@@ -28,9 +31,7 @@ function ProfileNotification() {
     const data = response.data;
     setNotifications(data);
 
-    const unreadCount = notifications.filter(
-      (noti) => noti.status === "unread"
-    ).length;
+    const unreadCount = data.filter((noti) => noti.status === "unread").length;
     setUnread(unreadCount);
     setLoading(false);
   };
