@@ -24,7 +24,8 @@ function Invitation({ invitation, fetchNotifications }) {
   const updateStatus = async () => {
     const response = await axios
       .patch(
-        `http://localhost:3002/updateNotificationStatus/${user.student_id}`,
+        import.meta.env.VITE_CURRENT_PATH +
+          `/updateNotificationStatus/${user.student_id}`,
         invitation
       )
       .catch((err) => {
@@ -45,7 +46,8 @@ function Invitation({ invitation, fetchNotifications }) {
   const deleteNotification = async () => {
     const response = await axios
       .patch(
-        `http://localhost:3002/deleteNotification/${user.student_id}`,
+        import.meta.env.VITE_CURRENT_PATH +
+          `/deleteNotification/${user.student_id}`,
         invitation
       )
       .catch((err) => {
@@ -65,7 +67,8 @@ function Invitation({ invitation, fetchNotifications }) {
   const acceptInvitation = async () => {
     const response = await axios
       .patch(
-        `http://localhost:3002/acceptInvitation/${user.student_id}`,
+        import.meta.env.VITE_CURRENT_PATH +
+          `/acceptInvitation/${user.student_id}`,
         invitation
       )
       .catch((err) => {

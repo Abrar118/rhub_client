@@ -13,7 +13,6 @@ import { motion } from "framer-motion";
 import axios from "axios";
 import CommunityCardHolder from "../homepage/CommunityCardHolder";
 import { toast } from "react-toastify";
-import LoadingIcon from "../utility/Loader/LoadingIcon";
 import { useNavigate } from "react-router-dom";
 import PortalPopup from "../PortalPopup";
 import { ScaleLoader } from "react-spinners";
@@ -32,9 +31,11 @@ function MyCommunities() {
     const myComTags = JSON.parse(
       window.localStorage.getItem("currentUser")
     ).community;
-    let URL = `http://localhost:3002/get_my_communities/${criteria}/${order}/${JSON.stringify(
-      myComTags
-    )}/${currentPage}`;
+    let URL =
+      import.meta.env.VITE_CURRENT_PATH +
+      `/get_my_communities/${criteria}/${order}/${JSON.stringify(
+        myComTags
+      )}/${currentPage}`;
     if (searchQuery.length > 0) URL += `?tag=${searchQuery}`;
 
     setLoading(true);

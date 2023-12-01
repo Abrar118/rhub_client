@@ -20,7 +20,7 @@ function AIChat() {
   const loadModel = async () => {
     setLoading(true);
     const response = await axios
-      .get("http://localhost:3002/loadModel")
+      .get(import.meta.env.VITE_CURRENT_PATH+"/loadModel")
       .catch((err) => {
         if (err.response?.status === 500) {
           console.log("No FAQs found");

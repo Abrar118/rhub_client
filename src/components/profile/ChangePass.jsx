@@ -138,7 +138,10 @@ export const CreateNewPass = () => {
     };
 
     const response = await axios
-      .patch(`http://localhost:3002/updatePassword/${send_id}`, reqBody)
+      .patch(
+        import.meta.env.VITE_CURRENT_PATH + `/updatePassword/${send_id}`,
+        reqBody
+      )
       .catch((error) => {
         if (error.response?.status === 500) {
           toast.error(error.response.data);

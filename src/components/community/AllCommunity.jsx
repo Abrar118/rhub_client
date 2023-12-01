@@ -40,7 +40,7 @@ function AllCommunity() {
   };
 
   const fetch_coms = async (criteria, order) => {
-    let URL = `http://localhost:3002/get_all_communities/${criteria}/${order}/${currentPage}`;
+    let URL = import.meta.env.VITE_CURRENT_PATH+`/get_all_communities/${criteria}/${order}/${currentPage}`;
     if (searchQuery.length > 0) URL += `?tag=${searchQuery}`;
 
     setLoading(true);

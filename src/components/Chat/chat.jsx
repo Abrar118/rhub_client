@@ -26,7 +26,7 @@ function Chat() {
 
   const getFaqs = async () => {
     const response = await axios
-      .get("http://localhost:3002/get_faqs")
+      .get(import.meta.env.VITE_CURRENT_PATH+"/get_faqs")
       .catch((err) => {
         if (err.response?.status === 500) {
           console.log("No FAQs found");

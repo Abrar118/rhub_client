@@ -24,7 +24,10 @@ export const Login = ({ closePopUp }) => {
     let terminate = false;
 
     const response = await axios
-      .get(`http://localhost:3002/getStudentByEmail/${email}/${password}`)
+      .get(
+        import.meta.env.VITE_CURRENT_PATH +
+          `/getStudentByEmail/${email}/${password}`
+      )
       .catch((error) => {
         if (error.response?.status === 500) {
           toast.error(error.response.data.error);

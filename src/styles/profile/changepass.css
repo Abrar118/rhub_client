@@ -10,6 +10,7 @@
   overflow: hidden;
   background-color: #0d0f10;
   box-sizing: border-box;
+  color: #fff;
 }
 
 .change-pass .verify-body {

@@ -12,13 +12,12 @@ import {
   AiFillStar as StarIcon,
 } from "react-icons/ai";
 import { BiCommentDetail as Comment } from "react-icons/bi";
-import { HiThumbUp as RateUsIcon } from "react-icons/hi";
 import {
   checkAllCaps,
   compareDates,
   getTextFormattedTime,
 } from "../utility/time";
-
+import { ScaleLoader } from "react-spinners";
 import PortalPopup from "../PortalPopup";
 import { convertBase64 } from "../utility/fileLoad";
 import { signal } from "@preact/signals-react";
@@ -32,6 +31,8 @@ function ComDash() {
   const [upcoming, setupcoming] = useState([]);
   const [addEvent, setAddEvent] = useState(false);
   const [giveRating, setGiveRating] = useState(false);
+  const [loading, setLoading] = useState(false);
+
   const comImage = useRef(null);
 
   const toggleAddEvent = () => {
@@ -46,7 +47,10 @@ function ComDash() {
     let terminate = false;
 
     const response = await axios
-      .get(`http://localhost:3002/get_communityByTag/${currentTag.tag}`)
+      .get(
+        import.meta.env.VITE_CURRENT_PATH +
+          `/get_communityByTag/${currentTag.tag}`
+      )
       .catch((error) => {
         if (error.response?.status === 500) {
           toast.error("Could not load data");
@@ -62,7 +66,7 @@ function ComDash() {
 
     terminate = false;
     const response2 = await axios
-      .get(`http://localhost:3002/getEvents/${currentTag.tag}`)
+      .get(import.meta.env.VITE_CURRENT_PATH + `/getEvents/${currentTag.tag}`)
       .catch((error) => {
         if (error.response?.status === 500) {
           toast.error("Could not load data");
@@ -100,9 +104,10 @@ function ComDash() {
 
     let terminate = false;
     const response = await axios
-      .post("http://localhost:3002/uploadComImage", {
+      .post(import.meta.env.VITE_CURRENT_PATH + "/uploadComImage", {
         image: base64Image,
         tag: com.value.tag,
+        publicId: com.value.imagePublicId,
       })
       .catch((error) => {
         if (error.response?.status === 413) {
@@ -117,6 +122,8 @@ function ComDash() {
     if (terminate) return;
 
     const data = response.data;
+    com.value.com_image = data.secure_url;
+    com.value.imagePublicId = data.public_id;
     toast.success("Image updated successfully.");
 
     //  console.log(data);
@@ -128,6 +135,12 @@ function ComDash() {
 
   return (
     <div className="dashboard-wrapper">
+      {loading && (
+        <PortalPopup  overlayColor="rgba(0,0,0, 0.5)" placement="Centered">
+          <ScaleLoader color="#36d7b7" height={35} width={5} />
+        </PortalPopup>
+      )}
+
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -360,7 +373,8 @@ const AddCommentPopUp = ({ tag, date }) => {
 
     const response = await axios
       .patch(
-        `http://localhost:3002/addComment/${JSON.stringify(tag)}/${date}`,
+        import.meta.env.VITE_CURRENT_PATH +
+          `/addComment/${JSON.stringify(tag)}/${date}`,
         requestBody
       )
       .catch((error) => {
@@ -459,7 +473,7 @@ export const AddEventPopUp = () => {
     // console.log(requestBody);
 
     const response = await axios.post(
-      "http://localhost:3002/addEvent",
+      import.meta.env.VITE_CURRENT_PATH + "/addEvent",
       requestBody
     );
     toast.success("Event created successfully");
@@ -577,7 +591,10 @@ export const GiveRating = ({ com, colsePopUp }) => {
     };
 
     const response = await axios
-      .patch(`http://localhost:3002/rateCom/${com.tag}`, requestBody)
+      .patch(
+        import.meta.env.VITE_CURRENT_PATH + `/rateCom/${com.tag}`,
+        requestBody
+      )
       .catch((error) => {
         if (error.response?.status === 500) {
           toast.error("Could not rate community");

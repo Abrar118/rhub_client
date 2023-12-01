@@ -32,14 +32,14 @@ function CreateCommunity({ closePopUp }) {
       resource: 0,
       rating: 0,
       admin: admin_id,
-      com_image: "/src/assets/default-com.jpg",
-      imagePublicId: "",
+      com_image: import.meta.env.VITE_COM_IMAGE,
+      imagePublicId: import.meta.env.VITE_COM_AVATAR_PUBLIC_ID ,
     };
 
     let terminate = false;
 
     const response = await axios
-      .post("http://localhost:3002/insertCommunity", requestBody)
+      .post(import.meta.env.VITE_CURRENT_PATH + "/insertCommunity", requestBody)
       .catch((error) => {
         if (error.response?.status === 500) {
           toast.error(error.response.data.err);
@@ -65,7 +65,7 @@ function CreateCommunity({ closePopUp }) {
 
     terminate = false;
     const response2 = await axios
-      .patch("http://localhost:3002/addComToUser", requestBody2)
+      .patch(import.meta.env.VITE_CURRENT_PATH + "/addComToUser", requestBody2)
       .catch((error) => {
         if (error.response?.status === 500) {
           toast.error(error.response.data.err);

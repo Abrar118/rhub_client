@@ -33,7 +33,9 @@ function Bookmark() {
   const [bookmarkList, setBookmarkList] = useState([]);
 
   const getBookmarks = async () => {
-    let API_URL = `http://localhost:3002/getBookmarks/${user_id}/${sortOption}/${sortOrder}`;
+    let API_URL =
+      import.meta.env.VITE_CURRENT_PATH +
+      `/getBookmarks/${user_id}/${sortOption}/${sortOrder}`;
     if (searchQuery.length > 0) API_URL += `?title=${searchQuery}`;
 
     const res = await axios.get(API_URL).catch((err) => {
@@ -136,12 +138,13 @@ export const BookmarkRow = ({ bookmark }) => {
     window.localStorage.setItem("profileOption", "My Communities");
 
     const response = await axios.get(
-      `http://localhost:3002/get_communityByTag/${currentTag}`
+      import.meta.env.VITE_CURRENT_PATH + `/get_communityByTag/${currentTag}`
     );
     const admin = response.data.admin;
 
     const content = await axios.get(
-      `http://localhost:3002/get_uploadByTitle/${bookmark.title}/${bookmark.uploadDate}`
+      import.meta.env.VITE_CURRENT_PATH +
+        `/get_uploadByTitle/${bookmark.title}/${bookmark.uploadDate}`
     );
 
     const activeContent = content.data;
@@ -162,9 +165,9 @@ export const BookmarkRow = ({ bookmark }) => {
   };
 
   const handleDeleteBookmark = async () => {
-    
     const response = await axios.delete(
-      `http://localhost:3002/deleteBookmark/${user_id}/${bookmark.title}`
+      import.meta.env.VITE_CURRENT_PATH +
+        `/deleteBookmark/${user_id}/${bookmark.title}`
     );
 
     if (response.data.acknowledged) {

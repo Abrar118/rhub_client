@@ -43,16 +43,18 @@ function ComRes() {
   const navigate = useNavigate();
 
   const toggleUpload = () => {
-    setuploadContent(!uploadContent);ekh
+    setuploadContent(!uploadContent);
   };
 
   const fetch_uploads = async (option, order) => {
-    let URL = `http://localhost:3002/get_uploads/${option}/${order}/${currentTag}`;
+    let URL =
+      import.meta.env.VITE_CURRENT_PATH +
+      `/get_uploads/${option}/${order}/${currentTag}`;
     if (searchQuery.length > 0) URL += `?key=${searchQuery.toUpperCase()}`;
 
     const response = await axios.get(URL);
     const res = await axios.get(
-      `http://localhost:3002/get_communityByTag/${currentTag}`
+      import.meta.env.VITE_CURRENT_PATH + `/get_communityByTag/${currentTag}`
     );
     const data = response.data;
     const data2 = res.data;
@@ -169,7 +171,7 @@ function ComRes() {
           {uploads.map((upload, index) => (
             <ResourceRow
               onClick={() => {
-                if (upload.access === "Open" || userId == comAdmin) {
+                if (upload.access === "Open" || userId === comAdmin) {
                   const activeContent = uploads[index];
                   const categoryData = {
                     activeContent: activeContent,
@@ -177,6 +179,7 @@ function ComRes() {
                     userId: userId,
                     access: upload.access,
                     keywords: upload.keywords,
+                    logNo: upload.logNo,
                   };
 
                   window.sessionStorage.setItem(
@@ -282,6 +285,7 @@ export const ResourceRow = ({
 
 export const ActiveResource = () => {
   const location = JSON.parse(window.sessionStorage.getItem("catData"));
+  const logNo = location.logNo;
   const [activeOption, setActiveOption] = useState("academic");
   const [mainList, setMainList] = useState([]);
   const [mainListType, setMainListType] = useState("academic");
@@ -304,9 +308,7 @@ export const ActiveResource = () => {
 
   const getContent = async () => {
     const response = await axios.get(
-      `http://localhost:3002/get_upload/${JSON.stringify(
-        keywords
-      )}/${currentTag}`
+      import.meta.env.VITE_CURRENT_PATH + `/get_upload/${logNo}/${currentTag}`
     );
 
     const data = response.data;
@@ -321,10 +323,13 @@ export const ActiveResource = () => {
   const changeAccess = async () => {
     const changedAccess = showAccess === "Open" ? "Restricted" : "Open";
 
-    const response = await axios.post("http://localhost:3002/changeAccess", {
-      access: changedAccess,
-      keywords: keywords,
-    });
+    const response = await axios.post(
+      import.meta.env.VITE_CURRENT_PATH + "/changeAccess",
+      {
+        access: changedAccess,
+        logNo: logNo,
+      }
+    );
 
     const data = response.data;
     if (data.acknowledged) {
@@ -334,13 +339,18 @@ export const ActiveResource = () => {
   };
 
   const insertBookmark = async () => {
+    const count = await axios.get(
+      import.meta.env.VITE_CURRENT_PATH + `/get_bookmark_count/${userId}`
+    );
+
     const response = await axios
-      .post("http://localhost:3002/insertBookmark", {
+      .post(import.meta.env.VITE_CURRENT_PATH + "/insertBookmark", {
         user: userId,
-        uploadDate: activeConent.date,
         title: activeConent.category_name,
         bookmarkDate: new Date().toISOString(),
         comTag: currentTag,
+        uploadLogNo: logNo,
+        bookmarkNo: count.data,
       })
       .catch((error) => {
         if (error.response?.status === 500) {
@@ -465,7 +475,7 @@ export const ActiveResource = () => {
             publicId={row.publicId}
             type={row.type}
             resourceType={row.resourceType}
-            time={activeConent.date}
+            logNo={logNo}
             mainListType={mainListType}
           />
         ))}
@@ -494,7 +504,7 @@ export const MainListRow = ({
   publicId,
   type,
   resourceType,
-  time,
+  logNo,
   mainListType,
 }) => {
   const currentTag = useParams().tag;
@@ -512,7 +522,8 @@ export const MainListRow = ({
 
     setDeleting(true);
     const response = await axios.delete(
-      `http://localhost:3002/deleteContent/${publicId}/${time}/${currentTag}/${type}/${resourceType}/${mainListType}`
+      import.meta.env.VITE_CURRENT_PATH +
+        `/deleteContent/${publicId}/${logNo}/${currentTag}/${type}/${resourceType}/${mainListType}`
     );
     setDeleting(false);
 
@@ -596,9 +607,10 @@ export const UploadPopUp = ({ keywords }) => {
     setIsUploading(true);
     const response = await axios
       .post(
-        `http://localhost:3002/uploadContent/${contentType}/${JSON.stringify(
-          keywords
-        )}/${selectedFile.name}/${student.student_id}`,
+        import.meta.env.VITE_CURRENT_PATH +
+          `/uploadContent/${contentType}/${JSON.stringify(keywords)}/${
+            selectedFile.name
+          }/${student.student_id}`,
         {
           file: base64File,
         }

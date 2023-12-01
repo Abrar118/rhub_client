@@ -40,7 +40,7 @@ const CommunityCardHolder = ({
 
       let terminate = false;
       const response = await axios
-        .post("http://localhost:3002/insertRequest", body)
+        .post(import.meta.env.VITE_CURRENT_PATH + "/insertRequest", body)
         .catch((err) => {
           if (err.response?.status === 500) {
             terminate = true;
@@ -51,7 +51,7 @@ const CommunityCardHolder = ({
       if (terminate) return;
 
       if (response.status === 201) {
-        toast.warning("Already a member if this community!");
+        toast.warning("Already a member of this community!");
         return;
       }
 

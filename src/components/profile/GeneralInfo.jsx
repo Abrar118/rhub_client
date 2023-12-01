@@ -6,8 +6,11 @@ import { backIn, motion } from "framer-motion";
 import { getTextFormattedTime } from "../utility/time";
 import { Link, useNavigate } from "react-router-dom";
 import { io } from "socket.io-client";
+import { toast } from "react-toastify";
 
-const socket = io("http://localhost:3002");
+const socket = io(import.meta.env.VITE_CURRENT_PATH, {
+  transports: ["websocket"],
+});
 
 function GeneralInfo() {
   const [name, setName] = useState();
@@ -40,6 +43,11 @@ function GeneralInfo() {
   useEffect(() => {
     socket.emit("addOnlineUser", {
       student_id: user.student_id,
+    });
+
+    socket.on("sendInvitationNotification", (message) => {
+      toast.success(message);
+      console.log(message);
     });
   }, [socket]);
 

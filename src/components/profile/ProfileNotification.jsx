@@ -9,7 +9,7 @@ import { toast } from "react-toastify";
 import PortalPopup from "../PortalPopup";
 import { io } from "socket.io-client";
 
-const socket = io("http://localhost:3002");
+const socket = io(import.meta.env.VITE_CURRENT_PATH);
 
 function ProfileNotification() {
   const [notifications, setNotifications] = useState([]);
@@ -21,7 +21,10 @@ function ProfileNotification() {
   const fetchNotifications = async () => {
     setLoading(true);
     const response = await axios
-      .get(`http://localhost:3002/getNotifications/${user.student_id}`)
+      .get(
+        import.meta.env.VITE_CURRENT_PATH +
+          `/getNotifications/${user.student_id}`
+      )
       .catch((err) => {
         if (err.response?.status === 500) {
           toast.error("Server Error");

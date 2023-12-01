@@ -28,7 +28,7 @@ function ProfileDropdown() {
   const navigate = useNavigate();
   const [optionState, setOpton] = useState("menu");
   const [menuHeight, setMenuHeight] = useState(null);
-  const [socket, setSocket] = useState(io("http://localhost:5000"));
+  const [socket, setSocket] = useState(io(import.meta.env.VITE_CURRENT_PATH));
   const dropdownRef = useRef(null);
   const user = JSON.parse(localStorage.getItem("currentUser"));
 
@@ -159,7 +159,7 @@ function ProfileDropdown() {
   useEffect(() => {
     setOpton("menu");
     setMenuHeight(dropdownRef.current?.firstChild.offsetHeight);
-    setSocket(io("http://localhost:5000"));
+    setSocket(io(import.meta.env.VITE_CURRENT_PATH));
   }, []);
 
   return (

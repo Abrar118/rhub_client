@@ -41,7 +41,9 @@ const menusRoutes = [
   },
 ];
 
-const socket = io("http://localhost:3002");
+const socket = io(import.meta.env.VITE_CURRENT_PATH, {
+  transports: ["websocket"],
+});
 
 const Navbar = () => {
   const [log_in, set_log_in] = useState(false);
@@ -78,7 +80,6 @@ const Navbar = () => {
   }, []);
 
   useEffect(() => {
-    console.log("useEffect");
     socket.on("sendInvitationNotification", (message) => {
       toast.success(message);
       console.log(message);

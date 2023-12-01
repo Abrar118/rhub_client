@@ -3,7 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { signal } from "@preact/signals-react";
-import "./index.css"
+import "./index.css";
 
 import Homepage from "./components/homepage/homepage";
 import MyProfile from "./components/profile/Myprofile";
@@ -22,13 +22,13 @@ import Bookmark from "./components/profile/Bookmark";
 import Chat from "./components/Chat/chat";
 import ProfileNotification from "./components/profile/ProfileNotification";
 import ChangePass from "./components/profile/ChangePass";
+import MyUploads from "./components/profile/MyUploads";
 
 export const logoBlack = signal(
   "https://res.cloudinary.com/da8v9ysli/image/upload/v1697061060/msthqidxbbfavh8lpczp.svg"
 );
 
 const App = () => {
-
   const mainStyle = {
     width: "98.98vw",
     overflow: "hidden",
@@ -55,7 +55,7 @@ const App = () => {
             <Route path="edit" element={<EditProfile />} />
             <Route path="bookmark" element={<Bookmark />} />
             <Route path="my-commnunities" element={<MyCommunities />} />
-            <Route path="my-uploads" element={<MyProfile />} />
+            <Route path="my-uploads" element={<MyUploads />} />
             <Route path="notification" element={<ProfileNotification />} />
             <Route path="inbox" element={<MyProfile />} />
             <Route path="help" element={<MyProfile />} />

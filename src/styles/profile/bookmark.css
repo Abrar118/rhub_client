@@ -69,10 +69,10 @@
 }
 
 .bookmark-container .search-input .search-community-button {
-  background-color: #f6c90e;
+  background-color: rgb(26, 25, 77);
   position: relative;
   font-family: "Poppins", sans-serif;
-  color: #000000;
+  color: #ffffff;
 }
 
 .bookmark-container .search-tab .sort-by {
@@ -124,7 +124,7 @@
   border: solid 1px #1a194d50;
   padding: 5px 5px 2px 5px;
   font-size: 20px;
-  color: #f6c90e;
+  color: rgb(26, 25, 77);
 }
 
 .bookmark-container .show-as .show-as-block:hover {
@@ -138,7 +138,7 @@
   align-items: center;
   gap: 10px;
   color: #000000;
-  background-color: #f6c90e;
+  background-color: rgb(26, 25, 77);
   height: 50px;
   padding: 5px 20px;
   border-radius: 10px;
@@ -193,7 +193,7 @@
 .bookmark-list .bookmark-item:hover {
   cursor: pointer;
   transform: scale(1.05);
-  box-shadow: 0px 6px 15px 2px #f6c90e;
+  box-shadow: 0px 6px 15px 2px rgb(26, 25, 77);
 }
 
 .bookmark-item .bookmark-info {
@@ -221,7 +221,7 @@
 .bookmark-item .bookmark-item-icon {
   position: relative;
   font-size: 50px;
-  color: #f6c90e;
+  color: rgb(26, 25, 77);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -247,7 +247,7 @@
 
 .bookmark-dropdown .bookmark-dropdown-icon:hover {
   cursor: pointer;
-  color: #f6c90e;
+  color: rgb(26, 25, 77);
 }
 
 .bookmark-dropdown .bookmark-dropdown-content {
@@ -284,6 +284,6 @@
 
 .bookmark-dropdown-content .bookmark-dropdown-item:hover {
   cursor: pointer;
-  color: #f6c90e;
+  color: rgb(185, 226, 19);
   scale: 1.05;
 }

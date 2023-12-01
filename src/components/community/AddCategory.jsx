@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 import { checkAllCaps, getCurrentTime } from "../utility/time";
 import { useParams } from "react-router-dom";
 
-function AddCategory({closePopUp}) {
+function AddCategory({ closePopUp }) {
   const [name, setName] = useState();
   const [keywords, setkeywords] = useState([]);
   const [desc, setDesc] = useState();
@@ -19,6 +19,10 @@ function AddCategory({closePopUp}) {
     const current = JSON.parse(window.localStorage.getItem("currentUser"));
     const current_id = current.student_id;
 
+    const count = await axios.get(
+      import.meta.env.VITE_CURRENT_PATH + "/get_upload_count"
+    );
+
     const requestBody = {
       access: privacy,
       category_name: name,
@@ -28,13 +32,14 @@ function AddCategory({closePopUp}) {
       community: currentTag,
       academic: [],
       student: [],
-      misc: []
+      misc: [],
+      logNo: count.data+1,
     };
 
     let terminate = false;
 
     const response = await axios
-      .post("http://localhost:3002/createCategory", requestBody)
+      .post(import.meta.env.VITE_CURRENT_PATH + "/createCategory", requestBody)
       .catch((error) => {
         if (error.response?.status === 500) {
           toast.error(error.response.data);
@@ -52,7 +57,7 @@ function AddCategory({closePopUp}) {
     }
 
     toast.success("Successfully Created Category!!");
-    
+
     setTimeout(() => {
       closePopUp();
       window.location.reload(true);

@@ -1,0 +1,201 @@
+.myup {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+  padding: 40px 20px;
+  overflow-y: auto;
+  background-color: #f3f4f7;
+  box-sizing: border-box;
+}
+
+.myup .search-tab {
+  width: 75vw;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  position: relative;
+  padding: 5px 20px;
+}
+
+.myup .search-tab .res-title {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 1.5em;
+  font-weight: 700;
+  text-align: center;
+}
+
+.myup .search-tab .search-objects {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.myup .search-tab .search-input {
+  display: flex;
+  align-items: center;
+  position: relative;
+  gap: 10px;
+}
+
+.myup .search-input .search-icon {
+  position: absolute;
+  font-size: 20px;
+  left: 10px;
+  top: 12px;
+  color: #000000;
+}
+
+.myup .search-input .search-input-holder {
+  background-color: #ffffff;
+  border: solid 1px #1a194d50;
+  border-radius: 5px;
+  height: 40px;
+  width: 300px;
+  padding-left: 40px;
+  outline: none;
+  color: #000000;
+
+  font-family: "Poppins", sans-serif;
+}
+
+.myup .search-input .search-input-holder:focus {
+  border-color: #ffffff60;
+}
+
+.myup .search-input .search-community-button {
+  background-color: rgb(26, 25, 77);
+  position: relative;
+  font-family: "Poppins", sans-serif;
+  color: #ffffff;
+}
+
+.myup .search-tab .sort-by {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  position: relative;
+  left: 2vw;
+}
+
+.myup .sort-by .sort-by-text {
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  color: #000000;
+}
+
+.myup .sort-by .sort-dropdown {
+  width: 180px;
+  height: 40px;
+  background-color: #ffffff;
+  color: #1a194d;
+  outline: none;
+  border: solid 1px #1a194d50;
+  border-radius: 5px;
+  font-family: "Poppins", sans-serif;
+}
+
+.myup .sort-dropdown .sort-dropdown-item {
+  color: #1a194d;
+  font-family: "Poppins", sans-serif;
+  font-size: 15px;
+}
+
+.myup .sort-dropdown .sort-dropdown:hover {
+  cursor: pointer;
+  accent-color: #1a194d;
+}
+
+.myup .search-tab .show-as {
+  position: relative;
+  left: 2vw;
+  display: flex;
+  align-items: center;
+  height: 30px;
+}
+
+.myup .show-as .show-as-block {
+  border: solid 1px #1a194d50;
+  padding: 5px 5px 2px 5px;
+  font-size: 20px;
+  color: rgb(26, 25, 77);
+}
+
+.myup .show-as .show-as-block:hover {
+  cursor: pointer;
+  background-color: #dbdbdb20;
+}
+
+.myup .myup-list {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 1.2rem;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  box-sizing: border-box;
+  padding: 1rem;
+}
+
+.myup .uploadRow {
+   position: relative;
+   width: 100%;
+   background-color: #ffffff;
+   border-radius: 1rem;
+   display: flex;
+   justify-content: space-between;
+   gap: 1rem;
+   padding: 1rem;
+   box-sizing: border-box;
+   color: #000000;
+   box-shadow: 0px 0px 10px 0px #00000020;
+}
+
+.uploadRow .upload-item {
+  position: relative;
+  background-color: #ffffff;
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1rem;
+  box-sizing: border-box;
+  color: #000000;
+}
+
+.upload-item .upload-item-title {
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: #000000;
+}
+
+.upload-item .upload-item-desc {
+   font-family: "Poppins", sans-serif;
+   font-weight: 400;
+   font-size: 1rem;
+   color: #000000;
+}
+
+.upload-item .upload-item-date {
+   font-family: "Poppins", sans-serif;
+   font-weight: 400;
+   font-size: 0.8rem;
+   color: #727171;
+}
+
+.upload-item .buttons {
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   gap: 1rem;
+}

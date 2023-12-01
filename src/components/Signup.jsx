@@ -42,7 +42,7 @@ function Signup({ closePopUp }) {
 
     let terminate = false;
     const response = await axios
-      .post("http://localhost:3002/insertUser", requestBody)
+      .post(import.meta.env.VITE_CURRENT_PATH + "/insertUser", requestBody)
       .catch((error) => {
         if (error.response?.status === 500) {
           toast.error(error.response.data.err);

@@ -5,6 +5,8 @@ import { motion } from "framer-motion";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { convertBase64 } from "../utility/fileLoad";
+import { ScaleLoader } from "react-spinners";
+import PortalPopup from "../PortalPopup";
 
 export const EditProfile = () => {
   const [name, setName] = useState();
@@ -14,6 +16,8 @@ export const EditProfile = () => {
   const [bio, setbio] = useState();
   const [avatarPath, setavatarPath] = useState();
   const [phone, setPhone] = useState();
+  const [publicId, setPublicId] = useState();
+  const [loading, setLoading] = useState(false);
   const uploadAvatar = useRef(null);
 
   const handleEdit = async (e) => {
@@ -31,7 +35,7 @@ export const EditProfile = () => {
 
     const student = JSON.parse(window.localStorage.getItem("currentUser"));
     const response = await axios.patch(
-      `http://localhost:3002/updateUser/${student.student_id}`,
+      import.meta.env.VITE_CURRENT_PATH + `/updateUser/${student.student_id}`,
       requestBody
     );
     const data = response.data;
@@ -63,8 +67,9 @@ export const EditProfile = () => {
 
     let terminate = false;
     const response = await axios
-      .post("http://localhost:3002/uploadAvatar", {
+      .post(import.meta.env.VITE_CURRENT_PATH + "/uploadAvatar", {
         image: base64Image,
+        publicId: publicId,
       })
       .catch((error) => {
         if (error.response?.status === 413) {
@@ -80,6 +85,10 @@ export const EditProfile = () => {
 
     const data = response.data;
     setavatarPath(data.secure_url);
+    const user = JSON.parse(window.localStorage.getItem("currentUser"));
+    user.avatar = data.secure_url;
+    user.publicId = data.public_id;
+    window.localStorage.setItem("currentUser", JSON.stringify(user));
     toast.success("Avatar updated successfully. Click SAVE to proceed.");
 
     //  console.log(data);
@@ -95,10 +104,16 @@ export const EditProfile = () => {
     setemail(data.email);
     setPhone(data.phone);
     setavatarPath(data.avatar);
+    setPublicId(data.publicId);
   }, []);
 
   return (
     <div className="edit-container">
+      {loading && (
+        <PortalPopup overlayColor="rgba(0,0,0, 0.5)" placement="Centered">
+          <ScaleLoader color="#36d7b7" height={35} width={5} />
+        </PortalPopup>
+      )}
       <div className="title-container">
         <div className="edit-title">Edit Profile</div>
       </div>

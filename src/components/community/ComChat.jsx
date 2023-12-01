@@ -22,7 +22,9 @@ import { io } from "socket.io-client";
 import ScrollToBottom from "react-scroll-to-bottom";
 
 const community = signal({});
-const socket = io("http://localhost:3002");
+const socket = io(import.meta.env.VITE_CURRENT_PATH, {
+  transports: ["websocket"],
+});
 
 function ComChat() {
   const user = JSON.parse(localStorage.getItem("currentUser"));
@@ -46,7 +48,7 @@ function ComChat() {
   const getAdmin = async () => {
     try {
       const res = await axios.get(
-        `http://localhost:3002/get_communityByTag/${currentTag}`
+        import.meta.env.VITE_CURRENT_PATH + `/get_communityByTag/${currentTag}`
       );
       comAdmin.current = res.data.admin;
       community.value = res.data;
@@ -60,7 +62,7 @@ function ComChat() {
   const getOnlineUsers = async () => {
     try {
       const res = await axios.get(
-        `http://localhost:3002/getOnlineUsers/${currentTag}`
+        import.meta.env.VITE_CURRENT_PATH + `/getOnlineUsers/${currentTag}`
       );
       setOnlineUsers(res.data.online);
       setOfflineUsers(res.data.offline);
@@ -72,7 +74,7 @@ function ComChat() {
   const deleteCommunity = async () => {
     setLoading(true);
     const reposnse = await axios
-      .delete(`http://localhost:3002/deleteCom/${currentTag}`)
+      .delete(import.meta.env.VITE_CURRENT_PATH + `/deleteCom/${currentTag}`)
       .catch((err) => {
         if (err.response?.status === 500) {
           toast.error("Something went wrong");
@@ -83,6 +85,34 @@ function ComChat() {
     if (data.acknowledged) {
       setLoading(false);
       toast.success("Community deleted successfully");
+      navigate("/profile/my-commnunities");
+    } else {
+      toast.error("Something went wrong");
+    }
+  };
+
+  const leaveCommunity = async () => {
+    setLoading(true);
+    let terminate = false;
+    const reposnse = await axios
+      .patch(import.meta.env.VITE_CURRENT_PATH + "/leaveCommunity", {
+        tag: currentTag,
+        studentId: user.student_id,
+      })
+      .catch((err) => {
+        if (err.response?.status === 500) {
+          toast.error("Something went wrong");
+          terminate = true;
+        }
+      });
+
+    if (terminate) return;
+
+    if (reposnse.status === 200) {
+      setLoading(false);
+      user.community = user.community.filter((tag) => tag !== currentTag);
+      localStorage.setItem("currentUser", JSON.stringify(user));
+      toast.success("Community left successfully");
       navigate("/profile/my-commnunities");
     } else {
       toast.error("Something went wrong");
@@ -242,20 +272,24 @@ function ComChat() {
             Manage Members
           </motion.button>
 
-          {showDelete && (
-            <motion.button
-              whileHover={{
-                scale: 1.04,
-                backgroundColor: "#ee4962",
-                color: "#fff",
-              }}
-              whileTap={{ scale: 0.9 }}
-              className="member-mng"
-              onClick={deleteCommunity}
-            >
-              Delete Community
-            </motion.button>
-          )}
+          <motion.button
+            whileHover={{
+              scale: 1.04,
+              backgroundColor: "#ee4962",
+              color: "#fff",
+            }}
+            whileTap={{ scale: 0.9 }}
+            className="member-mng"
+            onClick={() => {
+              if (showDelete) {
+                deleteCommunity();
+              } else {
+                leaveCommunity();
+              }
+            }}
+          >
+            {showDelete ? "Delete Community" : "Leave Community"}
+          </motion.button>
         </div>
       </motion.div>
 
@@ -379,7 +413,7 @@ export const ManageMembers = () => {
   const getRequests = async () => {
     try {
       const res = await axios.get(
-        `http://localhost:3002/getRequests/${currentTag}`
+        import.meta.env.VITE_CURRENT_PATH + `/getRequests/${currentTag}`
       );
       setRequests(res.data);
     } catch (err) {
@@ -389,7 +423,7 @@ export const ManageMembers = () => {
 
   const handleRequest = async ({ confirm, tag, id }) => {
     try {
-      await axios.patch("http://localhost:3002/handleRequest", {
+      await axios.patch(import.meta.env.VITE_CURRENT_PATH + "/handleRequest", {
         confirm: confirm,
         tag: tag,
         id: id,
@@ -415,7 +449,10 @@ export const ManageMembers = () => {
     };
 
     const response = await axios
-      .patch(`http://localhost:3002/sendInvitation/${invitationId}`, invitation)
+      .patch(
+        import.meta.env.VITE_CURRENT_PATH + `/sendInvitation/${invitationId}`,
+        invitation
+      )
       .catch((err) => {
         if (err.response?.status === 500) {
           toast.error("Something went wrong");

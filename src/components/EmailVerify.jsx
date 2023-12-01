@@ -19,7 +19,9 @@ function EmailVerify() {
     let terminate = false;
     if (inputCode === code.current) {
       const response = await axios
-        .patch(`http://localhost:3002/setAuthStatus`, { email: send_email })
+        .patch(import.meta.env.VITE_CURRENT_PATH + `/setAuthStatus`, {
+          email: send_email,
+        })
         .catch((error) => {
           if (error.response?.status === 500) {
             toast.error("Server Error");
@@ -47,7 +49,7 @@ function EmailVerify() {
   const fetch_status = async () => {
     let terminate = false;
     const response = await axios
-      .get(`http://localhost:3002/getAuthStatus/${send_email}`)
+      .get(import.meta.env.VITE_CURRENT_PATH + `/getAuthStatus/${send_email}`)
       .catch((error) => {
         if (error.response?.status === 500) {
           toast.error("Server Error");
@@ -97,8 +99,9 @@ function EmailVerify() {
                   color: "#1ab79d",
                   cursor: "pointer ",
                 }}
-
-                onClick={()=>{fetch_status()}}
+                onClick={() => {
+                  fetch_status();
+                }}
               >
                 send again
               </motion.span>
