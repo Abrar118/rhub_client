@@ -103,6 +103,7 @@ function ComDash() {
     const base64Image = await convertBase64(selectedImage);
 
     let terminate = false;
+    setLoading(true);
     const response = await axios
       .post(import.meta.env.VITE_CURRENT_PATH + "/uploadComImage", {
         image: base64Image,
@@ -124,6 +125,7 @@ function ComDash() {
     const data = response.data;
     com.value.com_image = data.secure_url;
     com.value.imagePublicId = data.public_id;
+    setLoading(false);
     toast.success("Image updated successfully.");
 
     //  console.log(data);
@@ -136,7 +138,7 @@ function ComDash() {
   return (
     <div className="dashboard-wrapper">
       {loading && (
-        <PortalPopup  overlayColor="rgba(0,0,0, 0.5)" placement="Centered">
+        <PortalPopup overlayColor="rgba(0,0,0, 0.5)" placement="Centered">
           <ScaleLoader color="#36d7b7" height={35} width={5} />
         </PortalPopup>
       )}

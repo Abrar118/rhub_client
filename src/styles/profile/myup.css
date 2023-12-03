@@ -147,17 +147,18 @@
 }
 
 .myup .uploadRow {
-   position: relative;
-   width: 100%;
-   background-color: #ffffff;
-   border-radius: 1rem;
-   display: flex;
-   justify-content: space-between;
-   gap: 1rem;
-   padding: 1rem;
-   box-sizing: border-box;
-   color: #000000;
-   box-shadow: 0px 0px 10px 0px #00000020;
+  position: relative;
+  width: 100%;
+  background-color: #ffffff;
+  border-radius: 0.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem;
+  box-sizing: border-box;
+  color: #000000;
+  box-shadow: 0px 0px 10px 0px #00000020;
 }
 
 .uploadRow .upload-item {
@@ -170,6 +171,7 @@
   padding: 1rem;
   box-sizing: border-box;
   color: #000000;
+  width: 80%;
 }
 
 .upload-item .upload-item-title {
@@ -179,23 +181,25 @@
   color: #000000;
 }
 
-.upload-item .upload-item-desc {
-   font-family: "Poppins", sans-serif;
-   font-weight: 400;
-   font-size: 1rem;
-   color: #000000;
-}
-
 .upload-item .upload-item-date {
-   font-family: "Poppins", sans-serif;
-   font-weight: 400;
-   font-size: 0.8rem;
-   color: #727171;
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-size: 0.8rem;
+  color: #727171;
 }
 
-.upload-item .buttons {
-   display: flex;
-   align-items: center;
-   justify-content: space-between;
-   gap: 1rem;
+.uploadRow .buttons {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.buttons .upload-item-button {
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-size: 0.8rem;
+  color: #ffffff;
 }

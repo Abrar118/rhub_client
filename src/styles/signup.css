@@ -48,6 +48,7 @@
    flex-direction: column;
    gap: 24px;
    position: relative;
+   color: white;
  }
  
  .register .div-2 {

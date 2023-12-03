@@ -22,7 +22,7 @@ import Bookmark from "./components/profile/Bookmark";
 import Chat from "./components/Chat/chat";
 import ProfileNotification from "./components/profile/ProfileNotification";
 import ChangePass from "./components/profile/ChangePass";
-import MyUploads from "./components/profile/MyUploads";
+import MyPersonalUploads from "./components/profile/MyUploads";
 
 export const logoBlack = signal(
   "https://res.cloudinary.com/da8v9ysli/image/upload/v1697061060/msthqidxbbfavh8lpczp.svg"
@@ -55,7 +55,7 @@ const App = () => {
             <Route path="edit" element={<EditProfile />} />
             <Route path="bookmark" element={<Bookmark />} />
             <Route path="my-commnunities" element={<MyCommunities />} />
-            <Route path="my-uploads" element={<MyUploads />} />
+            <Route path="my-uploads" element={<MyPersonalUploads />} />
             <Route path="notification" element={<ProfileNotification />} />
             <Route path="inbox" element={<MyProfile />} />
             <Route path="help" element={<MyProfile />} />

@@ -144,7 +144,7 @@ export const BookmarkRow = ({ bookmark }) => {
 
     const content = await axios.get(
       import.meta.env.VITE_CURRENT_PATH +
-        `/get_uploadByTitle/${bookmark.title}/${bookmark.uploadDate}`
+        `/getUploadByTitle/${bookmark.title}/${bookmark.uploadLogNo}`
     );
 
     const activeContent = content.data;
@@ -155,6 +155,7 @@ export const BookmarkRow = ({ bookmark }) => {
       userId: user_id,
       access: activeContent.access,
       keywords: activeContent.keywords,
+      logNo: activeContent.logNo,
     };
 
     window.sessionStorage.setItem("catData", JSON.stringify(categoryData));

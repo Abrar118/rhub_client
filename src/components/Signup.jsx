@@ -37,7 +37,8 @@ function Signup({ closePopUp }) {
       join_date: getCurrentTime(),
       community: [],
       authenticated: 0,
-      avatar: "/src/assets/default.png",
+      avatar: import.meta.env.VITE_USER_IMAGE,
+      publicId: import.meta.env.VITE_AVATAR_PUBLIC_ID,
     };
 
     let terminate = false;

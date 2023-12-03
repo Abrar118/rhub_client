@@ -63,13 +63,16 @@ export const EditProfile = () => {
       return;
     }
 
+    const student = JSON.parse(window.localStorage.getItem("currentUser"));
     const base64Image = await convertBase64(selectedImage);
 
     let terminate = false;
+    setLoading(true);
     const response = await axios
       .post(import.meta.env.VITE_CURRENT_PATH + "/uploadAvatar", {
         image: base64Image,
         publicId: publicId,
+        studentId: student.student_id,
       })
       .catch((error) => {
         if (error.response?.status === 413) {
@@ -89,6 +92,7 @@ export const EditProfile = () => {
     user.avatar = data.secure_url;
     user.publicId = data.public_id;
     window.localStorage.setItem("currentUser", JSON.stringify(user));
+    setLoading(false);
     toast.success("Avatar updated successfully. Click SAVE to proceed.");
 
     //  console.log(data);

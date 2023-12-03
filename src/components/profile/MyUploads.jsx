@@ -9,35 +9,34 @@ import {
 import { getTextFormattedTime } from "../utility/time";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { ScaleLoader, SyncLoader } from "react-spinners";
+import PortalPopup from "../PortalPopup";
 
 function MyUploads() {
-  const [academic, setAcademic] = useState([]);
-  const [student, setStudent] = useState([]);
-  const [misc, setMisc] = useState([]);
+  const [uploads, setUploads] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const getUploads = async () => {
     const user = JSON.parse(window.localStorage.getItem("currentUser"));
     const user_id = user.student_id;
     const tags = user.community;
 
-    const response = await axios.get(
-      import.meta.env.VITE_CURRENT_PATH +
-        `/getMyUploads/${user_id}/${JSON.stringify(tags)}`
-    );
+    setLoading(true);
+    const response = await axios
+      .get(
+        import.meta.env.VITE_CURRENT_PATH +
+          `/getMyUploads/${user_id}/${JSON.stringify(tags)}`
+      )
+      .catch((err) => {
+        if (err.response.status === 500) toast.error("Error fetching uploads");
+      });
+
+    setLoading(false);
 
     let data = response.data;
+    console.log(data);
 
-    let temp1 = [];
-    let temp2 = [];
-    let temp3 = [];
-
-    if (data[0] !== null) temp1 = data[0].sort((a, b) => a.date - b.date);
-    if (data[1] !== null) temp2 = data[1].sort((a, b) => a.date - b.date);
-    if (data[2] !== null) temp3 = data[2].sort((a, b) => a.date - b.date);
-
-    setAcademic(temp1);
-    setStudent(temp2);
-    setMisc(temp3);
+    setUploads(data);
   };
 
   useEffect(() => {
@@ -46,6 +45,11 @@ function MyUploads() {
 
   return (
     <div className="myup">
+      {loading && (
+        <PortalPopup overlayColor="rgba(0,0,0, 0.5)" placement="Centered">
+          <ScaleLoader color="#36d7b7" height={35} width={5} />
+        </PortalPopup>
+      )}
       <div className="search-tab">
         <div className="res-title">My Uploads</div>
         <div className="search-objects">
@@ -57,9 +61,7 @@ function MyUploads() {
               type="search"
               className="search-input-holder"
               placeholder="Search uploads by title"
-              onChange={(e) => {
-                setSearchQuery(e.target.value);
-              }}
+              onChange={(e) => {}}
             />
             <motion.button
               whileHover={{ scale: 1.04, backgroundColor: "#ee4962" }}
@@ -76,9 +78,7 @@ function MyUploads() {
               name="sort"
               id="sort"
               className="sort-dropdown"
-              onChange={(e) => {
-                setSortOption(e.target.value);
-              }}
+              onChange={(e) => {}}
             >
               <option value="bookmarkDate" className="sort-dropdown-item">
                 Date added
@@ -90,20 +90,10 @@ function MyUploads() {
           </div>
 
           <div className="show-as">
-            <div
-              className="show-as-block"
-              onClick={() => {
-                setSortOrder(1);
-              }}
-            >
+            <div className="show-as-block" onClick={() => {}}>
               <Ascending />
             </div>
-            <div
-              className="show-as-block"
-              onClick={() => {
-                setSortOrder(-1);
-              }}
-            >
+            <div className="show-as-block" onClick={() => {}}>
               <Descending />
             </div>
           </div>
@@ -111,21 +101,60 @@ function MyUploads() {
       </div>
 
       <div className="myup-list">
-        {academic.map((item) => (
-          <UploadItem item={item} />
-        ))}
+        {uploads[0] &&
+          uploads[0].map((item) => (
+            <>
+              {" "}
+              <div
+                style={{
+                  color: "#000000",
+                  fontFamily: "Poppins",
+                  fontWeight: 600,
+                }}
+              >
+                Academic Materials
+              </div>{" "}
+              <UploadItem item={item} />{" "}
+            </>
+          ))}
       </div>
 
       <div className="myup-list">
-        {student.map((item) => (
-          <UploadItem item={item} />
-        ))}
+        {uploads[0] &&
+          uploads[0].map((item) => (
+            <>
+              {" "}
+              <div
+                style={{
+                  color: "#000000",
+                  fontFamily: "Poppins",
+                  fontWeight: 600,
+                }}
+              >
+                Student Materials
+              </div>{" "}
+              <UploadItem item={item} />{" "}
+            </>
+          ))}
       </div>
 
       <div className="myup-list">
-        {misc.map((item) => (
-          <UploadItem item={item} />
-        ))}
+        {uploads[0] &&
+          uploads[0].map((item) => (
+            <>
+              {" "}
+              <div
+                style={{
+                  color: "#000000",
+                  fontFamily: "Poppins",
+                  fontWeight: 600,
+                }}
+              >
+                Miscellaneous Materials
+              </div>{" "}
+              <UploadItem item={item} />{" "}
+            </>
+          ))}
       </div>
     </div>
   );
@@ -136,31 +165,32 @@ const UploadItem = ({ item }) => {
     <div className="uploadRow">
       <div className="upload-item">
         <div className="upload-item-title">{item.name}</div>
-        <div className="upload-item-desc">{item.resourceType}</div>
         <div className="upload-item-date">
           {getTextFormattedTime(new Date(item.date))}
         </div>
       </div>
 
       <div className="buttons">
-        <div className="upload-item-button">
-          <motion.button
-            whileHover={{ scale: 1.04, backgroundColor: "#ee4962" }}
-            whileTap={{ scale: 0.9 }}
-            className="upload-item-button"
-          >
-            Download
-          </motion.button>
-        </div>
-        <div className="upload-item-button">
-          <motion.button
-            whileHover={{ scale: 1.04, backgroundColor: "#ee4962" }}
-            whileTap={{ scale: 0.9 }}
-            className="upload-item-button"
-          >
-            Delete
-          </motion.button>
-        </div>
+        <motion.button
+          whileHover={{ scale: 1.04, backgroundColor: "#ee4962" }}
+          whileTap={{ scale: 0.9 }}
+          style={{ backgroundColor: "#000000" }}
+          className="upload-item-button"
+          onClick={() => {
+            window.open(item.content, "_blank");
+          }}
+        >
+          Download
+        </motion.button>
+
+        <motion.button
+          whileHover={{ scale: 1.04, backgroundColor: "#ee4962" }}
+          whileTap={{ scale: 0.9 }}
+          style={{ backgroundColor: "#ee4962" }}
+          className="upload-item-button"
+        >
+          Delete
+        </motion.button>
       </div>
     </div>
   );
