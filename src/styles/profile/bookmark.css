@@ -174,14 +174,13 @@
   position: relative;
   background-color: #ffffff;
   color: #000000;
-  padding: 20px 20px;
+  padding: 1rem 1rem;
   border-radius: 10px;
   display: flex;
   align-items: flex-start;
   gap: 20px;
 
   width: 15vw;
-  height: 10vh;
   transition: all ease 500ms;
   box-shadow: 0px 5px 10px #17171730;
 }
@@ -230,12 +229,12 @@
 }
 
 .bookmark-item .bookmark-dropdown {
-  position: absolute;
+  /* position: absolute; */
   display: flex;
   flex-direction: column;
   align-items: flex-end;
   gap: 10px;
-  left: 90%;
+  left: 88%;
   top: 70%;
 }
 
@@ -247,7 +246,7 @@
 
 .bookmark-dropdown .bookmark-dropdown-icon:hover {
   cursor: pointer;
-  color: rgb(26, 25, 77);
+  color: #1a194d;
 }
 
 .bookmark-dropdown .bookmark-dropdown-content {
@@ -272,7 +271,7 @@
 .bookmark-dropdown:hover .bookmark-dropdown-content {
   visibility: visible;
   opacity: 1;
-  transform: translateY(-100%);
+  transform: translateY(30%);
 }
 
 .bookmark-dropdown-content .bookmark-dropdown-item {

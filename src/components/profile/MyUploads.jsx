@@ -33,9 +33,8 @@ function MyUploads() {
 
     setLoading(false);
 
-    let data = response.data;
+    const data = response.data;
     console.log(data);
-
     setUploads(data);
   };
 
