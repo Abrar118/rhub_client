@@ -13,7 +13,7 @@ import { ScaleLoader, SyncLoader } from "react-spinners";
 import PortalPopup from "../PortalPopup";
 
 function MyUploads() {
-  const [uploads, setUploads] = useState([]);
+  const [uploads, setUploads] = useState({});
   const [loading, setLoading] = useState(false);
 
   const getUploads = async () => {
@@ -100,58 +100,55 @@ function MyUploads() {
       </div>
 
       <div className="myup-list">
+        <div
+          style={{
+            color: "#000000",
+            fontFamily: "Poppins",
+            fontWeight: 600,
+          }}
+        >
+          Academic Materials
+        </div>
         {uploads[0] &&
           uploads[0].map((item) => (
             <>
-              {" "}
-              <div
-                style={{
-                  color: "#000000",
-                  fontFamily: "Poppins",
-                  fontWeight: 600,
-                }}
-              >
-                Academic Materials
-              </div>{" "}
-              <UploadItem item={item} />{" "}
+              <UploadItem item={item} />
             </>
           ))}
       </div>
 
       <div className="myup-list">
-        {uploads[0] &&
-          uploads[0].map((item) => (
+        <div
+          style={{
+            color: "#000000",
+            fontFamily: "Poppins",
+            fontWeight: 600,
+          }}
+        >
+          Student Materials
+        </div>
+        {uploads[1] &&
+          uploads[1].map((item) => (
             <>
-              {" "}
-              <div
-                style={{
-                  color: "#000000",
-                  fontFamily: "Poppins",
-                  fontWeight: 600,
-                }}
-              >
-                Student Materials
-              </div>{" "}
-              <UploadItem item={item} />{" "}
+              <UploadItem item={item} />
             </>
           ))}
       </div>
 
       <div className="myup-list">
-        {uploads[0] &&
-          uploads[0].map((item) => (
+        <div
+          style={{
+            color: "#000000",
+            fontFamily: "Poppins",
+            fontWeight: 600,
+          }}
+        >
+          Miscellaneous Materials
+        </div>
+        {uploads[2] &&
+          uploads[2].map((item) => (
             <>
-              {" "}
-              <div
-                style={{
-                  color: "#000000",
-                  fontFamily: "Poppins",
-                  fontWeight: 600,
-                }}
-              >
-                Miscellaneous Materials
-              </div>{" "}
-              <UploadItem item={item} />{" "}
+              <UploadItem item={item} />
             </>
           ))}
       </div>
